@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="top_wrap">
-      <img class="top_wrap_bg" src="playlist.coverImgUrl" />
+      <img class="top_wrap_bg" :src="playlist.coverImgUrl" />
     </div>
     <div class="opt_box">
       <div class="author">
         <div class="author_hd">
 <!--          <img class="author_avatar" src="//y.gtimg.cn/mediastyle/mod/mobile/img/logo.svg?max_age=2592000"/>-->
-          <h6 class="author_name">{{playlist.name}}</h6>
+          <h3 class="author_name">{{playlist.name}}</h3>
         </div>
         <div class="author_desc">{{playlist.description}}</div>
       </div>
@@ -100,6 +100,7 @@ export default {
     .author_desc
       color var(--c_tet2)
       text-align justify
+      font-size $font-size-medium
     .author_avatar
       display block
       width 20px

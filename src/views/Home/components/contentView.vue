@@ -1,6 +1,6 @@
 <template>
   <div class="content-view">
-    <div class="con-mod" v-for="musicItem in musicList">
+    <div class="con-mod" v-for="musicItem in musicList" :key="musicItem.id">
       <div class="con-tit">
         <h2 class="con-tit-text">{{musicItem.tit}}</h2>
         <p>更多</p>
@@ -57,6 +57,7 @@ export default {
         allList.forEach((item, index) => {
           this.musicList.push({
             tit: this.titList[index],
+            id: 'music' + index,
             list: item
           })
         })

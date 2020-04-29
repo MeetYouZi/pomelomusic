@@ -27,10 +27,10 @@
     </div>
     <div>
       <ul class="music-list">
-        <li class="music-item" v-for="item in privileges">
+        <li class="music-item" v-for="item in songList">
           <div class="item-box">
-            <h3 class="list-tit"><span class="list-txt">Physical</span></h3>
-            <p class="list-desc"><span class="list-txt">Ellie Goulding · Love Me Like You Do (From "Fifty Shades of Grey")(From "Fifty Shades of Grey")</span></p>
+            <h3 class="list-tit"><span class="list-txt">{{item.album}}</span></h3>
+            <p class="list-desc"><span class="list-txt">{{item.singer}}</span></p>
           </div>
         </li>
       </ul>
@@ -39,16 +39,19 @@
 </template>
 
 <script>
-import { getListDetail } from '@/api'
+import { getListDetail, getSongDetail } from '@/api'
+import formatSongs from '@/utils/song'
 
 const PAGE_SIZE = 26
+const MAXLENGTH = 100
 export default {
   name: 'MusicList',
   data () {
     return {
       id: '',
       playlist: {},
-      privileges: []
+      privileges: [],
+      songList: []
     }
   },
   computed: {
@@ -57,8 +60,13 @@ export default {
     _getListDetail () {
       getListDetail({ id: this.id }).then(res => {
         this.playlist = res.playlist
-        // this.privileges = res.privileges
-        console.log(res, 'res')
+        this._getSongDetail(this.playlist)
+      })
+    },
+    _getSongDetail (playlist) {
+      const trackIds = playlist.trackIds.map(({ id }) => id)
+      getSongDetail(trackIds.slice(0, MAXLENGTH)).then(res => {
+        this.songList = formatSongs(res.songs)
       })
     }
   },

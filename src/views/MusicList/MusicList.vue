@@ -27,7 +27,11 @@
     </div>
     <div>
       <ul class="music-list">
-        <li class="music-item" v-for="item in songList">
+        <li class="music-item"
+            v-for="item in songList"
+            :key="item.id"
+            @click="handlePlaySong(item)"
+        >
           <div class="item-box">
             <h3 class="list-tit"><span class="list-txt">{{item.album}}</span></h3>
             <p class="list-desc"><span class="list-txt">{{item.singer}}</span></p>
@@ -35,6 +39,8 @@
         </li>
       </ul>
     </div>
+    <!--播放器-->
+    <audio ref="pomelomusicAudio"></audio>
   </div>
 </template>
 
@@ -51,12 +57,26 @@ export default {
       id: '',
       playlist: {},
       privileges: [],
-      songList: []
+      songList: [],
+      songUrl: '',
+      songReady: false
     }
   },
   computed: {
   },
   methods: {
+    handlePlaySong (item) {
+      const audio = this.$refs.pomelomusicAudio
+      this.songReady = !this.songReady
+      if (this.songReady) {
+        return audio.pause()
+      }
+      this.songUrl = item.url
+      this.$refs.pomelomusicAudio.src = item.url
+      this.$nextTick(() => {
+        audio.play()
+      })
+    },
     _getListDetail () {
       getListDetail({ id: this.id }).then(res => {
         this.playlist = res.playlist
@@ -67,6 +87,7 @@ export default {
       const trackIds = playlist.trackIds.map(({ id }) => id)
       getSongDetail(trackIds.slice(0, MAXLENGTH)).then(res => {
         this.songList = formatSongs(res.songs)
+        console.log(this.songList)
       })
     }
   },

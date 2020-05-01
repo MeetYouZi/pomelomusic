@@ -8,7 +8,7 @@
       <div class="con-scroll-x">
         <div class="con-scroll-bd">
           <ul class="con-list">
-            <li class="list-item" v-for="item in musicItem.list" :key="item.id" @click="handleClickUrl(item.id)">
+            <li class="list-item" v-for="item in musicItem.list" :key="item.id" @click.stop="handleClickUrl(item.id)">
               <div class="list-box">
                 <div class="list-media">
                   <img class="list-img" :src="item.picUrl"/>

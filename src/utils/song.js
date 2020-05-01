@@ -25,14 +25,13 @@ export function createSongList (music) {
     singer: music.ar.length > 0 && filterSinger(music.ar),
     album: music.al.name,
     image: music.al.picUrl || null,
-    duration: music.duration / 1000,
+    duration: music.dt / 1000,
     url: `https://music.163.com/song/media/outer/url?id=${music.id}.mp3`
   })
 }
 
 // 歌曲数据格式化
 const formatSongs = function formatPlayList (list) {
-  console.log(list)
   const Songs = []
   list.forEach(item => {
     const musicData = item

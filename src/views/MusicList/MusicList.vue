@@ -16,12 +16,18 @@
         <div class="play_bar">
           <div class="play_all">
             <i class="play_all_icon"></i>
-            <span class="play_all_text">播放全部</span>
+            <div class="progressBox" @click.stop="togglePalying">
+              <progress-circle :radius="34" :percent="percent"></progress-circle>
+            </div>
+            <span class="play_all_text">{{songReady ? '播放全部' : currentSong.name}}</span>
           </div>
           <div class="collect">
             <i class="collect_icon"></i>
             收藏歌单
           </div>
+        </div>
+        <div class="progress-bar">
+          <progress-bar :percent="percent"></progress-bar>
         </div>
       </div>
     </div>
@@ -31,27 +37,31 @@
             v-for="item in songList"
             :key="item.id"
             @click="handlePlaySong(item)"
+            :class="{active: item.id == currentSong.id}"
         >
           <div class="item-box">
-            <h3 class="list-tit"><span class="list-txt">{{item.album}}</span></h3>
+            <h3 class="list-tit"><span class="list-txt">{{item.name}}</span></h3>
             <p class="list-desc"><span class="list-txt">{{item.singer}}</span></p>
           </div>
         </li>
       </ul>
     </div>
     <!--播放器-->
-    <audio ref="pomelomusicAudio"></audio>
+    <audio ref="pomelomusicAudio" @timeupdate="updateTime"></audio>
   </div>
 </template>
 
 <script>
 import { getListDetail, getSongDetail } from '@/api'
 import formatSongs from '@/utils/song'
+import ProgressBar from '@/views/MusicList/components/progressBar'
+import ProgressCircle from '@/views/MusicList/components/progressCircle'
 
 const PAGE_SIZE = 26
 const MAXLENGTH = 100
 export default {
   name: 'MusicList',
+  components: { ProgressBar, ProgressCircle },
   data () {
     return {
       id: '',
@@ -59,23 +69,55 @@ export default {
       privileges: [],
       songList: [],
       songUrl: '',
-      songReady: false
+      songReady: true,
+      currentTime: 0,
+      currentSong: {}
     }
   },
   computed: {
+    percent () {
+      // return 0.3
+      return this.currentSong.duration ? this.currentTime / this.currentSong.duration : 0
+    }
+  },
+  watch: {
+    currentSong (newSong, oldSong) {
+      if (!newSong.id || !newSong.url || newSong.id === oldSong.id) {
+        return
+      }
+      this.songReady = false
+      this.$refs.pomelomusicAudio.src = newSong.url
+      this.$refs.pomelomusicAudio.play()
+      // 若歌曲 5s 未播放，则认为超时，修改状态确保可以切换歌曲。
+      // clearTimeout(this.timer)
+      // this.timer = setTimeout(() => {
+      //   this.songReady = true
+      // }, 5000)
+    }
   },
   methods: {
+    // 更新时间
+    updateTime (e) {
+      this.currentTime = e.target.currentTime
+    },
+    togglePalying () {
+      const audio = this.$refs.pomelomusicAudio
+      audio.pause()
+    },
+    // 播放暂停事件
     handlePlaySong (item) {
       const audio = this.$refs.pomelomusicAudio
-      this.songReady = !this.songReady
-      if (this.songReady) {
+      if (this.songReady && item.id === this.currentSong.id) {
+        this.songReady = false
+        return audio.play()
+      }
+      if (!this.songReady && item.id && item.id === this.currentSong.id) {
+        this.songReady = true
         return audio.pause()
       }
-      this.songUrl = item.url
-      this.$refs.pomelomusicAudio.src = item.url
-      this.$nextTick(() => {
-        audio.play()
-      })
+      if (item.id !== this.currentSong.id) {
+        this.currentSong = item
+      }
     },
     _getListDetail () {
       getListDetail({ id: this.id }).then(res => {
@@ -86,6 +128,7 @@ export default {
     _getSongDetail (playlist) {
       const trackIds = playlist.trackIds.map(({ id }) => id)
       getSongDetail(trackIds.slice(0, MAXLENGTH)).then(res => {
+        // console.log(res)
         this.songList = formatSongs(res.songs)
         console.log(this.songList)
       })
@@ -141,6 +184,16 @@ export default {
       color var(--c_tet2)
   .play_bar_wrap
     height 55px
+    position relative
+    .progressBox
+      position absolute
+      width 34px
+      height 34px
+    .progress-bar
+      position absolute
+      left 0
+      bottom -7px
+      width 100%
     .play_bar
       display flex
       justify-content space-between
@@ -152,9 +205,11 @@ export default {
         align-items center
         justify-content flex-start
         .play_all_text
+          width 100px
           margin-left 10px
           font-size $font-size-medium
           color var(--color)
+          no-wrap()
         .play_all_icon
           display: flex
           align-items center
@@ -185,6 +240,9 @@ export default {
     position relative
     padding 10px 16px
     overflow hidden
+    color var(--color)
+    &.active
+      color var(--theme_color)
     .item-box
       width 100%
       display flex
@@ -193,13 +251,13 @@ export default {
       overflow hidden
       .list-tit
         font-size $font-size-large
-        color var(--color)
+        color inherit
         line-height 24px
+        width 100%
       .list-desc
         max-width 95%
         overflow hidden
         font-size $font-size-small
-        color var(--c_tet2)
         line-height 18px
       .list-txt
         display block

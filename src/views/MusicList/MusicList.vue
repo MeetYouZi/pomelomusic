@@ -13,7 +13,7 @@
       </div>
 
       <div class="play_bar_wrap">
-        <div class="play_bar">
+        <div class="play_bar" :class="{'fixed': showAbs}">
           <div class="play_all">
             <i class="play_icon play_all_icon" v-show="!isPalying"></i>
             <i class="play_icon iconfont iconpause1" v-show="isPalying"></i>
@@ -26,9 +26,9 @@
             <i class="collect_icon"></i>
             收藏歌单
           </div>
-        </div>
-        <div class="progress-bar" v-show="isPalying">
-          <progress-bar :percent="percent"></progress-bar>
+          <div class="progress-bar" v-show="isPalying">
+            <progress-bar :percent="percent"></progress-bar>
+          </div>
         </div>
       </div>
     </div>
@@ -78,6 +78,7 @@ export default {
       songReady: true,
       currentTime: 0,
       currentSong: {},
+      showAbs: false
     }
   },
   filters: {
@@ -117,6 +118,14 @@ export default {
     }
   },
   methods: {
+    handleScroll () {
+      const top = document.documentElement.scrollTop
+      if (top < 300) {
+        this.showAbs = false
+      } else {
+        this.showAbs = true
+      }
+    },
     // 更新时间
     updateTime (e) {
       this.currentTime = e.target.currentTime
@@ -154,6 +163,12 @@ export default {
         console.log(this.songList)
       })
     }
+  },
+  mounted () {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.handleScroll)
   },
   created () {
     this.id = this.$route.params.id
@@ -221,6 +236,10 @@ export default {
       justify-content space-between
       align-items center
       padding 0 12px
+      &.fixed
+        fixTop()
+        background #fff
+        box-shadow 0 0 12px 0 rgba(0,0,0,.06)
       .play_all
         flex 1
         display flex

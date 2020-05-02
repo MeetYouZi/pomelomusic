@@ -1,8 +1,9 @@
 <template>
-  <div class="home" @click="handleToggleTheme">
+  <div class="home">
     <search></search>
-    <banner :banner-list="bannerList"></banner>
+    <banner :banner-list="bannerList" @click="handleToggleTheme"></banner>
     <content-view></content-view>
+    <pomelo-play></pomelo-play>
   </div>
 </template>
 
@@ -10,13 +11,15 @@
 import banner from '@/views/Home/components/banner'
 import search from '@/views/Home/components/search'
 import contentView from '@/views/Home/components/contentView'
+import pomeloPlay from '@/components/pomeloPlay/pomeloPlay'
 import { getBanner } from '@/api'
 export default {
   name: 'Home',
   components: {
     banner,
     search,
-    contentView
+    contentView,
+    pomeloPlay
   },
   data () {
     return {

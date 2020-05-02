@@ -3,7 +3,7 @@
     <div class="con-mod" v-for="musicItem in musicList" :key="musicItem.id">
       <div class="con-tit">
         <h2 class="con-tit-text">{{musicItem.tit}}</h2>
-        <p>更多</p>
+        <p>更多<i class="iconfont iconright"></i> </p>
       </div>
       <div class="con-scroll-x">
         <div class="con-scroll-bd">
@@ -113,10 +113,18 @@ export default {
       .con-tit
         height 30px
         display flex
-        color var(--c_txt1)
         align-items center
         justify-content space-between
         margin 20px 16px 10px
+        .con-tit-text
+          color var(--c_txt1)
+          font-size $font-size-large
+          font-weight bold
+        p
+          font-size $font-size-small
+          color var(--c_tet2)
+          .iconright
+            font-size $font-size-small
     .con-scroll-x
       margin-top -10px
     .con-scroll-bd

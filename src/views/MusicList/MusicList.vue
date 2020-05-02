@@ -15,8 +15,9 @@
       <div class="play_bar_wrap">
         <div class="play_bar">
           <div class="play_all">
-            <i class="play_all_icon"></i>
-            <div class="progressBox" @click.stop="togglePalying">
+            <i class="play_icon play_all_icon" v-show="!isPalying"></i>
+            <i class="play_icon iconfont iconpause1" v-show="isPalying"></i>
+            <div class="progressBox" @click.stop="togglePalying" v-show="isPalying">
               <progress-circle :radius="34" :percent="percent"></progress-circle>
             </div>
             <span class="play_all_text">{{songReady ? '播放全部' : currentSong.name}}</span>
@@ -26,7 +27,7 @@
             收藏歌单
           </div>
         </div>
-        <div class="progress-bar">
+        <div class="progress-bar" v-show="isPalying">
           <progress-bar :percent="percent"></progress-bar>
         </div>
       </div>
@@ -42,6 +43,7 @@
           <div class="item-box">
             <h3 class="list-tit"><span class="list-txt">{{item.name}}</span></h3>
             <p class="list-desc"><span class="list-txt">{{item.singer}}</span></p>
+<!--            <p></p>-->
           </div>
         </li>
       </ul>
@@ -75,6 +77,9 @@ export default {
     }
   },
   computed: {
+    isPalying () {
+      return this.currentSong.id
+    },
     percent () {
       // return 0.3
       return this.currentSong.duration ? this.currentTime / this.currentSong.duration : 0
@@ -172,7 +177,8 @@ export default {
     .author_desc
       color var(--c_tet2)
       text-align justify
-      font-size $font-size-medium
+      line-height 14px
+      font-size $font-size-small
     .author_avatar
       display block
       width 20px
@@ -180,7 +186,7 @@ export default {
       margin-right 10px
       border-radius 100%
     .author_name
-      font-size $font-size-small
+      font-size $font-size-medium
       color var(--c_tet2)
   .play_bar_wrap
     height 55px
@@ -204,20 +210,24 @@ export default {
         display flex
         align-items center
         justify-content flex-start
+        font-size $font-size-medium
         .play_all_text
           width 100px
           margin-left 10px
-          font-size $font-size-medium
+          text-align left
           color var(--color)
           no-wrap()
-        .play_all_icon
+        .play_icon
           display: flex
           align-items center
           justify-content center
           width 34px
           height 34px
+          box-sizing border-box
           border-radius 100%
-          background #31c27c
+          border 1px solid $color-theme
+        .play_all_icon
+          background $color-theme
           &:before
             content ""
             display block
@@ -228,6 +238,9 @@ export default {
             border-width 7px 11px
             border-style solid
             border-radius 2px
+        .iconpause1
+          font-size 22px
+          color $color-theme
       .collect
         height 55px
         display flex
@@ -260,6 +273,7 @@ export default {
         font-size $font-size-small
         line-height 18px
       .list-txt
+        text-align left
         display block
         no-wrap()
 </style>

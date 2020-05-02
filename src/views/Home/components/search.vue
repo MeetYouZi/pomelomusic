@@ -1,5 +1,6 @@
 <template>
   <div class="search_bar">
+    <i class="iconfont iconsearch"></i>
     <input type="search" value="" class="search_bar__input c_input" placeholder="搜索"/>
   </div>
 </template>
@@ -19,6 +20,13 @@ export default {
   overflow hidden
   border-radius (@height / 2)
   background #fff
+  .iconsearch
+    position absolute
+    left 50%
+    top 50%
+    transform translate(-0, -50%)
+    margin-left -26px
+    color $color-text-d
   .search_bar__input
     position: absolute
     top: 0

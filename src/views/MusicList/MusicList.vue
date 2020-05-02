@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="top_wrap">
-      <img class="top_wrap_bg" :src="playlist.coverImgUrl" />
+      <img class="top_wrap_bg" :src="headerImgCover" />
     </div>
     <div class="opt_box">
       <div class="author">
@@ -35,15 +35,18 @@
     <div>
       <ul class="music-list">
         <li class="music-item"
-            v-for="item in songList"
+            v-for="(item, index) in songList"
             :key="item.id"
             @click="handlePlaySong(item)"
             :class="{active: item.id == currentSong.id}"
         >
           <div class="item-box">
-            <h3 class="list-tit"><span class="list-txt">{{item.name}}</span></h3>
-            <p class="list-desc"><span class="list-txt">{{item.singer}}</span></p>
-<!--            <p></p>-->
+            <span class="list-num" v-text="index + 1"></span>
+            <div class="list-content">
+              <h3 class="list-tit"><span class="list-txt">{{item.name}}</span></h3>
+              <p class="list-desc"><span class="list-txt">{{item.singer}}</span></p>
+            </div>
+            <p class="list-time">{{ (item.duration % 3600) | formatTime}}</p>
           </div>
         </li>
       </ul>
@@ -56,6 +59,7 @@
 <script>
 import { getListDetail, getSongDetail } from '@/api'
 import formatSongs from '@/utils/song'
+import { formatTime } from '@/utils/utils'
 import ProgressBar from '@/views/MusicList/components/progressBar'
 import ProgressCircle from '@/views/MusicList/components/progressCircle'
 
@@ -73,10 +77,22 @@ export default {
       songUrl: '',
       songReady: true,
       currentTime: 0,
-      currentSong: {}
+      currentSong: {},
     }
   },
+  filters: {
+    formatTime
+  },
   computed: {
+    headerImgCover () {
+      let img = ''
+      if (this.isPalying) {
+        img = this.currentSong.image
+      } else {
+        img = this.playlist.coverImgUrl
+      }
+      return img
+    },
     isPalying () {
       return this.currentSong.id
     },
@@ -211,8 +227,9 @@ export default {
         align-items center
         justify-content flex-start
         font-size $font-size-medium
+        overflow hidden
         .play_all_text
-          width 100px
+          flex 1
           margin-left 10px
           text-align left
           color var(--color)
@@ -259,9 +276,17 @@ export default {
     .item-box
       width 100%
       display flex
-      flex-direction column
-      align-items flex-start
+      justify-content space-between
+      align-items baseline
       overflow hidden
+      .list-num
+        padding-right 6px
+      .list-content
+        flex 1
+        display flex
+        flex-direction column
+        justify-content space-around
+        align-items flex-start
       .list-tit
         font-size $font-size-large
         color inherit

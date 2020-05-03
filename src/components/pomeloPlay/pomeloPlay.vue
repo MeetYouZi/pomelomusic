@@ -12,7 +12,7 @@
       </div>
       <div class="control">
         <progress-circle :radius="radius" :percent="percent">
-<!--          <i @click.stop="togglePlaying" class="iconfont iconpause1 icon-mini" :class="miniIcon"></i>-->
+          <i @click.stop="togglePlaying" class="iconfont iconpause1 icon-mini" :class="miniIcon"></i>
         </progress-circle>
       </div>
       <div class="control" @click.stop="showPlaylist">
@@ -33,7 +33,7 @@ export default {
   },
   data () {
     return {
-      radius: 32,
+      radius: 30,
       fullScreen: false,
       miniIcon: '',
       currentTime: 0,
@@ -130,6 +130,7 @@ export default {
     box-sizing border-box
     border 1px solid $color-theme
     position relative
+    margin-right 10px
     .iconfont
       font-size: 16px
       color: $color-theme

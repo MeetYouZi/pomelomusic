@@ -11,9 +11,11 @@
         <p class="desc" v-html="currentSong.singer"></p>
       </div>
       <div class="control">
-        <progress-circle :radius="radius" :percent="percent">
+        <div class="progress-circle-box">
+          <progress-circle :radius="radius" :percent="percent">
+          </progress-circle>
           <i @click.stop="togglePlaying" class="iconfont iconpause1 icon-mini" :class="miniIcon"></i>
-        </progress-circle>
+        </div>
       </div>
       <div class="control" @click.stop="showPlaylist">
         <i class="iconfont iconplay_fill"></i>
@@ -123,14 +125,21 @@ export default {
       color: $color-text-d
   .control
     flex: 0 0 30px
-    width: 31px
-    height 31px
+    display flex
+    align-items center
+    justify-content center
+    width 30px
+    height 30px
     border-radius 50%
     text-align center
     box-sizing border-box
     border 1px solid $color-theme
     position relative
     margin-right 10px
+    .progress-circle-box
+      position absolute
+      width 30px
+      height 30px
     .iconfont
       font-size: 16px
       color: $color-theme

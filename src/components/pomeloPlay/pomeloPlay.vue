@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 import progressCircle from '@/views/MusicList/components/progressCircle'
 export default {
   name: 'pomeloPlay',
@@ -39,7 +40,6 @@ export default {
       fullScreen: false,
       miniIcon: '',
       currentTime: 0,
-      playing: false,
       currentSong: {
         album: '我们在夏枝繁茂时再见',
         duration: 218.979,
@@ -58,7 +58,13 @@ export default {
     percent () {
       // return 0.3
       return this.currentSong.duration ? this.currentTime / this.currentSong.duration : 0
-    }
+    },
+    ...mapGetters([
+      'playing',
+      'playMode',
+      'playList',
+      'currentSong'
+    ])
   },
   methods: {
     // 更新时间

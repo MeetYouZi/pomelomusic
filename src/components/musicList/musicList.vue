@@ -3,7 +3,7 @@
     <li class="music-item"
         v-for="(item, index) in songList"
         :key="item.id"
-        @click="handlePlaySong(item)"
+        @click="handleSelectSong(item, index)"
         :class="{active: item.id == currentSong.id}"
     >
       <div class="item-box">
@@ -31,20 +31,8 @@ export default {
   },
   methods: {
     // 播放暂停事件
-    handlePlaySong (item) {
-
-      // const audio = this.$refs.pomelomusicAudio
-      // if (this.songReady && item.id === this.currentSong.id) {
-      //   this.songReady = false
-      //   return audio.play()
-      // }
-      // if (!this.songReady && item.id && item.id === this.currentSong.id) {
-      //   this.songReady = true
-      //   return audio.pause()
-      // }
-      // if (item.id !== this.currentSong.id) {
-      //   this.currentSong = item
-      // }
+    handleSelectSong (item, index) {
+      this.$emit('selectItem', item, index)
     }
   }
 }

@@ -32,13 +32,12 @@
         </div>
       </div>
     </div>
-    <music-list :songList="songList"></music-list>
-    <!--播放器-->
-    <audio ref="pomelomusicAudio" @timeupdate="updateTime"></audio>
+    <music-list :songList="songList" @selectItem="selectItem"></music-list>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { getListDetail, getSongDetail } from '@/api'
 import formatSongs from '@/utils/song'
 import { formatTime } from '@/utils/utils'
@@ -113,10 +112,14 @@ export default {
         this.showAbs = true
       }
     },
-    // 更新时间
-    updateTime (e) {
-      this.currentTime = e.target.currentTime
+    // 播放暂停事件
+    selectItem (item, index) {
+      this.selectPlay({
+        list: this.list,
+        index
+      })
     },
+    ...mapActions(['selectPlay']),
     togglePalying () {
       const audio = this.$refs.pomelomusicAudio
       audio.pause()

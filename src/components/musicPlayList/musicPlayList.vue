@@ -19,6 +19,9 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { formatTime } from '@/utils/utils'
+
 export default {
   name: 'musicList',
   props: {
@@ -28,6 +31,12 @@ export default {
         return []
       }
     }
+  },
+  filters: {
+    formatTime
+  },
+  computed: {
+    ...mapGetters(['currentSong'])
   },
   methods: {
     // 播放暂停事件

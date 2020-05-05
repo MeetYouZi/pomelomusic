@@ -1,6 +1,6 @@
 <template>
   <transition name="miniplay">
-    <div class="pomelo-play" v-show="!fullScreen">
+    <div class="pomelo-play" v-show="!fullScreen && playing">
       <div class="icon">
         <div class="imgWrapper" ref="miniWrapper">
           <img ref="miniImage" :class="cdCls" width="44" height="44" :src="currentSong.image">
@@ -21,7 +21,7 @@
         <i class="iconfont iconplay_fill"></i>
       </div>
       <!--播放器-->
-      <audio ref="pomelomusicAudio" @timeupdate="updateTime"></audio>
+      <audio ref="pomelomusicAudio" @timeupdate="updateTime" @ended="end"></audio>
     </div>
   </transition>
 </template>
@@ -37,18 +37,19 @@ export default {
   data () {
     return {
       radius: 30,
+      musicReady: false, // 是否可以使用播放器
       fullScreen: false,
       miniIcon: '',
-      currentTime: 0,
-      currentSong: {
-        album: '我们在夏枝繁茂时再见',
-        duration: 218.979,
-        id: 1371353582,
-        image: 'https://p1.music.126.net/mXqmc1nD5mu2S4pEvBVHzw==/109951164141857357.jpg',
-        name: '我们在夏枝繁茂时再见',
-        singer: '钱正昊',
-        url: 'https://music.163.com/song/media/outer/url?id=1371353582.mp3'
-      }
+      currentTime: 0
+      // currentSong: {
+      //   album: '我们在夏枝繁茂时再见',
+      //   duration: 218.979,
+      //   id: 1371353582,
+      //   image: 'https://p1.music.126.net/mXqmc1nD5mu2S4pEvBVHzw==/109951164141857357.jpg',
+      //   name: '我们在夏枝繁茂时再见',
+      //   singer: '钱正昊',
+      //   url: 'https://music.163.com/song/media/outer/url?id=1371353582.mp3'
+      // }
     }
   },
   computed: {
@@ -66,10 +67,34 @@ export default {
       'currentSong'
     ])
   },
+  watch: {
+    playing (newPlaying) {
+      const pomelomusicAudio = this.$refs.pomelomusicAudio
+      this.$nextTick(() => {
+        newPlaying ? pomelomusicAudio.play() : pomelomusicAudio.pause()
+        // newPlaying ? silencePromise(audio.play()) : audio.pause()
+        this.musicReady = true
+      })
+    },
+    currentSong (newSong, oldSong) {
+      if (!newSong.id || !newSong.url || newSong.id === oldSong.id) {
+        return
+      }
+      this.musicReady = false
+      this.$refs.pomelomusicAudio.src = newSong.url
+      this.$refs.pomelomusicAudio.play()
+      // 若歌曲 5s 未播放，则认为超时，修改状态确保可以切换歌曲。
+      clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        this.musicReady = true
+      }, 5000)
+    }
+  },
   methods: {
     // 更新时间
     updateTime (e) {
       this.currentTime = e.target.currentTime
+      // this.setCurrentTime(currentTime)
     },
     togglePlaying () {
       const pomelomusicAudio = this.$refs.pomelomusicAudio
@@ -79,7 +104,40 @@ export default {
     },
     showPlaylist () {
 
-    }
+    },
+    end () {
+      this.currentTime = 0
+      this.next()
+    },
+    loop () {
+      this.$refs.audio.currentTime = 0
+      this.$refs.audio.play()
+      this.setPlayingState(true)
+    },
+    next () {
+      if (!this.songReady) {
+        return
+      }
+      if (this.playlist.length === 1) {
+        this.loop()
+      } else {
+        let index = this.currentIndex + 1
+        if (index === this.playlist.length) {
+          index = 0
+        }
+        this.setCurrentIndex(index)
+        if (!this.playing) {
+          this.togglePlaying()
+        }
+      }
+    },
+    ...mapMutations({
+      setPlayMode: 'SET_PLAYMODE',
+      setPlaylist: 'SET_PLAYLIST',
+      setCurrentIndex: 'SET_CURRENTINDEX',
+      setCurrentTime: 'SET_CURRENTTIME',
+      setPlayingState: 'SET_PLAYINGSTATE'
+    })
   }
 }
 </script>

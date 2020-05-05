@@ -13,6 +13,7 @@ module.exports = {
     config.resolve.alias
       .set('@', resolve('src'))
       .set('stylus', resolve('src/assets/stylus'))
+      .set('components', resolve('src/components'))
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
     types.forEach(type => addStyleResource(config.module.rule('stylus').oneOf(type)))
   },

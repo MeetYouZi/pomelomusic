@@ -4,9 +4,10 @@ const state = {
   playing: false,
   fullScreen: false,
   playMode: playMode.loop,
-  playlist: [],
+  playList: [],
   currentIndex: -1,
-  currentSong: {}
+  currentSong: {},
+  currentTime: 0
 }
 
 export default state

@@ -6,7 +6,9 @@ export const playList = state => state.playList
 export const playMode = state => state.playMode
 // 当前播放index
 export const currentIndex = state => state.currentIndex
+// 当前播放进度
+export const currentTime = state => state.currentTime
 // 当前播放
 export const currentSong = (state) => {
-  return state.playlist[state.currentIndex] || {}
+  return state.playList[state.currentIndex] || {}
 }

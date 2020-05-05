@@ -15,9 +15,9 @@
       <div class="play_bar_wrap">
         <div class="play_bar" :class="{'fixed': showAbs}">
           <div class="play_all">
-            <i class="play_icon play_all_icon" v-show="!isPalying"></i>
-            <i class="play_icon iconfont iconpause1" v-show="isPalying"></i>
-            <div class="progressBox" @click.stop="togglePalying" v-show="isPalying">
+            <i class="play_icon play_all_icon" v-show="!playing"></i>
+            <i class="play_icon iconfont iconpause1" v-show="playing"></i>
+            <div class="progressBox" @click.stop="togglePalying" v-show="playing">
               <progress-circle :radius="34" :percent="percent"></progress-circle>
             </div>
             <span class="play_all_text">{{songReady ? '播放全部' : currentSong.name}}</span>
@@ -26,24 +26,23 @@
             <i class="collect_icon"></i>
             收藏歌单
           </div>
-          <div class="progress-bar" v-show="isPalying">
+          <div class="progress-bar" v-show="playing">
             <progress-bar :percent="percent"></progress-bar>
           </div>
         </div>
       </div>
     </div>
-    <music-list :songList="songList" @selectItem="selectItem"></music-list>
+    <music-play-list :songList="songList" @selectItem="selectItem"></music-play-list>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { getListDetail, getSongDetail } from '@/api'
 import formatSongs from '@/utils/song'
-import { formatTime } from '@/utils/utils'
 import ProgressBar from '@/views/MusicList/components/progressBar'
 import ProgressCircle from '@/views/MusicList/components/progressCircle'
-import MusicList from 'components/musicList/musicList'
+import MusicPlayList from 'components/musicPlayList/musicPlayList'
 
 const PAGE_SIZE = 26
 const MAXLENGTH = 100
@@ -52,7 +51,7 @@ export default {
   components: {
     ProgressBar,
     ProgressCircle,
-    MusicList
+    MusicPlayList
   },
   data () {
     return {
@@ -62,26 +61,19 @@ export default {
       songList: [],
       songUrl: '',
       songReady: true,
-      currentTime: 0,
-      currentSong: {},
       showAbs: false
     }
   },
-  filters: {
-    formatTime
-  },
   computed: {
+    ...mapGetters(['currentSong', 'playing', 'currentTime']),
     headerImgCover () {
       let img = ''
-      if (this.isPalying) {
+      if (this.playing) {
         img = this.currentSong.image
       } else {
         img = this.playlist.coverImgUrl
       }
       return img
-    },
-    isPalying () {
-      return this.currentSong.id
     },
     percent () {
       // return 0.3
@@ -94,13 +86,6 @@ export default {
         return
       }
       this.songReady = false
-      this.$refs.pomelomusicAudio.src = newSong.url
-      this.$refs.pomelomusicAudio.play()
-      // 若歌曲 5s 未播放，则认为超时，修改状态确保可以切换歌曲。
-      // clearTimeout(this.timer)
-      // this.timer = setTimeout(() => {
-      //   this.songReady = true
-      // }, 5000)
     }
   },
   methods: {
@@ -115,7 +100,7 @@ export default {
     // 播放暂停事件
     selectItem (item, index) {
       this.selectPlay({
-        list: this.list,
+        list: this.songList,
         index
       })
     },
@@ -133,7 +118,6 @@ export default {
     _getSongDetail (playlist) {
       const trackIds = playlist.trackIds.map(({ id }) => id)
       getSongDetail(trackIds.slice(0, MAXLENGTH)).then(res => {
-        // console.log(res)
         this.songList = formatSongs(res.songs)
         console.log(this.songList)
       })

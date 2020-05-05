@@ -11,6 +11,9 @@ const mutations = {
   },
   [types.SET_CURRENTINDEX] (state, currentIndex) {
     state.currentIndex = currentIndex
+  },
+  [types.SET_CURRENTTIME] (state, currentTime) {
+    state.currentTime = currentTime
   }
 }
 export default mutations

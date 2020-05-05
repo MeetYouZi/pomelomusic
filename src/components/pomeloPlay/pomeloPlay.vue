@@ -1,6 +1,6 @@
 <template>
   <transition name="miniplay">
-    <div class="pomelo-play" v-show="!fullScreen && playing">
+    <div class="pomelo-play" v-show="!fullScreen && isShowPlay">
       <div class="icon">
         <div class="imgWrapper" ref="miniWrapper">
           <img ref="miniImage" :class="cdCls" width="44" height="44" :src="currentSong.image">
@@ -60,6 +60,9 @@ export default {
       // return 0.3
       return this.currentSong.duration ? this.currentTime / this.currentSong.duration : 0
     },
+    isShowPlay () {
+      return this.currentSong.id
+    },
     ...mapGetters([
       'playing',
       'playMode',
@@ -98,9 +101,16 @@ export default {
     },
     togglePlaying () {
       const pomelomusicAudio = this.$refs.pomelomusicAudio
-      pomelomusicAudio.src = this.currentSong.url
-      pomelomusicAudio.play()
-      this.playing = true
+      if (!this.playing && !this.currentSong.id) {
+        return
+      }
+      if (!this.playing && this.currentSong.id) {
+        pomelomusicAudio.play()
+        this.setPlayingState(true)
+      } else {
+        pomelomusicAudio.pause()
+        this.setPlayingState(false)
+      }
     },
     showPlaylist () {
 

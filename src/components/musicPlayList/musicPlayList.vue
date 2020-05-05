@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import { formatTime } from '@/utils/utils'
 
 export default {
@@ -36,13 +36,20 @@ export default {
     formatTime
   },
   computed: {
-    ...mapGetters(['currentSong'])
+    ...mapGetters(['currentSong', 'playing'])
   },
   methods: {
     // 播放暂停事件
     handleSelectSong (item, index) {
+      if (this.currentSong.id && item.id === this.currentSong.id) {
+        this.setPlaying(!this.playing)
+        return
+      }
       this.$emit('selectItem', item, index)
-    }
+    },
+    ...mapMutations({
+      setPlaying: 'SET_PLAYINGSTATE'
+    })
   }
 }
 </script>

@@ -14,10 +14,10 @@
 
       <div class="play_bar_wrap">
         <div class="play_bar" :class="{'fixed': showAbs}">
-          <div class="play_all">
+          <div class="play_all"  @click.stop="togglePalying">
             <i class="play_icon play_all_icon" v-show="!playing"></i>
             <i class="play_icon iconfont iconpause1" v-show="playing"></i>
-            <div class="progressBox" @click.stop="togglePalying" v-show="playing">
+            <div class="progressBox" v-show="playing">
               <progress-circle :radius="34" :percent="percent"></progress-circle>
             </div>
             <span class="play_all_text">{{songReady ? '播放全部' : currentSong.name}}</span>
@@ -37,14 +37,14 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { getListDetail, getSongDetail } from '@/api'
 import formatSongs from '@/utils/song'
 import ProgressBar from '@/views/MusicList/components/progressBar'
 import ProgressCircle from '@/views/MusicList/components/progressCircle'
-import MusicPlayList from 'components/musicPlayList/musicPlayList'
+import MusicPlayList from '@/components/musicPlayList/musicPlayList'
+import { SET_PLAYINGSTATE } from '@/store/mutation-types'
 
-const PAGE_SIZE = 26
 const MAXLENGTH = 100
 export default {
   name: 'MusicList',
@@ -68,7 +68,7 @@ export default {
     ...mapGetters(['currentSong', 'playing', 'currentTime']),
     headerImgCover () {
       let img = ''
-      if (this.playing) {
+      if (this.currentSong.id) {
         img = this.currentSong.image
       } else {
         img = this.playlist.coverImgUrl
@@ -105,9 +105,21 @@ export default {
       })
     },
     ...mapActions(['selectPlay']),
+    ...mapMutations({
+      setPlayState: SET_PLAYINGSTATE
+    }),
     togglePalying () {
-      const audio = this.$refs.pomelomusicAudio
-      audio.pause()
+      // const audio = this.$refs.pomelomusicAudio
+      // audio.pause()
+      if (!this.playing) {
+        const index = 0
+        this.selectPlay({
+          list: this.songList,
+          index
+        })
+      } else {
+        this.setPlayState(!this.playing)
+      }
     },
     _getListDetail () {
       getListDetail({ id: this.id }).then(res => {

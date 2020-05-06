@@ -8,7 +8,7 @@
       <div class="con-scroll-x">
         <div class="con-scroll-bd">
           <ul class="con-list">
-            <li class="list-item" v-for="item in musicItem.list" :key="item.id" @click.stop="handleClickUrl(item.id)">
+            <li class="list-item" v-for="(item, index) in musicItem.list" :key="item.id" @click.stop="handleClick(musicItem, item, index)">
               <div class="list-box">
                 <div class="list-media">
                   <img class="list-img" :src="item.picUrl"/>
@@ -29,12 +29,27 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import formatSongs from '@/utils/song'
 import { getPersonalized, getNewSongs, getPersonalizedMv, getDjprogram } from '@/api'
+import { SET_PLAYINGSTATE } from '@/store/mutation-types'
 export default {
   name: 'contentView',
   data () {
     return {
-      titList: ['热门推荐', '最新音乐', '推荐MV', '推荐电台'],
+      titList: [{
+        key: 'hot',
+        name: '热门推荐'
+      }, {
+        key: 'music',
+        name: '最新音乐'
+      }, {
+        key: 'mv',
+        name: '推荐MV'
+      }, {
+        key: 'program',
+        name: '推荐电台'
+      }],
       hotMvList: [],
       hotList: [],
       newList: [],
@@ -42,10 +57,69 @@ export default {
       musicList: []
     }
   },
+  computed: {
+    ...mapGetters(['playing', 'currentSong']),
+    normalizedSongs () {
+      const songList = this.songList.map((songs) => {
+        const song = songs.song
+        return {
+          id: song.id,
+          name: song.name,
+          ar: song.artists,
+          dt: song.duration,
+          mv: song.mvId,
+          al: {
+            name: songs.name,
+            picUrl: songs.picUrl
+          }
+        }
+      })
+      return this.nomalizeSong(songList)
+    }
+  },
   methods: {
-    handleClickUrl (id) {
+    nomalizeSong (songList) {
+      return formatSongs(songList)
+    },
+    handleTomusicList (id) {
       this.$router.push(`/musicList/${id}`)
     },
+    playMusic (item, index) {
+      if (this.playing && this.currentSong.id && item.id && item.id === this.currentSong.id) {
+        this.setPlayState(false)
+      } else {
+        this.selectPlay({
+          list: this.normalizedSongs,
+          index
+        })
+      }
+    },
+    playMV () {
+
+    },
+    handleClick (musicItem, item, index) {
+      const key = musicItem.key
+      switch (key) {
+        case 'hot':
+          this.handleTomusicList(item.id)
+          break
+        case 'music':
+          this.playMusic(item, index)
+          break
+        case 'mv':
+          this.playMV()
+          break
+        case 'program':
+          this.playMV()
+          break
+        default:
+          console.log('啥也没有呢～')
+      }
+    },
+    ...mapActions(['selectPlay']),
+    ...mapMutations({
+      setPlayState: SET_PLAYINGSTATE
+    }),
     _getMusicList () {
       Promise.all([
         this._getPersonalized(),
@@ -54,9 +128,11 @@ export default {
         this._getDjprogram()]
       ).then(res => {
         const allList = res
+        this.songList = res[1]
         allList.forEach((item, index) => {
           this.musicList.push({
-            tit: this.titList[index],
+            key: this.titList[index].key,
+            tit: this.titList[index].name,
             id: 'music' + index,
             list: item
           })
@@ -66,7 +142,7 @@ export default {
     // 热门音乐
     _getPersonalized () {
       return new Promise(resolve => {
-        getPersonalized({ limit: 10 }).then(res => {
+        getPersonalized({ limit: 15 }).then(res => {
           resolve(res.result)
         })
       })
@@ -80,7 +156,7 @@ export default {
         })
       })
     },
-    // 最新音乐
+    // 最新MV
     _getPersonalizedMv () {
       return new Promise(resolve => {
         getPersonalizedMv().then(res => {

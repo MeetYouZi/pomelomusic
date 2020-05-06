@@ -131,7 +131,6 @@ export default {
       const trackIds = playlist.trackIds.map(({ id }) => id)
       getSongDetail(trackIds.slice(0, MAXLENGTH)).then(res => {
         this.songList = formatSongs(res.songs)
-        console.log(this.songList)
       })
     }
   },

@@ -1,6 +1,12 @@
 <template>
   <div class="home">
-    <search></search>
+    <div class="top-header">
+      <h2 class="top-title">音乐馆</h2>
+      <div class="search-box">
+        <search></search>
+      </div>
+      <i class="iconfont iconplay_fill"></i>
+    </div>
     <banner :banner-list="bannerList" @click="handleToggleTheme"></banner>
     <content-view></content-view>
   </div>
@@ -44,4 +50,16 @@ export default {
     background var(--theme)
     position relative
     overflow hidden
+    .top-header
+      display flex
+      justify-content space-between
+      align-items center
+      padding 0 10px
+      box-sizing border-box
+      .top-title
+        font-size $font-size-large-m
+        color var(--color)
+        font-weight bold
+      .search-box
+        flex 1
 </style>

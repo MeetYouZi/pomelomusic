@@ -12,7 +12,7 @@
               <div class="list-box">
                 <div class="list-media">
                   <img class="list-img" :src="item.picUrl"/>
-                  <div class="cover_count">
+                  <div class="cover_count" v-show="musicItem.key != 'music'">
                     <span class="cover-count-num">{{item.playCount}}</span>
                   </div>
                 </div>

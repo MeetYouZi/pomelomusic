@@ -1,29 +1,37 @@
 <template>
-  <transition name="miniplay">
-    <div class="pomelo-play" v-show="!fullScreen && isShowPlay">
-      <div class="icon">
-        <div class="imgWrapper" ref="miniWrapper">
-          <img ref="miniImage" :class="cdCls" width="44" height="44" :src="currentSong.image">
+  <div class="pomelo-module">
+    <transition name="playlist">
+      <div class="playlist-bg" v-show="fullScreen">
+        <div class="close-icon-fix" @click="handleclose">X</div>
+        历史播放列表
+      </div>
+    </transition>
+    <transition name="miniplay">
+      <div class="pomelo-play" v-show="isShowPlay">
+        <div class="icon">
+          <div class="imgWrapper" ref="miniWrapper">
+            <img ref="miniImage" :class="cdCls" width="44" height="44" :src="currentSong.image">
+          </div>
         </div>
-      </div>
-      <div class="text">
-        <h2 class="name" v-html="currentSong.name"></h2>
-        <p class="desc" v-html="currentSong.singer"></p>
-      </div>
-      <div class="control">
-        <div class="progress-circle-box">
-          <progress-circle :radius="radius" :percent="percent">
-          </progress-circle>
-          <i @click.stop="togglePlaying" class="iconfont iconpause1 icon-mini" :class="miniIcon"></i>
+        <div class="text">
+          <h2 class="name" v-html="currentSong.name"></h2>
+          <p class="desc" v-html="currentSong.singer"></p>
         </div>
+        <div class="control">
+          <div class="progress-circle-box">
+            <progress-circle :radius="radius" :percent="percent">
+            </progress-circle>
+            <i @click.stop="togglePlaying" class="iconfont iconpause1 icon-mini" :class="miniIcon"></i>
+          </div>
+        </div>
+        <div class="control" @click.stop="showPlaylist">
+          <i class="iconfont iconplay_fill"></i>
+        </div>
+        <!--播放器-->
+        <audio ref="pomelomusicAudio" @timeupdate="updateTime" @ended="end"></audio>
       </div>
-      <div class="control" @click.stop="showPlaylist">
-        <i class="iconfont iconplay_fill"></i>
-      </div>
-      <!--播放器-->
-      <audio ref="pomelomusicAudio" @timeupdate="updateTime" @ended="end"></audio>
-    </div>
-  </transition>
+    </transition>
+  </div>
 </template>
 
 <script>
@@ -112,8 +120,11 @@ export default {
         this.setPlayingState(false)
       }
     },
+    handleclose () {
+      this.fullScreen = false
+    },
     showPlaylist () {
-
+      this.fullScreen = true
     },
     end () {
       this.currentTime = 0
@@ -125,14 +136,14 @@ export default {
       this.setPlayingState(true)
     },
     next () {
-      if (!this.songReady) {
-        return
-      }
-      if (this.playlist.length === 1) {
+      // if (!this.songReady) {
+      //   return
+      // }
+      if (this.playList.length === 1) {
         this.loop()
       } else {
         let index = this.currentIndex + 1
-        if (index === this.playlist.length) {
+        if (index === this.playList.length) {
           index = 0
         }
         this.setCurrentIndex(index)
@@ -153,83 +164,109 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-.pomelo-play
-  display: flex
-  align-items: center
-  position: fixed
-  left: 0
-  bottom: 0
-  z-index: 180
-  width: 100%
-  height: 50px
-  // background: var(--theme)
-  background: #fff
-  &.miniplay-enter-active, &.miniplay-leave-active
-    transition: all 0.4s
-  &.miniplay-enter, &.miniplay-leave-to
-    opacity: 0
-  .icon
-    flex: 0 0 44px
-    width: 44px
-    height: 44px
-    padding: 0 10px 0 20px
-    margin-top -20px
-    .imgWrapper
-      height: 100%
-      width: 100%
-      img
-        border-radius: 50%
-        &.play
-          animation: rotate 10s linear infinite
-        &.pause
-          animation-play-state: paused
-  .text
-    display: flex
-    flex: 1
-    line-height: 20px
-    overflow: hidden
-    .name
-      margin-bottom: 2px
-      no-wrap()
-      font-size: $font-size-medium
-      color: $color-text
-    .desc
-      no-wrap()
-      font-size: $font-size-small
-      color: $color-text-d
-  .control
-    flex: 0 0 30px
-    display flex
-    align-items center
-    justify-content center
-    width 30px
-    height 30px
-    border-radius 50%
-    text-align center
-    box-sizing border-box
-    border 1px solid $color-theme
+  .pomelo-module
     position relative
-    margin-right 10px
-    .progress-circle-box
+  .playlist-bg
+    position fixed
+    left 0
+    right 0
+    bottom 50px
+    z-index 150
+    height 70%
+    background rgba(255, 255, 255, 0.99)
+    transition all 0.4s
+    &.playlist-enter-active, &.playlist-leave-active
+      transition: all 0.4s
+      .top, .bottom
+        transition: all 0.4s cubic-bezier(0.86, 0.18, 0.82, 1.32)
+    &.playlist-enter, &.playlist-leave-to
+      transform: translate3d(0, 100px, 0)
+      opacity 0
+      .top
+        transform: translate3d(0, -100px, 0)
+      .bottom
+        transform: translate3d(0, 100px, 0)
+    .close-icon-fix
       position absolute
+      top 10px
+      right 10px
+  .pomelo-play
+    display: flex
+    align-items: center
+    position: fixed
+    left: 0
+    bottom: 0
+    z-index: 180
+    width: 100%
+    height: 50px
+    // background: var(--theme)
+    background: #fff
+    &.miniplay-enter-active, &.miniplay-leave-active
+      transition: all 0.4s
+    &.miniplay-enter, &.miniplay-leave-to
+      opacity: 0
+    .icon
+      flex: 0 0 44px
+      width: 44px
+      height: 44px
+      padding: 0 10px 0 20px
+      margin-top -20px
+      .imgWrapper
+        height: 100%
+        width: 100%
+        img
+          border-radius: 50%
+          &.play
+            animation: rotate 10s linear infinite
+          &.pause
+            animation-play-state: paused
+    .text
+      display: flex
+      flex: 1
+      line-height: 20px
+      overflow: hidden
+      .name
+        margin-bottom: 2px
+        no-wrap()
+        font-size: $font-size-medium
+        color: $color-text
+      .desc
+        no-wrap()
+        font-size: $font-size-small
+        color: $color-text-d
+    .control
+      flex: 0 0 30px
+      display flex
+      align-items center
+      justify-content center
       width 30px
       height 30px
-    .iconfont
-      font-size: 16px
-      color: $color-theme
-      line-height 30px
+      border-radius 50%
       text-align center
-    .icon-mini
-      color: $color-theme
-      font-size: 20px
-      position absolute
-      text-align center
-      left 50%
-      top 50%
-      transform translate(-50%, -50%)
-  @keyframes rotate
-    0%
-      transform: rotate(0)
-    100%
-      transform: rotate(360deg)
+      box-sizing border-box
+      border 1px solid $color-theme
+      position relative
+      margin-right 10px
+      .progress-circle-box
+        position absolute
+        width 30px
+        height 30px
+      .iconfont
+        font-size: 16px
+        color: $color-theme
+        line-height 30px
+        text-align center
+      .icon-mini
+        color: $color-theme
+        font-size: 20px
+        position absolute
+        text-align center
+        left 50%
+        top 50%
+        transform translate(-50%, -50%)
+    @keyframes rotate
+      0%
+        transform: rotate(0)
+      100%
+        transform: rotate(360deg)
 </style>

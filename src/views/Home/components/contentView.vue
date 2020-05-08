@@ -227,7 +227,6 @@ export default {
                 position: absolute
                 top: 0
                 left: 0
-                z-index: 1
                 width: 100%
                 height: 100%
                 object-fit: cover
@@ -236,7 +235,7 @@ export default {
                 position: absolute;
                 bottom: 0;
                 right: 0;
-                z-index: 5;
+                z-index: 1;
                 display flex
                 align-items center
                 justify-content center

@@ -5,7 +5,7 @@
       <div class="search-box">
         <search></search>
       </div>
-      <i class="iconfont iconplay_fill"></i>
+      <i class="iconfont iconmusic"></i>
     </div>
     <banner :banner-list="bannerList" @click="handleToggleTheme"></banner>
     <content-view></content-view>

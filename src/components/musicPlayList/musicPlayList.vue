@@ -3,7 +3,7 @@
     <li class="music-item"
         v-for="(item, index) in songList"
         :key="item.id"
-        @click="handleSelectSong(item, index)"
+        @click.stop="handleSelectSong(item, index)"
         :class="{active: item.id == currentSong.id}"
     >
       <div class="item-box">

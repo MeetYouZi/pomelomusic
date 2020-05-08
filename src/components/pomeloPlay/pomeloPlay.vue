@@ -1,9 +1,24 @@
 <template>
   <div class="pomelo-module">
-    <transition name="playlist">
-      <div class="playlist-bg" v-show="fullScreen">
-        <div class="close-icon-fix" @click="handleclose">X</div>
-        历史播放列表
+    <transition name="fade">
+      <div class="playlist-mask" v-show="fullScreen" @click="handleclose">
+        <transition name="playlist">
+          <div class="playlist-bg" v-show="fullScreen">
+            <div class="playlist-title">
+              播放列表
+              <div class="close-icon-fix" @click="handleclose">
+                <i class="iconfont iconclose"></i>
+              </div>
+            </div>
+            <div class="music-play-list">
+              <music-play-list
+                :songList="playList"
+                @selectItem="selectItem"
+              >
+              </music-play-list>
+            </div>
+          </div>
+        </transition>
       </div>
     </transition>
     <transition name="miniplay">
@@ -24,23 +39,29 @@
             <i @click.stop="togglePlaying" class="iconfont iconpause1 icon-mini" :class="miniIcon"></i>
           </div>
         </div>
-        <div class="control" @click.stop="showPlaylist">
-          <i class="iconfont iconplay_fill"></i>
+        <div class="control menu" @click.stop="showPlaylist">
+          <i class="iconfont iconmenuoff"></i>
         </div>
         <!--播放器-->
-        <audio ref="pomelomusicAudio" @timeupdate="updateTime" @ended="end"></audio>
+        <audio ref="pomelomusicAudio"
+               @timeupdate="updateTime"
+               @ended="end"
+               @pause="paused"
+        ></audio>
       </div>
     </transition>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import progressCircle from '@/views/MusicList/components/progressCircle'
+import musicPlayList from '@/components/musicPlayList/musicPlayList'
 export default {
   name: 'pomeloPlay',
   components: {
-    progressCircle
+    progressCircle,
+    musicPlayList
   },
   data () {
     return {
@@ -75,7 +96,8 @@ export default {
       'playing',
       'playMode',
       'playList',
-      'currentSong'
+      'currentSong',
+      'currentIndex'
     ])
   },
   watch: {
@@ -102,6 +124,13 @@ export default {
     }
   },
   methods: {
+    selectItem (item, index) {
+      this.setCurrentIndex(index)
+      // this.selectPlay({
+      //   list: this.songList,
+      //   index
+      // })
+    },
     // 更新时间
     updateTime (e) {
       this.currentTime = e.target.currentTime
@@ -125,6 +154,9 @@ export default {
     },
     showPlaylist () {
       this.fullScreen = true
+    },
+    paused () {
+      this.setPlayingState(false)
     },
     end () {
       this.currentTime = 0
@@ -152,6 +184,7 @@ export default {
         }
       }
     },
+    ...mapActions(['selectPlay']),
     ...mapMutations({
       setPlayMode: 'SET_PLAYMODE',
       setPlaylist: 'SET_PLAYLIST',
@@ -166,6 +199,18 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   .pomelo-module
     position relative
+    z-index 2
+  .playlist-mask
+    position fixed
+    left 0
+    right 0
+    top 0
+    bottom 0
+    background rgba(0, 0, 0, 0.6)
+    &.fade-enter, &.fade-leave-active
+      opacity: 0
+    &.fade-enter-active, &.fade-leave-active
+      transition: all 0.3s ease-in-out
   .playlist-bg
     position fixed
     left 0
@@ -175,8 +220,10 @@ export default {
     height 70%
     background rgba(255, 255, 255, 0.99)
     transition all 0.4s
+    display flex
+    flex-direction column
     &.playlist-enter-active, &.playlist-leave-active
-      transition: all 0.4s
+      transition: all 0.4s ease-in-out
       .top, .bottom
         transition: all 0.4s cubic-bezier(0.86, 0.18, 0.82, 1.32)
     &.playlist-enter, &.playlist-leave-to
@@ -186,10 +233,23 @@ export default {
         transform: translate3d(0, -100px, 0)
       .bottom
         transform: translate3d(0, 100px, 0)
+    .playlist-title
+      height 40px
+      line-height 40px
+      text-align center
+      font-size $font-size-medium
+      font-weight bold
+      color var(--color)
+    .music-play-list
+      flex 1
+      overflow scroll
     .close-icon-fix
       position absolute
-      top 10px
-      right 10px
+      top 0
+      right 16px
+      .iconfont
+        color var(--c_gray)
+        font-size $font-size-large
   .pomelo-play
     display: flex
     align-items: center
@@ -247,12 +307,14 @@ export default {
       border 1px solid $color-theme
       position relative
       margin-right 10px
+      &.menu
+        border 0px solid $color-theme
       .progress-circle-box
         position absolute
         width 30px
         height 30px
       .iconfont
-        font-size: 16px
+        font-size: 20px
         color: $color-theme
         line-height 30px
         text-align center

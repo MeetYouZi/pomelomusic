@@ -60,6 +60,10 @@ export default {
         font-size $font-size-large-m
         color var(--color)
         font-weight bold
+      .iconmusic
+        font-size 22px
+        font-weight bold
+        color var(--theme_color)
       .search-box
         flex 1
 </style>

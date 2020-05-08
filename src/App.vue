@@ -39,7 +39,7 @@ export default {
   .rv
     position absolute
     width 100%
-    transition all ease 250ms
+    transition all ease .5s
     &.slide-left-enter, &.slide-right-leave-active
       transform translate3d(100%, 0, 0)
     &.slide-left-leave-active, &.slide-right-enter

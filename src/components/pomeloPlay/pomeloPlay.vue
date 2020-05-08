@@ -206,6 +206,7 @@ export default {
     right 0
     top 0
     bottom 0
+    z-index 100
     background rgba(0, 0, 0, 0.6)
     &.fade-enter, &.fade-leave-active
       opacity: 0
@@ -249,7 +250,7 @@ export default {
       right 16px
       .iconfont
         color var(--c_gray)
-        font-size $font-size-large
+        font-size 20px
   .pomelo-play
     display: flex
     align-items: center
@@ -308,7 +309,10 @@ export default {
       position relative
       margin-right 10px
       &.menu
+        font-size 20px
         border 0px solid $color-theme
+        .iconfont
+          font-weight 600
       .progress-circle-box
         position absolute
         width 30px

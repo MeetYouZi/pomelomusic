@@ -22,7 +22,7 @@
       </div>
     </transition>
     <transition name="miniplay">
-      <div class="pomelo-play" v-show="isShowPlay">
+      <div class="pomelo-play" v-show="isShowPlay" @swiperight="swiperight(x)">
         <div class="icon">
           <div class="imgWrapper" ref="miniWrapper">
             <img ref="miniImage" :class="cdCls" width="44" height="44" :src="currentSong.image">
@@ -36,7 +36,10 @@
           <div class="progress-circle-box">
             <progress-circle :radius="radius" :percent="percent">
             </progress-circle>
-            <i @click.stop="togglePlaying" class="iconfont iconpause1 icon-mini" :class="miniIcon"></i>
+            <i @click.stop="togglePlaying"
+               class="iconfont icon-mini"
+               :class="miniIcon"
+            ></i>
           </div>
         </div>
         <div class="control menu" @click.stop="showPlaylist">
@@ -68,7 +71,6 @@ export default {
       radius: 30,
       musicReady: false, // 是否可以使用播放器
       fullScreen: false,
-      miniIcon: '',
       currentTime: 0
       // currentSong: {
       //   album: '我们在夏枝繁茂时再见',
@@ -84,6 +86,9 @@ export default {
   computed: {
     cdCls () {
       return this.playing ? 'play' : ''
+    },
+    miniIcon () {
+      return this.playing ? 'iconpause1' : 'iconplay_fill'
     },
     percent () {
       // return 0.3
@@ -130,6 +135,10 @@ export default {
       //   list: this.songList,
       //   index
       // })
+    },
+    swiperight () {
+      alert('8888')
+      this.next()
     },
     // 更新时间
     updateTime (e) {

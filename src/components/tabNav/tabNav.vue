@@ -57,13 +57,13 @@ export default {
       .tab-link
         font-size $font-size-small
         color: $color-text
-        &.tab-link2
-          position relative
-          top -6px
       .tab-icon
         width 23px
         height 23px
         font-size $font-size-large-x
         text-align center
         padding-bottom 2px
+      &.router-link-active
+        .tab-link, .iconfont
+          color: $color-theme
 </style>

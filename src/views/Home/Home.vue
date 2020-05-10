@@ -9,10 +9,12 @@
     </div>
     <banner :banner-list="bannerList" @click="handleToggleTheme"></banner>
     <content-view></content-view>
+    <tab-nav></tab-nav>
   </div>
 </template>
 
 <script>
+import tabNav from '@/components/tabNav/tabNav'
 import banner from '@/views/Home/components/banner'
 import search from '@/views/Home/components/search'
 import contentView from '@/views/Home/components/contentView'
@@ -20,6 +22,7 @@ import { getBanner } from '@/api'
 export default {
   name: 'Home',
   components: {
+    tabNav,
     banner,
     search,
     contentView

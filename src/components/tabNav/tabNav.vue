@@ -21,7 +21,7 @@ export default {
       iconList: [
         {
           id: '001',
-          url: '/',
+          url: '/home',
           icon: 'iconmusic',
           name: '音乐馆'
         }, {

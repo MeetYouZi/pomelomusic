@@ -6,14 +6,17 @@
       </keep-alive>
     </transition>
     <pomelo-play></pomelo-play>
+    <tab-nav></tab-nav>
   </div>
 </template>
 
 <script>
 import pomeloPlay from '@/components/pomeloPlay/pomeloPlay'
+import TabNav from '@/components/tabNav/tabNav'
 export default {
   components: {
-    pomeloPlay
+    pomeloPlay,
+    TabNav
   },
   data () {
     return {

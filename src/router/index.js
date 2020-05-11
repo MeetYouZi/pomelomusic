@@ -10,29 +10,29 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    redirect: '/home'
+  }, {
+    path: '/home',
     name: 'Home',
     component: Home,
     meta: {
       requiresAuth: false
     }
-  },
-  {
+  }, {
     path: '/musicList/:id',
     name: 'MusicList',
     component: MusicList,
     meta: {
       requiresAuth: false
     }
-  },
-  {
+  }, {
     path: '/recommend',
     name: 'Recommend',
     component: Recommend,
     meta: {
       requiresAuth: false
     }
-  },
-  {
+  }, {
     path: '/about',
     name: 'About',
     component: About

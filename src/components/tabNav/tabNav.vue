@@ -28,7 +28,12 @@ export default {
           id: '002',
           url: '/recommend',
           icon: 'iconmusic',
-          name: '推荐'
+          name: '排行'
+        }, {
+          id: '002',
+          url: '/personal',
+          icon: 'iconmusic',
+          name: '我的'
         }
       ]
     }

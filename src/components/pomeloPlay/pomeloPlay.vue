@@ -225,7 +225,7 @@ export default {
     position fixed
     left 0
     right 0
-    bottom 50px
+    bottom 90px
     z-index 150
     height 70%
     background rgba(255, 255, 255, 0.99)
@@ -265,7 +265,7 @@ export default {
     align-items: center
     position: fixed
     left: 0
-    bottom: 0
+    bottom: 40px
     z-index: 180
     width: 100%
     height: 50px

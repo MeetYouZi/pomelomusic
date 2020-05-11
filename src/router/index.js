@@ -4,6 +4,8 @@ const Home = () => import('@/views/Home/Home')
 const MusicList = () => import('@/views/MusicList/MusicList')
 const Recommend = () => import('@/views/Recommend/Recommend')
 const About = () => import('@/views/About')
+const Music = () => import('@/views/music')
+const Personal = () => import('@/views/Personal/Personal')
 
 Vue.use(VueRouter)
 
@@ -12,24 +14,42 @@ const routes = [
     path: '/',
     redirect: '/home'
   }, {
-    path: '/home',
-    name: 'Home',
-    component: Home,
-    meta: {
-      requiresAuth: false
-    }
+    path: '/',
+    name: 'Music',
+    component: Music,
+    children: [
+      {
+        path: 'home',
+        name: 'Home',
+        component: Home,
+        meta: {
+          index: 0,
+          requiresAuth: false
+        }
+      }, {
+        path: 'recommend',
+        name: 'Recommend',
+        component: Recommend,
+        meta: {
+          index: 0,
+          requiresAuth: false
+        }
+      }, {
+        path: '/personal',
+        name: 'Personal',
+        component: Personal,
+        meta: {
+          index: 0,
+          requiresAuth: false
+        }
+      }
+    ]
   }, {
     path: '/musicList/:id',
     name: 'MusicList',
     component: MusicList,
     meta: {
-      requiresAuth: false
-    }
-  }, {
-    path: '/recommend',
-    name: 'Recommend',
-    component: Recommend,
-    meta: {
+      index: 1,
       requiresAuth: false
     }
   }, {

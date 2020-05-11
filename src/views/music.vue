@@ -1,6 +1,8 @@
 <template>
   <div class="music">
-    <router-link></router-link>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
     <tab-nav></tab-nav>
   </div>
 </template>

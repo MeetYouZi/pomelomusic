@@ -6,7 +6,7 @@
       </keep-alive>
     </transition>
     <pomelo-play></pomelo-play>
-    <tab-nav></tab-nav>
+<!--    <tab-nav></tab-nav>-->
   </div>
 </template>
 
@@ -26,8 +26,8 @@ export default {
   // watch $route 决定使用哪种过渡
   watch: {
     '$route' (to, from) {
-      const toDepth = to.path.split('/').length
-      const fromDepth = from.path.split('/').length
+      const toDepth = to.meta.index
+      const fromDepth = from.meta.index
       this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
     }
   }

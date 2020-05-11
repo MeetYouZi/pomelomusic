@@ -2,7 +2,11 @@
   <div class="rank_list">
     <div class="rank_title">官方榜</div>
     <ul class="rank_list_top">
-      <li class="rank_list_item" v-for="(item) in topList" :key="item.id">
+      <li class="rank_list_item"
+          v-for="(item) in topList"
+          :key="item.id"
+          @click="handleToDetail(item.id)"
+      >
         <div class="ank_list_left">
           <h2 class="rank_list_tit">{{item.name}}</h2>
           <ol class="rank_song_list">
@@ -19,7 +23,11 @@
     </ul>
     <div class="rank_title">全球榜</div>
     <ul class="rank_list_global">
-      <li class="rank_global_item" v-for="item in globalTopList" :key="item.id">
+      <li class="rank_global_item"
+          v-for="item in globalTopList"
+          :key="item.id"
+          @click="handleToDetail(item.id)"
+      >
         <div class="rank_global_coverImgUrl">
           <img class="rank_global_img" :src="item.coverImgUrl"/>
         </div>
@@ -40,6 +48,9 @@ export default {
     }
   },
   methods: {
+    handleToDetail (id) {
+      this.$router.push(`/musicList/${id}`)
+    },
     _formatToplist (obj) {
       return {
         name: obj.name,
@@ -60,8 +71,8 @@ export default {
             return item
           }
         })
-        const artistToplist = this._formatToplist(res.artistToplist)
-        this.topList.push(artistToplist)
+        // const artistToplist = this._formatToplist(res.artistToplist)
+        // this.topList.push(artistToplist)
       })
     }
   },

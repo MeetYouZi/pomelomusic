@@ -12,11 +12,9 @@
 
 <script>
 import pomeloPlay from '@/components/pomeloPlay/pomeloPlay'
-import TabNav from '@/components/tabNav/tabNav'
 export default {
   components: {
-    pomeloPlay,
-    TabNav
+    pomeloPlay
   },
   data () {
     return {
@@ -30,7 +28,27 @@ export default {
       const fromDepth = from.meta.index
       this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
     }
-  }
+  },
+  methods: {
+    removeAnimate () {
+      // 首次加载完成后移除动画
+      let loadDOM = document.querySelector('#appLoadingBox')
+      if (loadDOM) {
+        const animationendFunc = function () {
+          loadDOM.removeEventListener('animationend', animationendFunc)
+          loadDOM.removeEventListener('webkitAnimationEnd', animationendFunc)
+          document.body.removeChild(loadDOM)
+          loadDOM = null
+        }
+        loadDOM.addEventListener('animationend', animationendFunc)
+        loadDOM.addEventListener('webkitAnimationEnd', animationendFunc)
+        loadDOM.classList.add('removeAnimate')
+      }
+    }
+  },
+  mounted () {
+    this.removeAnimate()
+  },
 }
 </script>
 <style lang="stylus" scoped>

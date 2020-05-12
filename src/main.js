@@ -11,8 +11,8 @@ Vue.config.productionTip = false
 Vue.use(VueLazyload)
 Vue.use(VueLazyload, {
   preLoad: 1.3,
-  error: 'dist/error.png',
-  loading: 'dist/loading.gif',
+  error: 'src/assets/img/error.jpeg',
+  loading: 'src/assets/img/loading.jpeg',
   attempt: 1
 })
 

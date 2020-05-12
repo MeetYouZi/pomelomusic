@@ -11,7 +11,7 @@
             <li class="list-item" v-for="(item, index) in musicItem.list" :key="item.id" @click.stop="handleClick(musicItem, item, index)">
               <div class="list-box">
                 <div class="list-media">
-                  <img class="list-img" :src="item.picUrl"/>
+                  <img class="list-img" v-lazy="item.picUrl"/>
                   <div class="cover_count" v-show="musicItem.key != 'music'">
                     <span class="cover-count-num">{{item.playCount}}</span>
                   </div>

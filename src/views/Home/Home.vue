@@ -1,13 +1,20 @@
 <template>
   <div class="home">
     <div class="top-header">
-      <h2 class="top-title">音乐馆</h2>
+      <h2
+        class="top-title"
+        @click="handleToggleTheme"
+        v-show="!showSearchView"
+      >
+        音乐馆
+      </h2>
       <div class="search-box">
-        <search></search>
+        <search @handelFocus="handelFocus"></search>
       </div>
-      <i class="iconfont iconmusic"></i>
+      <div class="cancel" v-show="showSearchView">取消</div>
+      <i v-show="!showSearchView" class="iconfont iconmusic"></i>
     </div>
-    <banner :banner-list="bannerList" @click="handleToggleTheme"></banner>
+    <banner :banner-list="bannerList"></banner>
     <content-view></content-view>
   </div>
 </template>
@@ -26,13 +33,17 @@ export default {
   },
   data () {
     return {
-      bannerList: []
+      bannerList: [],
+      showSearchView: false
     }
   },
   methods: {
     // 切换主题
     handleToggleTheme () {
       document.querySelector('html').className = 'black'
+    },
+    handelFocus (show) {
+      this.showSearchView = show
     },
     _getBanner () {
       getBanner().then(res => {
@@ -56,6 +67,9 @@ export default {
       align-items center
       padding 0 10px
       box-sizing border-box
+      .cancel
+        font-size $font-size-medium
+        color var(--color)
       .top-title
         font-size $font-size-large-m
         color var(--color)

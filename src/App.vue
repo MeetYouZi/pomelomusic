@@ -48,7 +48,7 @@ export default {
   },
   mounted () {
     this.removeAnimate()
-  },
+  }
 }
 </script>
 <style lang="stylus" scoped>

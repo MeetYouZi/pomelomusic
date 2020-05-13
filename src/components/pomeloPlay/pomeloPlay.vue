@@ -269,8 +269,7 @@ export default {
     z-index: 180
     width: 100%
     height: 50px
-    // background: var(--theme)
-    background: #fff
+    background var(--playBg)
     &.miniplay-enter-active, &.miniplay-leave-active
       transition: all 0.4s
     &.miniplay-enter, &.miniplay-leave-to
@@ -287,23 +286,23 @@ export default {
         img
           border-radius: 50%
           &.play
-            animation: rotate 10s linear infinite
+            animation rotate 10s linear infinite
           &.pause
             animation-play-state: paused
     .text
-      display: flex
-      flex: 1
-      line-height: 20px
-      overflow: hidden
+      display flex
+      flex 1
+      line-height 20px
+      overflow hidden
       .name
         margin-bottom: 2px
         no-wrap()
-        font-size: $font-size-medium
-        color: $color-text
+        font-size $font-size-medium
+        color var(--color)
       .desc
         no-wrap()
-        font-size: $font-size-small
-        color: $color-text-d
+        font-size $font-size-small
+        color var(--c_tet2)
     .control
       flex: 0 0 30px
       display flex

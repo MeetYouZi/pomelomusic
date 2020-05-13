@@ -43,7 +43,7 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   .tab
-    background #fff
+    background var(--playBg)
     width 100%
     position fixed
     bottom 0
@@ -61,11 +61,12 @@ export default {
       justify-content center
       .tab-link
         font-size $font-size-small
-        color: $color-text
+        color var(--theme_color)
       .tab-icon
         width 23px
         height 23px
         font-size $font-size-large-x
+        color var(--theme_color)
         text-align center
         padding-bottom 2px
       &.router-link-active

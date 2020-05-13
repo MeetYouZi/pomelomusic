@@ -22,17 +22,17 @@ export default {
         {
           id: '001',
           url: '/home',
-          icon: 'iconmusic',
+          icon: 'iconmusic1',
           name: '音乐馆'
         }, {
           id: '002',
           url: '/recommend',
-          icon: 'iconmusic',
+          icon: 'iconpaihang',
           name: '排行'
         }, {
           id: '002',
           url: '/personal',
-          icon: 'iconmusic',
+          icon: 'iconMy',
           name: '我的'
         }
       ]

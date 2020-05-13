@@ -8,11 +8,9 @@ import store from './store'
 import 'stylus/index.styl'
 
 Vue.config.productionTip = false
-Vue.use(VueLazyload)
 Vue.use(VueLazyload, {
-  preLoad: 1.3,
-  error: 'src/assets/img/error.jpeg',
-  loading: 'src/assets/img/loading.jpeg',
+  error: require('../src/assets/img/error.jpeg'),
+  loading: require('../src/assets/img/loading.jpeg'),
   attempt: 1
 })
 

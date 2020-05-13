@@ -1,7 +1,7 @@
 <template>
   <div class="music">
     <keep-alive>
-      <router-view/>
+      <router-view class="music-content-view"/>
     </keep-alive>
     <tab-nav></tab-nav>
   </div>
@@ -16,5 +16,6 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-
+.music-content-view
+  margin-bottom 50px
 </style>

@@ -228,7 +228,7 @@ export default {
     bottom 90px
     z-index 150
     height 70%
-    background rgba(255, 255, 255, 0.99)
+    background var(--playBg)
     transition all 0.4s
     display flex
     flex-direction column

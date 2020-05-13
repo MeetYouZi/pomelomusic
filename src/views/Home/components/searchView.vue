@@ -72,10 +72,8 @@ export default {
       font-weight 700
     .hot_search_delete
       position absolute
-      top 6px
-      right 4px
-      width 20px
-      height 4px
+      top 0
+      right 16px
     .hot_search_list
       margin 0 16px
       .hot_search_item

@@ -79,7 +79,7 @@ export default {
       display flex
       justify-content space-between
       align-items center
-      padding 0 10px
+      padding 0 16px
       box-sizing border-box
       background var(--theme)
       z-index 1

@@ -32,7 +32,7 @@ export default {
   height 30px
   display flex
   position relative
-  margin 8px 10px
+  margin 8px 16px 8px 0
   overflow hidden
   border-radius (@height / 2)
   background var(--searchBg)

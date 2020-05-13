@@ -232,25 +232,24 @@ export default {
                 object-fit: cover
                 border-radius: 8px
               .cover_count
-                position: absolute;
-                bottom: 0;
-                right: 0;
-                z-index: 1;
+                position absolute
+                bottom 0
+                right 0
                 display flex
                 align-items center
                 justify-content center
-                height: 17px;
-                min-width: 14px;
-                padding: 0 7px;
-                border-radius: 8px;
-                background: rgba(0,0,0,.4);
+                height 17px
+                min-width 14px
+                padding 0 7px
+                border-radius 8px
+                background rgba(0,0,0,.4)
                 .cover-count-num
-                  display: block
-                  margin-left: 2px
-                  line-height: normal
-                  font-size: 11px
-                  font-weight: 300
-                  color: #fff
+                  display block
+                  margin-left 2px
+                  line-height normal
+                  font-size $font-size-small
+                  font-weight 300
+                  color #fff
             .list-bd
               margin-top: 8px
               line-height: 17px

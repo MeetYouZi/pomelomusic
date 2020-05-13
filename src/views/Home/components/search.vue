@@ -1,5 +1,5 @@
 <template>
-  <div class="search_bar">
+  <div class="search_bar" :class="{'focus': isIconsearch}">
     <i class="iconfont iconsearch"></i>
     <input type="search" v-model="query" @focus="handelFocus" @blur="handleBlue" class="search_bar__input c_input" placeholder="搜索"/>
   </div>
@@ -10,15 +10,18 @@ export default {
   name: 'search',
   data () {
     return {
-      query: ''
+      query: '',
+      isIconsearch: false
     }
   },
   methods: {
     handelFocus () {
+      this.isIconsearch = true
       this.$emit('handelFocus', true)
     },
     handleBlue () {
-      this.$emit('handelFocus', false)
+      if (!this.query) this.isIconsearch = false
+      // this.$emit('handelFocus', false)
     }
   }
 }
@@ -58,4 +61,9 @@ export default {
     -webkit-appearance: none
     &.c_input
        color var(--searchcolor)
+  &.focus
+    .iconsearch
+      left 30px
+    .search_bar__input
+      text-align left
 </style>

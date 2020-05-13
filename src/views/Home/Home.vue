@@ -9,11 +9,12 @@
         音乐馆
       </h2>
       <div class="search-box">
-        <search @handelFocus="handelFocus"></search>
+        <search @handelFocus="handelFocus" ref="searchBar"></search>
       </div>
-      <div class="cancel" v-show="showSearchView">取消</div>
+      <div class="cancel" @click.stop="handelCancel" v-show="showSearchView">取消</div>
       <i v-show="!showSearchView" class="iconfont iconmusic"></i>
     </div>
+    <search-view :showSearchView="showSearchView"></search-view>
     <banner :banner-list="bannerList"></banner>
     <content-view></content-view>
   </div>
@@ -23,13 +24,15 @@
 import banner from '@/views/Home/components/banner'
 import search from '@/views/Home/components/search'
 import contentView from '@/views/Home/components/contentView'
+import searchView from '@/views/Home/components/searchView'
 import { getBanner } from '@/api'
 export default {
   name: 'Home',
   components: {
     banner,
     search,
-    contentView
+    contentView,
+    searchView
   },
   data () {
     return {
@@ -41,6 +44,11 @@ export default {
     // 切换主题
     handleToggleTheme () {
       document.querySelector('html').className = 'black'
+    },
+    handelCancel () {
+      this.$refs.searchBar.query = ''
+      this.$refs.searchBar.handleBlue()
+      this.showSearchView = false
     },
     handelFocus (show) {
       this.showSearchView = show
@@ -61,12 +69,20 @@ export default {
     background var(--theme)
     position relative
     overflow hidden
+    padding-top 40px
+    box-sizing border-box
     .top-header
+      position fixed
+      top 0
+      left 0
+      width 100%
       display flex
       justify-content space-between
       align-items center
       padding 0 10px
       box-sizing border-box
+      background var(--theme)
+      z-index 1
       .cancel
         font-size $font-size-medium
         color var(--color)

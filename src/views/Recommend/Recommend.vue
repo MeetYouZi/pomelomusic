@@ -92,14 +92,14 @@ export default {
       font-size $font-size-large
       font-weight bold
       padding 0 0 10px 16px
+      color var(--color)
     .rank_list_top
       margin-bottom 20px
     .rank_list_item
       display flex
       align-items center
-      margin 0 16px 12px
+      padding 0 16px 12px
       border-radius 8px 0 0 8px
-      background var(--bg)
       .ank_list_left
         flex 1
         overflow hidden
@@ -108,12 +108,13 @@ export default {
           line-height 22px
           font-size 16px
           font-weight 700
+          color var(--color)
         .rank_song_list
           position relative
           .rank_song_list_item
             margin 0 12px 4px
             line-height 16px
-            color var(--color)
+            color var(--c_tet3)
             no-wrap()
       .rank_list_media
         position relative

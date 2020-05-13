@@ -61,12 +61,12 @@ export default {
       justify-content center
       .tab-link
         font-size $font-size-small
-        color var(--theme_color)
+        color var(--color)
       .tab-icon
         width 23px
         height 23px
         font-size $font-size-large-x
-        color var(--theme_color)
+        color var(--color)
         text-align center
         padding-bottom 2px
       &.router-link-active

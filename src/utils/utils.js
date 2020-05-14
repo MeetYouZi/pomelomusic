@@ -36,3 +36,17 @@ export function formatTime (interval) {
   const second = pad(interval % 60)
   return `${minute}:${second}`
 }
+
+// 防抖
+export function debounce (func, delay) {
+  let timer
+
+  return function (...args) {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(() => {
+      func.apply(this, args)
+    }, delay)
+  }
+}

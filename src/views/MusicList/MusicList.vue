@@ -176,7 +176,7 @@ export default {
       align-items center
       margin-bottom 8px
     .author_desc
-      color var(--c_tet2)
+      color var(--c_txt2)
       text-align justify
       line-height 14px
       font-size $font-size-small
@@ -188,7 +188,7 @@ export default {
       border-radius 100%
     .author_name
       font-size $font-size-medium
-      color var(--c_tet2)
+      color var(--c_txt2)
   .play_bar_wrap
     height 55px
     position relative

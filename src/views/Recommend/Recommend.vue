@@ -114,7 +114,7 @@ export default {
           .rank_song_list_item
             margin 0 12px 4px
             line-height 16px
-            color var(--c_tet3)
+            color var(--c_txt3)
             no-wrap()
       .rank_list_media
         position relative

@@ -14,6 +14,12 @@ const mutations = {
   },
   [types.SET_CURRENTTIME] (state, currentTime) {
     state.currentTime = currentTime
+  },
+  [types.SET_SEARCHHISTORYS] (state, searchHistorys) {
+    state.searchHistorys = searchHistorys
+    try {
+      localStorage.pomelomusic_SearchHistorys = JSON.stringify(searchHistorys)
+    } catch (e) {}
   }
 }
 export default mutations

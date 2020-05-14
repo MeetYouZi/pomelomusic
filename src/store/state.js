@@ -7,7 +7,8 @@ const state = {
   playList: [],
   currentIndex: -1,
   currentSong: {},
-  currentTime: 0
+  currentTime: 0,
+  searchHistorys: JSON.parse(localStorage.getItem('pomelomusic_SearchHistorys')) || []
 }
 
 export default state

@@ -2,6 +2,8 @@
 export const playing = state => state.playing
 // 播放列表
 export const playList = state => state.playList
+// 历史搜索记录
+export const searchHistorys = state => state.searchHistorys
 // 播放模式
 export const playMode = state => state.playMode
 // 当前播放index

@@ -182,84 +182,76 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-  .content-view
+  .con-mod
     position relative
-    .con-mod
-      position relative
-      .con-tit
-        height 30px
-        display flex
-        align-items center
-        justify-content space-between
-        margin 20px 16px 10px
-        .con-tit-text
-          color var(--c_txt1)
-          font-size $font-size-large
-          font-weight bold
-        p
+    .con-tit
+      height 30px
+      display flex
+      align-items center
+      justify-content space-between
+      margin 20px 16px 10px
+      .con-tit-text
+        color var(--c_txt1)
+        font-size $font-size-large
+        font-weight bold
+      p
+        font-size $font-size-small
+        color var(--c_txt2)
+        .iconright
           font-size $font-size-small
-          color var(--c_tet2)
-          .iconright
+  .con-scroll-x
+    margin-top -10px
+  .con-scroll-bd
+    margin-bottom -10px
+    padding 10px 0
+    overflow-x auto
+    overflow-y hidden
+    margin 0 12px
+    .con-list
+      font-size 0
+      display flex
+      .list-item
+        vertical-align top
+        display inline-block
+        margin-bottom 14px
+        font-size $font-size-small
+        .list-box
+          width 110px
+          margin 0 4px
+          .list-media
+            height 110px
+            position relative
+            .list-img
+              position: absolute
+              top: 0
+              left: 0
+              width: 100%
+              height: 100%
+              object-fit: cover
+              border-radius: 8px
+            .cover_count
+              position absolute
+              bottom 0
+              right 0
+              display flex
+              align-items center
+              justify-content center
+              height 17px
+              min-width 14px
+              padding 0 7px
+              border-radius 8px
+              background rgba(0,0,0,.4)
+              .cover-count-num
+                display block
+                margin-left 2px
+                line-height normal
+                font-size $font-size-small
+                font-weight 300
+                color #fff
+          .list-bd
+            margin-top 8px
+            line-height 17px
             font-size $font-size-small
-    .con-scroll-x
-      margin-top -10px
-    .con-scroll-bd
-      margin-bottom -10px
-      padding 10px 0
-      overflow-x auto
-      overflow-y hidden
-      .con-list
-        margin 0 12px
-        font-size 0
-        display flex
-        .list-item
-          vertical-align top
-          display inline-block
-          margin-bottom 14px
-          font-size 12px
-          .list-box
-            width 110px
-            margin 0 4px
-            .list-media
-              height 110px
-              position relative
-              .list-img
-                position: absolute
-                top: 0
-                left: 0
-                width: 100%
-                height: 100%
-                object-fit: cover
-                border-radius: 8px
-              .cover_count
-                position absolute
-                bottom 0
-                right 0
-                display flex
-                align-items center
-                justify-content center
-                height 17px
-                min-width 14px
-                padding 0 7px
-                border-radius 8px
-                background rgba(0,0,0,.4)
-                .cover-count-num
-                  display block
-                  margin-left 2px
-                  line-height normal
-                  font-size $font-size-small
-                  font-weight 300
-                  color #fff
-            .list-bd
-              margin-top: 8px
-              line-height: 17px
-              font-size: 12px
-              color var(--c_txt1)
-              display: -webkit-box
-              -webkit-box-orient: vertical
-              -webkit-line-clamp: 2
-              white-space: normal
-              word-wrap: break-word
-              word-break: normal
-              overflow hidden
+            color var(--c_txt1)
+            no-wrap-number(2)
 </style>

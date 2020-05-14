@@ -9,12 +9,18 @@
         音乐馆
       </h2>
       <div class="search-box">
-        <search @handelFocus="handelFocus" ref="searchBar"></search>
+        <search
+          @handelFocus="handelFocus"
+          ref="searchBar"
+          @keyWordChange="keyWordChange"
+        ></search>
       </div>
       <div class="cancel" @click.stop="handelCancel" v-show="showSearchView">取消</div>
       <i v-show="!showSearchView" class="iconfont iconmusic"></i>
     </div>
-    <search-view :showSearchView="showSearchView"></search-view>
+    <search-view :showSearchView="showSearchView"
+                 :keyWord="keyWord"
+    ></search-view>
     <banner :banner-list="bannerList"></banner>
     <content-view></content-view>
   </div>
@@ -37,13 +43,19 @@ export default {
   data () {
     return {
       bannerList: [],
-      showSearchView: false
+      showSearchView: false,
+      isBlack: false,
+      keyWord: ''
     }
   },
   methods: {
     // 切换主题
     handleToggleTheme () {
-      document.querySelector('html').className = 'black'
+      this.isBlack = !this.isBlack
+      document.querySelector('html').className = this.isBlack ? 'black' : 'white'
+    },
+    keyWordChange (newValue) {
+      this.keyWord = newValue.trim()
     },
     handelCancel () {
       this.$refs.searchBar.query = ''
@@ -79,7 +91,7 @@ export default {
       display flex
       justify-content space-between
       align-items center
-      padding 0 16px
+      padding-right 16px
       box-sizing border-box
       background var(--theme)
       z-index 1
@@ -87,6 +99,7 @@ export default {
         font-size $font-size-medium
         color var(--color)
       .top-title
+        padding-left 16px
         font-size $font-size-large-m
         color var(--color)
         font-weight bold

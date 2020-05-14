@@ -1,11 +1,23 @@
 <template>
   <div class="search_bar" :class="{'focus': isIconsearch}">
     <i class="iconfont iconsearch"></i>
-    <input type="search" v-model="query" @focus="handelFocus" @blur="handleBlue" class="search_bar__input c_input" placeholder="搜索"/>
+    <input
+      type="search"
+      v-model="query"
+      @input="onInput"
+      @focus="handelFocus"
+      @blur="handleBlue"
+      class="search_bar_input c_input"
+      placeholder="搜索"
+    />
   </div>
 </template>
 
 <script>
+// import storage from 'good-storage'
+import { mapMutations } from 'vuex'
+import { debounce } from '@/utils/utils'
+import { SET_SEARCHHISTORYS } from '@/store/mutation-types'
 export default {
   name: 'search',
   data () {
@@ -15,6 +27,9 @@ export default {
     }
   },
   methods: {
+    onInput: debounce((newQuery) => {
+      // console.log(this.query, '2222')
+    }, 500),
     handelFocus () {
       this.isIconsearch = true
       this.$emit('handelFocus', true)
@@ -22,7 +37,18 @@ export default {
     handleBlue () {
       if (!this.query) this.isIconsearch = false
       // this.$emit('handelFocus', false)
-    }
+    },
+    ...mapMutations({
+      set_searchHistory: SET_SEARCHHISTORYS
+    })
+  },
+  created () {
+    this.$watch('query', debounce((newQuery) => {
+      // if (newQuery.trim()) {
+      //   this.set_searchHistory(newQuery)
+      // }
+      this.$emit('keyWordChange', newQuery)
+    }, 500))
   }
 }
 </script>
@@ -32,7 +58,7 @@ export default {
   height 30px
   display flex
   position relative
-  margin 8px 16px 8px 0
+  margin 8px 16px 8px 16px
   overflow hidden
   border-radius (@height / 2)
   background var(--searchBg)
@@ -45,7 +71,7 @@ export default {
     margin-left -26px
     color  var(--searchcolor)
     vertical-align top
-  .search_bar__input
+  .search_bar_input
     position: absolute
     top: 0
     left: 0
@@ -64,6 +90,6 @@ export default {
   &.focus
     .iconsearch
       left 30px
-    .search_bar__input
+    .search_bar_input
       text-align left
 </style>

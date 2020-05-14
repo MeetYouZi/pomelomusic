@@ -88,7 +88,7 @@ export default {
       return this.playing ? 'play' : ''
     },
     miniIcon () {
-      return this.playing ? 'iconpause1' : 'iconplay_fill'
+      return this.playing ? 'iconpause1' : 'iconplay'
     },
     percent () {
       // return 0.3
@@ -302,7 +302,7 @@ export default {
       .desc
         no-wrap()
         font-size $font-size-small
-        color var(--c_tet2)
+        color var(--c_txt2)
     .control
       flex: 0 0 30px
       display flex

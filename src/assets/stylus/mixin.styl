@@ -34,9 +34,17 @@ bg-image($url)
 
 // 不换行
 no-wrap()
-  text-overflow: ellipsis
-  overflow: hidden
-  white-space: nowrap
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+
+// 超过多行用点
+no-wrap-number($nummber)
+  overflow hidden
+  -webkit-line-clamp $nummber
+  text-overflow ellipsis
+  display -webkit-box
+  -webkit-box-orient vertical
 
 // fixTop
 fixTop()

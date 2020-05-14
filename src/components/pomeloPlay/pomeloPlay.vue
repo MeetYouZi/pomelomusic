@@ -143,7 +143,7 @@ export default {
     // 更新时间
     updateTime (e) {
       this.currentTime = e.target.currentTime
-      // this.setCurrentTime(currentTime)
+      this.setCurrentTime(this.currentTime)
     },
     togglePlaying () {
       const pomelomusicAudio = this.$refs.pomelomusicAudio

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="music_list_warp">
     <div class="top_wrap">
       <img class="top_wrap_bg" :src="headerImgCover" />
     </div>
@@ -148,6 +148,8 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
+.music_list_warp
+  background var(--bg)
 .top_wrap
   position relative
   height 236px
@@ -165,7 +167,7 @@ export default {
   z-index 10
   margin -4px 16px 12px
   border-radius 2px
-  background var(--bg)
+  background var(--searchBg)
   box-shadow 0 0 12px 0 rgba(0,0,0,.06)
   .author
     padding: 10px 16px;

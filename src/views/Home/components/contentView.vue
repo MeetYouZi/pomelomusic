@@ -97,6 +97,9 @@ export default {
     playMV () {
 
     },
+    toPlaySong (item) {
+      this.$router.push(`/playSong/${item.id}`)
+    },
     handleClick (musicItem, item, index) {
       const key = musicItem.key
       switch (key) {
@@ -104,7 +107,8 @@ export default {
           this.handleTomusicList(item.id)
           break
         case 'music':
-          this.playMusic(item, index)
+          this.toPlaySong(item)
+          // this.playMusic(item, index)
           break
         case 'mv':
           this.playMV()

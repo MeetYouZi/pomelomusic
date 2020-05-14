@@ -18,8 +18,10 @@
       <div class="cancel" @click.stop="handelCancel" v-show="showSearchView">取消</div>
       <i v-show="!showSearchView" class="iconfont iconmusic"></i>
     </div>
-    <search-view :showSearchView="showSearchView"
-                 :keyWord="keyWord"
+    <search-view
+      ref="searchView"
+      :showSearchView="showSearchView"
+      :keyWord="keyWord"
     ></search-view>
     <banner :banner-list="bannerList"></banner>
     <content-view></content-view>
@@ -59,6 +61,7 @@ export default {
     },
     handelCancel () {
       this.$refs.searchBar.query = ''
+      this.$refs.searchView.searchMusicList = []
       this.$refs.searchBar.handleBlue()
       this.showSearchView = false
     },

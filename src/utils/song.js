@@ -22,7 +22,7 @@ export function createSongList (music) {
   return new Song({
     id: music.id,
     name: music.name,
-    singer: music.ar.length > 0 && filterSinger(music.ar),
+    singer: music.ar && music.ar.length > 0 && filterSinger(music.ar),
     album: music.al.name,
     image: music.al.picUrl || null,
     duration: music.dt / 1000,

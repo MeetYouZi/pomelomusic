@@ -7,10 +7,18 @@ export const getSearchHot = (params) => {
     params
   })
 }
-// 获取热搜
+// 综合搜索
 export const getSearchSuggest = (data) => {
   return axios.request({
     url: '/search/suggest',
+    method: 'get',
+    params: data
+  })
+}
+// 歌单搜索
+export const searchMusic = (data) => {
+  return axios.request({
+    url: '/search',
     method: 'get',
     params: data
   })

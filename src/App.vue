@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <transition :name="transitionName">
-      <keep-alive exclude="MusicList">
+      <keep-alive exclude="MusicList, PlaySong">
         <router-view class="rv"/>
       </keep-alive>
     </transition>

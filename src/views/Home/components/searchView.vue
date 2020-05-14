@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
     <div class="searchView" v-show="showSearchView">
-      <div class="hot_search" v-show="hotKey.length">
+      <div class="hot_search" v-show="hotKey.length && !searchMusicList.length">
         <h1 class="hot_search_title color1">历史搜索</h1>
         <div
           class="hot_search_delete color1"
@@ -10,16 +10,16 @@
           <i class="iconfont icondel1"></i>
         </div>
         <ul class="hot_search_list">
-          <li @click="addQuery(item.k)" class="hot_search_history_item c_txt1 hot_search_item_bg2" v-for="(item,index) in hotKey" :key="index">
+          <li @click="searchMusic(item)" class="hot_search_history_item c_txt1 hot_search_item_bg2" v-for="(item,index) in hotKey" :key="index">
             {{item}}
           </li>
         </ul>
       </div>
-      <div class="hot_search" v-show="searchHots.length">
+      <div class="hot_search" v-show="searchHots.length && !searchMusicList.length">
         <h1 class="hot_search_title color1">热搜榜</h1>
 <!--        <div class="hot_search_delete color1"><i class="iconfont iconclose"></i> </div>-->
         <ul class="hot_search_list">
-          <li @click="addQuery(item.first)" class="hot_search_item c_txt1" v-for="(item,index) in searchHots" :key="index">
+          <li @click="searchMusic(item.searchWord)" class="hot_search_item c_txt1" v-for="(item,index) in searchHots" :key="index">
             <div class="search_item_sort" :class="index < 4 ? 'colorTheme' : ''">{{index + 1}}</div>
             <div class="search_item_content">
               <div class="search_item_name">
@@ -31,17 +31,28 @@
           </li>
         </ul>
       </div>
+      <div class="search_list" v-show="searchMusicList.length">
+        <search-list
+          :song-list="searchMusicList"
+          @selectItem="handleSelectSong"
+        ></search-list>
+      </div>
     </div>
   </transition>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
-import { getSearchHot } from '@/api'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { getSearchHot, searchMusic } from '@/api'
 import { SET_SEARCHHISTORYS } from '@/store/mutation-types'
+import searchList from './searchList'
+import { createSongList } from '@/utils/song'
 const SEARCH_MAX_LEN = 10
 export default {
   name: 'searchView',
+  components: {
+    searchList
+  },
   props: {
     showSearchView: Boolean,
     keyWord: {
@@ -53,9 +64,12 @@ export default {
     keyWord (newQuery) {
       if (!newQuery) {
         setTimeout(() => {
+          this.searchMusicList = []
         }, 20)
       } else {
-        this.saveSearch(newQuery)
+        setTimeout(() => {
+          this.searchMusic(newQuery)
+        }, 500)
       }
     }
   },
@@ -67,7 +81,8 @@ export default {
   },
   data () {
     return {
-      searchHots: []
+      searchHots: [],
+      searchMusicList: []
     }
   },
   methods: {
@@ -87,6 +102,14 @@ export default {
         arr.pop()
       }
     },
+    handleSelectSong (item, index) {
+      const songList = [item]
+      this.selectPlay({
+        list: songList,
+        index: 0
+      })
+    },
+    ...mapActions(['selectPlay']),
     saveSearch (query) {
       const searches = JSON.parse(JSON.stringify(this.hotKey))
       this.insertArray(searches, query, (item) => {
@@ -97,6 +120,44 @@ export default {
     },
     addQuery () {
 
+    },
+    filterSinger (singers) {
+      const arr = []
+      singers.forEach(item => {
+        arr.push(item.name)
+      })
+      return arr.join('/')
+    },
+    createSong (music) {
+      const { id, name, img, artists, duration } = music
+      return {
+        id,
+        name,
+        img,
+        artists,
+        singer: music.artists && music.artists.length > 0 && this.filterSinger(music.artists),
+        album: music.album.name,
+        duration: duration / 1000
+      }
+    },
+    formatSongs (list) {
+      const Songs = []
+      list.forEach(item => {
+        const musicData = item
+        if (musicData.id) {
+          Songs.push(this.createSong(musicData))
+        }
+      })
+      return Songs
+    },
+    searchMusic (keywords) {
+      const data = {
+        keywords
+      }
+      searchMusic(data).then(res => {
+        this.saveSearch(keywords)
+        this.searchMusicList = this.formatSongs(res.result.songs)
+      })
     },
     _getSearchHot () {
       getSearchHot().then(res => {

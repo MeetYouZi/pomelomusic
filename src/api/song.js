@@ -13,3 +13,10 @@ export const getLyricl = (id) => {
     method: 'get'
   })
 }
+
+export const getCommentList = (id) => {
+  return axios.request({
+    url: `/comment/music?id=${id}`,
+    method: 'get'
+  })
+}

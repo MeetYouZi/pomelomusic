@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name: 'lyric',
   props: {
@@ -79,7 +79,7 @@ export default {
       .lyric_item
         line-height 34px
         text-align center
-        color $color-text
+        color var(--c_txt2)
         &.active
           color $color-theme
 </style>

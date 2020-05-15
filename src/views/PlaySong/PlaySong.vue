@@ -23,24 +23,32 @@
     <div class="bg">
       <img class="bg_img" :src="currentSong.image">
     </div>
+    <div class="song_comment">
+      <h1 class="comment_tit">精彩评论</h1>
+      <comment :commentList="commentList" :hotCommentList="hotCommentList"></comment>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { getLyricl, getSongDetail } from '@/api'
+import { getLyricl, getSongDetail, getCommentList } from '@/api'
 import { parseLyric } from '@/utils/lyric'
 import formatSongs from '@/utils/song'
 import lyric from '@/views/PlaySong/components/lyric'
+import comment from '@/views/PlaySong/components/comment'
 const MARGINTOP = 0
 export default {
   name: 'PlaySong',
   components: {
-    lyric
+    lyric,
+    comment
   },
   data () {
     return {
-      lyric: []
+      lyric: [],
+      commentList: [],
+      hotCommentList: []
     }
   },
   computed: {
@@ -70,21 +78,30 @@ export default {
             index: 0
           // }, 1000)
         })
-        console.log(res)
+      })
+    },
+    _getCommentList (id) {
+      getCommentList(id).then(res => {
+        this.commentList = res.comments
+        this.hotCommentList = res.hotComments
       })
     },
     ...mapActions(['selectPlay'])
   },
-  mounted () {
+  activated () {
+    console.log(this.$route.params.id)
     const id = this.$route.params.id
     this._getSongDetail(id)
     this._getLyric(id)
+    this._getCommentList(id)
   }
 }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .song_wrap
+  z-index 20
+  background var(--theme)
   .main
     position relative
     padding-bottom 15px
@@ -98,7 +115,7 @@ export default {
         display flex
         align-items center
         justify-content center
-        margin-top 20px
+        margin-top 10px
         line-height 30px
         font-size $font-size-large
       .sing_name
@@ -128,18 +145,32 @@ export default {
           color #000
           line-height 38px
           font-size 20px
+  .song_comment
+    position relative
+    padding 0 16px
+    box-sizing border-box
+    .comment_tit
+      height 55px
+      font-size $font-size-large-m
+      font-weight 400
+      text-align center
+      line-height 55px
+      color var(--c_txt1)
   .bg
     position absolute
     top 0
     left 0
     z-index 1
     width 100%
+    height 100%
+    overflow hidden
     .bg_img
       position absolute
       top 0
       left 0
       z-index 2
       width 100%
-      opacity .06
-      // transform scale(1.2)
+      opacity 0.2
+      filter blur(8px)
+      transform scale(1.2)
 </style>

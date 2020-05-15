@@ -4,21 +4,19 @@
       <div class="main_wrap">
         <div class="song_info">
           <h1 class="song_name">{{currentSong.name}}</h1>
-          <h1 class="sing_name">{{currentSong.singer}}{{lyricIndex}}</h1>
+          <h1 class="sing_name">{{currentSong.singer}}</h1>
         </div>
-        <div class="lyric_info">
-          <div class="song_info_lyric" ref="musicLyric">
-            <ul class="lyric">
-              <li
-                class="lyric_item"
-                v-for="(i, index) in lyric"
-                :style="lyricTop"
-                :class="{active:lyricIndex===index}"
-              >
-                {{i.text}}
-              </li>
-            </ul>
-          </div>
+        <lyric :lyric="lyric"></lyric>
+      </div>
+      <div class="opt">
+        <div class="opt_item">
+          <i class="iconfont iconplay"></i>
+        </div>
+        <div class="opt_item">
+          <i class="iconfont iconpause"></i>
+        </div>
+        <div class="opt_item">
+          <i class="iconfont iconplay"></i>
         </div>
       </div>
     </div>
@@ -33,36 +31,20 @@ import { mapActions, mapGetters } from 'vuex'
 import { getLyricl, getSongDetail } from '@/api'
 import { parseLyric } from '@/utils/lyric'
 import formatSongs from '@/utils/song'
+import lyric from '@/views/PlaySong/components/lyric'
 const MARGINTOP = 0
 export default {
   name: 'PlaySong',
+  components: {
+    lyric
+  },
   data () {
     return {
-      lyric: [],
-      lyricIndex: 0,
-      top: 0
-    }
-  },
-  watch: {
-    currentTime (newTime) {
-      if (this.nolyric) {
-        return
-      }
-      let lyricIndex = 0
-      for (let i = 0; i < this.lyric.length; i++) {
-        if (newTime > this.lyric[i].time) {
-          lyricIndex = i
-        }
-      }
-      this.lyricIndex = lyricIndex
+      lyric: []
     }
   },
   computed: {
-    ...mapGetters(['currentTime', 'currentSong']),
-    lyricTop () {
-      return `transform :translate3d(0, ${-34 *
-      (this.lyricIndex - this.top)}px, 0)`
-    }
+    ...mapGetters(['currentTime', 'currentSong'])
   },
   methods: {
     // 获取歌词
@@ -97,9 +79,6 @@ export default {
     const id = this.$route.params.id
     this._getSongDetail(id)
     this._getLyric(id)
-    const dom = this.$refs.musicLyric
-    const height = dom.offsetHeight
-    this.top = Math.floor(height / 34 / 2)
   }
 }
 </script>
@@ -120,35 +99,35 @@ export default {
         align-items center
         justify-content center
         margin-top 20px
+        line-height 30px
+        font-size $font-size-large
       .sing_name
         margin 0 20px 15px
         text-align center
         no-wrap()
+        color var(--c_txt2)
         font-size $font-size-medium
-      .lyric_info
-        position relative
-        height 165px
-      .song_info_lyric
-        position absolute
-        top 0
-        right 0
-        bottom 0
-        left 0
-        z-index 1
+    .opt
+      display flex
+      align-items center
+      justify-content center
+      height 90px
+      margin-top 20px
+      .opt_item
+        width 38px
+        height 38px
+        margin 0 20px
+        border-radius 50%
+        border 1px solid #ccc
+        text-align center
         display flex
         align-items center
-        opacity 1
-        .lyric
-          width 100%
-          height 160px
-          margin-top 15px
-          overflow hidden
-          .lyric_item
-            line-height 34px
-            text-align center
-            color $color-text
-            &.active
-              color $color-theme
+        justify-content center
+        .iconfont
+          font-weight bold
+          color #000
+          line-height 38px
+          font-size 20px
   .bg
     position absolute
     top 0

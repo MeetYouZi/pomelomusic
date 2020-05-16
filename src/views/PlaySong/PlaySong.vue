@@ -117,6 +117,7 @@ export default {
         justify-content center
         margin-top 10px
         line-height 30px
+        color var(--c_txt1)
         font-size $font-size-large
       .sing_name
         margin 0 20px 15px

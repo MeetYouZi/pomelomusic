@@ -71,6 +71,8 @@ export default {
         align-items baseline
         overflow hidden
         .list-num
+          min-width 10px
+          text-align right
           padding-right 6px
         .list-content
           flex 1
@@ -78,6 +80,7 @@ export default {
           flex-direction column
           justify-content space-around
           align-items flex-start
+          overflow hidden
         .list-tit
           font-size $font-size-large
           color inherit
@@ -88,6 +91,7 @@ export default {
           overflow hidden
           font-size $font-size-small
           line-height 18px
+          color var(--c_txt2)
         .list-txt
           text-align left
           display block

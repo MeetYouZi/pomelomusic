@@ -20,7 +20,7 @@
             <div class="progressBox" v-show="playing">
               <progress-circle :radius="34" :percent="percent"></progress-circle>
             </div>
-            <span class="play_all_text">{{songReady ? '播放全部' : currentSong.name}}</span>
+            <span class="play_all_text">{{!playing ? '播放全部' : currentSong.name}}</span>
           </div>
           <div class="collect">
             <i class="collect_icon"></i>
@@ -91,7 +91,7 @@ export default {
   methods: {
     handleScroll () {
       const top = document.documentElement.scrollTop
-      if (top < 300) {
+      if (top < 310) {
         this.showAbs = false
       } else {
         this.showAbs = true
@@ -149,6 +149,7 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .music_list_warp
+  z-index 10
   background var(--bg)
 .top_wrap
   position relative
@@ -210,8 +211,9 @@ export default {
       padding 0 12px
       &.fixed
         fixTop()
-        background #fff
+        background var(--searchBg)
         box-shadow 0 0 12px 0 rgba(0,0,0,.06)
+        transition all .1s
       .play_all
         flex 1
         display flex

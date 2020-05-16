@@ -23,7 +23,7 @@
     </transition>
     <transition name="miniplay">
       <div class="pomelo-play" v-show="isShowPlay" @swiperight="swiperight(x)">
-        <div class="icon">
+        <div class="icon" @click="handleToUrl">
           <div class="imgWrapper" ref="miniWrapper">
             <img ref="miniImage" :class="cdCls" width="44" height="44" :src="currentSong.image">
           </div>
@@ -135,6 +135,9 @@ export default {
       //   list: this.songList,
       //   index
       // })
+    },
+    handleToUrl () {
+      this.$router.push(`/playSong/${this.currentSong.id}`)
     },
     swiperight () {
       alert('8888')
@@ -265,7 +268,7 @@ export default {
     align-items: center
     position: fixed
     left: 0
-    bottom: 40px
+    bottom: 50px
     z-index: 180
     width: 100%
     height: 50px

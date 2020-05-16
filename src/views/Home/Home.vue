@@ -15,8 +15,21 @@
           @keyWordChange="keyWordChange"
         ></search>
       </div>
-      <div class="cancel" @click.stop="handelCancel" v-show="showSearchView">取消</div>
-      <i v-show="!showSearchView" class="iconfont iconmusic"></i>
+      <div class="fixed">
+        <div class="cancel" @click.stop="handelCancel" v-show="showSearchView">取消</div>
+        <transition name="fade">
+          <i v-show="!showSearchView && !playing" class="iconfont iconmusic fade"></i>
+        </transition>
+        <transition name="fade">
+          <div
+            class="dynamic fade"
+            v-show="!showSearchView && playing"
+            @click="handleToUrl"
+          >
+            <dynamic></dynamic>
+          </div>
+        </transition>
+      </div>
     </div>
     <search-view
       ref="searchView"
@@ -29,18 +42,24 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import banner from '@/views/Home/components/banner'
 import search from '@/views/Home/components/search'
 import contentView from '@/views/Home/components/contentView'
 import searchView from '@/views/Home/components/searchView'
+import dynamic from '@/components/dynamic/dynamic'
 import { getBanner } from '@/api'
 export default {
   name: 'Home',
   components: {
     banner,
     search,
+    dynamic,
     contentView,
     searchView
+  },
+  computed: {
+    ...mapGetters(['playing', 'currentSong'])
   },
   data () {
     return {
@@ -58,6 +77,9 @@ export default {
     },
     keyWordChange (newValue) {
       this.keyWord = newValue.trim()
+    },
+    handleToUrl () {
+      this.$router.push(`/playSong/${this.currentSong.id}`)
     },
     handelCancel () {
       this.$refs.searchBar.query = ''
@@ -98,6 +120,13 @@ export default {
       box-sizing border-box
       background var(--theme)
       z-index 1
+      .fixed
+        min-width 22px
+        position relative
+        text-align right
+      .dynamic
+        width 22px
+        position absolute
       .cancel
         font-size $font-size-medium
         color var(--color)
@@ -107,6 +136,10 @@ export default {
         color var(--color)
         font-weight bold
       .iconmusic
+        position absolute
+        top 50%
+        left 50%
+        transform translate(-50%, -50%)
         font-size 22px
         font-weight bold
         color var(--theme_color)

@@ -15,6 +15,12 @@
 
 input:focus
   outline-offset: -2px
+.fade
+  &.fade-enter, &.fade-leave-active
+    transition all 0.3s ease-in-out
+    opacity 0
+  &.fade-enter-active, &.fade-leave-active
+    transition all 0.3s ease-in-out
 
 .fixTop
   position fixed

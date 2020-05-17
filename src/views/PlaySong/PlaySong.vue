@@ -12,7 +12,7 @@
         <lyric :lyric="lyric"></lyric>
       </div>
       <div class="opt">
-        <div class="opt_item">
+        <div class="opt_item" @click="prev">
           <i class="iconfont iconshangyiqu101"></i>
         </div>
         <div class="opt_item icon-mini" @click="togglePalying">
@@ -21,7 +21,7 @@
              :class="miniIcon"
           ></i>
         </div>
-        <div class="opt_item">
+        <div class="opt_item" @click="next">
           <i class="iconfont iconxiayiqu101"></i>
 <!--          <icon_like></icon_like>-->
         </div>
@@ -42,7 +42,8 @@ import formatSongs from '@/utils/song'
 import lyric from '@/views/PlaySong/components/lyric'
 import comment from '@/views/PlaySong/components/comment'
 import icon_like from '@/components/icons/icon_like'
-import { SET_PLAYINGSTATE } from '@/store/mutation-types'
+import { SET_PLAYINGSTATE, SET_CURRENTINDEX } from '@/store/mutation-types'
+import { currentSong } from '@/store/getters'
 const MARGINTOP = 0
 export default {
   name: 'PlaySong',
@@ -59,7 +60,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['currentTime', 'currentSong', 'playing']),
+    ...mapGetters(['currentTime', 'currentSong', 'playing', 'currentIndex', 'playList']),
     miniIcon () {
       return this.playing ? 'iconpause1' : 'iconplay'
     }
@@ -68,14 +69,43 @@ export default {
     togglePalying () {
       this.setPlayState(!this.playing)
     },
+    next () {
+      console.log('8888')
+      let index = 0
+      if (this.currentIndex === this.playList.length - 1) {
+        index = 0
+      } else {
+        index = this.currentIndex + 1
+      }
+      this.setCurrentIndex(index)
+      if (!this.playing) {
+        this.togglePlaying()
+      }
+    },
+    prev () {
+      let index = this.currentIndex - 1
+      if (index === -1) {
+        index = this.playList.length - 1
+      }
+      this.setCurrentIndex(index)
+      if (!this.playing) {
+        this.togglePlaying()
+      }
+    },
     ...mapMutations({
+      setCurrentIndex: SET_CURRENTINDEX,
       setPlayState: SET_PLAYINGSTATE
     }),
+    isplaying (list) {
+      const index = list.findIndex((item) => {
+        return item.id === currentSong.id
+      })
+      return index > -1
+    },
     // 获取歌词
     _getLyric (id) {
       getLyricl(id).then(res => {
         this.lyric = parseLyric(res.lrc.lyric)
-        console.log(this.lyric, 'this.lyric')
         if (res.nolyric) {
           this.nolyric = true
         } else {
@@ -88,12 +118,18 @@ export default {
     _getSongDetail (id) {
       getSongDetail(id).then(res => {
         this.songList = formatSongs(res.songs)
-        // setTimeout(() => {
+        if (!this.isplaying(this.songList)) {
           this.selectPlay({
             list: this.songList,
             index: 0
-          // }, 1000)
-        })
+          })
+        }
+        // setTimeout(() => {
+        //   this.selectPlay({
+        //     list: this.songList,
+        //     index: 0
+        // }, 1000)
+        // })
       })
     },
     _getCommentList (id) {
@@ -105,7 +141,6 @@ export default {
     ...mapActions(['selectPlay'])
   },
   activated () {
-    console.log(this.$route.params.id)
     const id = this.$route.params.id
     this._getSongDetail(id)
     this._getLyric(id)

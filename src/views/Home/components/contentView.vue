@@ -32,7 +32,7 @@
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import formatSongs from '@/utils/song'
 import { getPersonalized, getNewSongs, getPersonalizedMv, getDjprogram } from '@/api'
-import { SET_PLAYINGSTATE } from '@/store/mutation-types'
+import { SET_PLAYINGSTATE, SET_PLAYLIST } from '@/store/mutation-types'
 export default {
   name: 'contentView',
   data () {
@@ -81,7 +81,8 @@ export default {
     nomalizeSong (songList) {
       return formatSongs(songList)
     },
-    handleTomusicList (id) {
+    handleTomusicList (id, index) {
+      // this.setplayList(this.normalizedSongs)
       this.$router.push(`/musicList/${id}`)
     },
     playMusic (item, index) {
@@ -97,17 +98,21 @@ export default {
     playMV () {
 
     },
-    toPlaySong (item) {
+    toPlaySong (item, index) {
+      this.selectPlay({
+        list: this.normalizedSongs,
+        index
+      })
       this.$router.push(`/playSong/${item.id}`)
     },
     handleClick (musicItem, item, index) {
       const key = musicItem.key
       switch (key) {
         case 'hot':
-          this.handleTomusicList(item.id)
+          this.handleTomusicList(item.id, index)
           break
         case 'music':
-          this.toPlaySong(item)
+          this.toPlaySong(item, index)
           // this.playMusic(item, index)
           break
         case 'mv':
@@ -122,6 +127,7 @@ export default {
     },
     ...mapActions(['selectPlay']),
     ...mapMutations({
+      setplayList: SET_PLAYLIST,
       setPlayState: SET_PLAYINGSTATE
     }),
     _getMusicList () {

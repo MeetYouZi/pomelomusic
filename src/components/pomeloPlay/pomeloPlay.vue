@@ -191,6 +191,7 @@ export default {
           index = 0
         }
         this.setCurrentIndex(index)
+        // this.setPlaying(true)
         if (!this.playing) {
           this.togglePlaying()
         }

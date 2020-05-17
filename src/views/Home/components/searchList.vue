@@ -4,7 +4,6 @@
         v-for="(item, index) in songList"
         :key="item.id"
         @click.stop="handleSelectSong(item, index)"
-        :class="{active: item.id == currentSong.id}"
     >
       <div class="item-box">
         <span class="list-num" v-text="index + 1"></span>
@@ -41,10 +40,10 @@ export default {
   methods: {
     // 播放暂停事件
     handleSelectSong (item, index) {
-      if (this.currentSong.id && item.id === this.currentSong.id) {
-        this.setPlaying(!this.playing)
-        return
-      }
+      // if (this.currentSong.id && item.id === this.currentSong.id) {
+      //   this.setPlaying(!this.playing)
+      //   return
+      // }
       this.$emit('selectItem', item, index)
     },
     ...mapMutations({

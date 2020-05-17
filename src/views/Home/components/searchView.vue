@@ -103,11 +103,12 @@ export default {
       }
     },
     handleSelectSong (item, index) {
-      const songList = [item]
-      this.selectPlay({
-        list: songList,
-        index: 0
-      })
+      // const songList = [item]
+      // this.selectPlay({
+      //   list: songList,
+      //   index: 0
+      // })
+      this.$router.push(`/playSong/${item.id}`)
     },
     ...mapActions(['selectPlay']),
     saveSearch (query) {

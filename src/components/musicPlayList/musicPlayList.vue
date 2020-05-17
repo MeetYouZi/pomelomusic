@@ -62,8 +62,6 @@ export default {
       padding 10px 16px
       overflow hidden
       color var(--color)
-      &.active
-        color var(--theme_color)
       .item-box
         width 100%
         display flex
@@ -96,4 +94,8 @@ export default {
           text-align left
           display block
           no-wrap()
+      &.active
+        color var(--theme_color)
+        .list-desc
+          color var(--theme_color)
 </style>

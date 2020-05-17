@@ -84,7 +84,7 @@ export default {
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-  @import "~stylus/variable"
+  @import "~stylus/variable.styl"
 
   .progress-bar
     height: 30px

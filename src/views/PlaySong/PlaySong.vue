@@ -1,5 +1,8 @@
 <template>
   <div class="song_wrap">
+    <div class="bg">
+      <img class="bg_img" :src="currentSong.image">
+    </div>
     <div class="main">
       <div class="main_wrap">
         <div class="song_info">
@@ -10,18 +13,19 @@
       </div>
       <div class="opt">
         <div class="opt_item">
-          <i class="iconfont iconplay"></i>
+          <i class="iconfont iconshangyiqu101"></i>
+        </div>
+        <div class="opt_item icon-mini" @click="togglePalying">
+          <i
+             class="iconfont icon-mini"
+             :class="miniIcon"
+          ></i>
         </div>
         <div class="opt_item">
-          <i class="iconfont iconpause"></i>
-        </div>
-        <div class="opt_item">
-          <i class="iconfont iconplay"></i>
+          <i class="iconfont iconxiayiqu101"></i>
+<!--          <icon_like></icon_like>-->
         </div>
       </div>
-    </div>
-    <div class="bg">
-      <img class="bg_img" :src="currentSong.image">
     </div>
     <div class="song_comment">
       <h1 class="comment_tit">精彩评论</h1>
@@ -31,18 +35,21 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { getLyricl, getSongDetail, getCommentList } from '@/api'
 import { parseLyric } from '@/utils/lyric'
 import formatSongs from '@/utils/song'
 import lyric from '@/views/PlaySong/components/lyric'
 import comment from '@/views/PlaySong/components/comment'
+import icon_like from '@/components/icons/icon_like'
+import { SET_PLAYINGSTATE } from '@/store/mutation-types'
 const MARGINTOP = 0
 export default {
   name: 'PlaySong',
   components: {
     lyric,
-    comment
+    comment,
+    icon_like
   },
   data () {
     return {
@@ -52,9 +59,18 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['currentTime', 'currentSong'])
+    ...mapGetters(['currentTime', 'currentSong', 'playing']),
+    miniIcon () {
+      return this.playing ? 'iconpause1' : 'iconplay'
+    }
   },
   methods: {
+    togglePalying () {
+      this.setPlayState(!this.playing)
+    },
+    ...mapMutations({
+      setPlayState: SET_PLAYINGSTATE
+    }),
     // 获取歌词
     _getLyric (id) {
       getLyricl(id).then(res => {
@@ -136,14 +152,15 @@ export default {
         height 38px
         margin 0 20px
         border-radius 50%
-        border 1px solid #ccc
         text-align center
         display flex
         align-items center
         justify-content center
+        &.icon-mini
+          border 1px solid #ccc
         .iconfont
+          color var(--c_txt1)
           font-weight bold
-          color #000
           line-height 38px
           font-size 20px
   .song_comment
@@ -161,7 +178,6 @@ export default {
     position absolute
     top 0
     left 0
-    z-index 1
     width 100%
     height 100%
     overflow hidden
@@ -169,7 +185,6 @@ export default {
       position absolute
       top 0
       left 0
-      z-index 2
       width 100%
       opacity 0.2
       filter blur(8px)

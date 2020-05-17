@@ -18,6 +18,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+const lyricLineHight = 28
 export default {
   name: 'lyric',
   props: {
@@ -26,7 +27,7 @@ export default {
   computed: {
     ...mapGetters(['currentTime']),
     lyricTop () {
-      return `transform :translate3d(0, ${-34 * (this.lyricIndex - this.top)}px, 0)`
+      return `transform :translate3d(0, -${(this.lyricIndex - this.top) * lyricLineHight}px, 0)`
     }
   },
   watch: {
@@ -76,10 +77,15 @@ export default {
       height 160px
       margin-top 15px
       overflow hidden
+      // box-shadow 0px 0px 0px #f2f2f2,   /*左边阴影*/
+      // 0px -20px 10px #f2f2f2 inset,  /*上边阴影*/
+      // 0px 0px 0px #f2f2f2,  /*右边阴影*/
+      // 0px 20px 10px #f2f2f2 inset /*下边阴影*/
       .lyric_item
-        line-height 34px
+        line-height 28px
         text-align center
         color var(--c_txt2)
+        no-wrap()
         &.active
           color $color-theme
 </style>

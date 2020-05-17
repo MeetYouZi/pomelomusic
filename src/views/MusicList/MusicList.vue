@@ -40,8 +40,8 @@
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { getListDetail, getSongDetail } from '@/api'
 import formatSongs from '@/utils/song'
-import ProgressBar from '@/views/MusicList/components/progressBar'
-import ProgressCircle from '@/views/MusicList/components/progressCircle'
+import ProgressBar from '@/components/progress/progressBar'
+import ProgressCircle from '@/components/progress/progressCircle'
 import MusicPlayList from '@/components/musicPlayList/musicPlayList'
 import { SET_PLAYINGSTATE } from '@/store/mutation-types'
 

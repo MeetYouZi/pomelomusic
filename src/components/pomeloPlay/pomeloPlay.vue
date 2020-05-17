@@ -58,7 +58,7 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-import progressCircle from '@/views/MusicList/components/progressCircle'
+import progressCircle from '@/components/progress/progressCircle'
 import musicPlayList from '@/components/musicPlayList/musicPlayList'
 export default {
   name: 'pomeloPlay',

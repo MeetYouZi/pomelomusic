@@ -13,7 +13,8 @@
             </div>
             <div class="header_right">
               <span class="likeNum">{{item.likedCount}}</span>
-              <i class="iconfont iconclose"></i>
+              <i class="iconfont icondianzan"></i>
+<!--              <icon-praise></icon-praise>-->
             </div>
           </div>
           <div class="comment_desc">
@@ -27,8 +28,12 @@
 
 <script>
 import { dateFormat } from '@/utils/format'
+import iconPraise from '@/components/icons/icon_praise'
 export default {
   name: 'comment',
+  components: {
+    iconPraise
+  },
   props: {
     hotCommentList: {
       type: Array,
@@ -80,6 +85,7 @@ export default {
         .header_right
           text-align right
           width 90px
+          color var(--c_txt2)
           .likeNum
             font-size $font-size-small
             padding-right 5px

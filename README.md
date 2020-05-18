@@ -1,8 +1,9 @@
-# pomelomusic
+# 小柚palyer说明书
 
 ## Project setup
+![avatar](./src/assets/img/error.jpeg)
 ```
-npm install
+
 ```
 
 ### Compiles and hot-reloads for development

@@ -303,6 +303,7 @@ export default {
         no-wrap()
         font-size $font-size-medium
         color var(--color)
+        padding-right 2px
       .desc
         no-wrap()
         font-size $font-size-small

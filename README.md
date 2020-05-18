@@ -11,3 +11,10 @@
 ### 后端接口
 https://binaryify.github.io/NeteaseCloudMusicApi
 
+### 使用说明
+静等上线......
+```
+npm install
+npm run serve
+```
+

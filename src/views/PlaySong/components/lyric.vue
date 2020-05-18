@@ -7,9 +7,9 @@
           v-for="(i, index) in lyric"
           :key="index"
           :style="lyricTop"
-          :class="{active:lyricIndex===index}"
+          :class="{ active:lyricIndex===index }"
         >
-          {{i.text}}
+          {{ i.text }}
         </li>
       </ul>
     </div>
@@ -18,6 +18,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { prefixStyle } from '@/assets/js/dom'
+const transform = prefixStyle('transform')
 const lyricLineHight = 28
 export default {
   name: 'lyric',
@@ -27,7 +29,7 @@ export default {
   computed: {
     ...mapGetters(['currentTime']),
     lyricTop () {
-      return `transform :translate3d(0, -${(this.lyricIndex - this.top) * lyricLineHight}px, 0)`
+      return `${transform}: translate3d(0, -${(this.lyricIndex - this.top) * lyricLineHight}px, 0)`
     }
   },
   watch: {
@@ -51,9 +53,8 @@ export default {
     }
   },
   mounted () {
-    const dom = this.$refs.musicLyric
-    const height = dom.offsetHeight
-    this.top = Math.floor(height / 34 / 2)
+    const height = this.$refs.musicLyric.offsetHeight
+    this.top = Math.floor(height / lyricLineHight / 2)
   }
 }
 </script>
@@ -86,6 +87,7 @@ export default {
         text-align center
         color var(--c_txt2)
         no-wrap()
+        transition all .3s
         &.active
           color $color-theme
 </style>

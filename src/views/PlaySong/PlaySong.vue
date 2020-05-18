@@ -42,8 +42,6 @@ import formatSongs from '@/utils/song'
 import lyric from '@/views/PlaySong/components/lyric'
 import comment from '@/views/PlaySong/components/comment'
 import icon_like from '@/components/icons/icon_like'
-import { SET_PLAYINGSTATE, SET_CURRENTINDEX } from '@/store/mutation-types'
-import { currentSong } from '@/store/getters'
 const MARGINTOP = 0
 export default {
   name: 'PlaySong',
@@ -65,12 +63,26 @@ export default {
       return this.playing ? 'iconpause1' : 'iconplay'
     }
   },
+  watch: {
+    currentSong (newVaule, oldVaule) {
+      if (!newVaule.id) {
+        this.lyric = []
+        return
+      }
+      if (newVaule.id === oldVaule.id) {
+        return
+      }
+      this.$nextTick(() => {
+        this._getLyric(newVaule.id)
+        this._getCommentList(newVaule.id)
+      })
+    }
+  },
   methods: {
     togglePalying () {
       this.setPlayState(!this.playing)
     },
     next () {
-      console.log('8888')
       let index = 0
       if (this.currentIndex === this.playList.length - 1) {
         index = 0
@@ -93,12 +105,12 @@ export default {
       }
     },
     ...mapMutations({
-      setCurrentIndex: SET_CURRENTINDEX,
-      setPlayState: SET_PLAYINGSTATE
+      setCurrentIndex: 'SET_CURRENTINDEX',
+      setPlayState: 'SET_PLAYINGSTATE'
     }),
     isplaying (list) {
       const index = list.findIndex((item) => {
-        return item.id === currentSong.id
+        return item.id === this.currentSong.id
       })
       return index > -1
     },

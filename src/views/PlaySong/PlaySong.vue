@@ -234,6 +234,8 @@ export default {
       left 0
       width 100%
       opacity 0.2
-      filter blur(8px)
+      filter blur(4px)
       transform scale(1.2)
+      mask-image linear-gradient(180deg,hsla(0,0%,100%,0) 0,
+      hsla(0,0%,100%,1) 15%,#fff 25%,#fff 65%,hsla(0,0%,100%,.8) 100%,hsla(0,0%,100%,0))
 </style>

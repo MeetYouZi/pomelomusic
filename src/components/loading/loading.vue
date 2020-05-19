@@ -1,17 +1,19 @@
 <template>
-  <div class="loading">
-    <div class="loading-row">
-      <ul class="con-list">
-        <li class="list-item" v-for="item in 5">
-          <div class="list-box">
-            <div class="list-media">
+  <transition name="fade">
+    <div class="loading fade">
+      <div class="loading-row">
+        <ul class="con-list">
+          <li class="list-item" v-for="item in 5" :key="'load' + item">
+            <div class="list-box">
+              <div class="list-media">
+              </div>
+              <div class="list-bd"></div>
             </div>
-            <div class="list-bd"></div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -27,6 +29,7 @@ export default {
   overflow-x auto
   overflow-y hidden
   margin 0 12px
+  transition all .3s ease-in
   .con-list
     font-size 0
     display flex

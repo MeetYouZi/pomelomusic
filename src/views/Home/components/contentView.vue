@@ -1,35 +1,44 @@
 <template>
   <div class="content-view">
-    <loading v-show="!musicList.length"></loading>
-    <div class="con-mod" v-for="musicItem in musicList" :key="musicItem.id">
-      <div class="con-tit">
-        <h2 class="con-tit-text">{{musicItem.tit}}</h2>
-        <p>更多<i class="iconfont iconright"></i> </p>
-      </div>
-      <div class="con-scroll-x">
-        <div class="con-scroll-bd">
-          <ul class="con-list">
-            <li class="list-item"
-                v-for="(item, index) in musicItem.list"
-                :key="item.id"
-                @click.stop="handleClick(musicItem, item, index)"
-            >
-              <div class="list-box">
-                <div class="list-media">
-                  <img class="list-img" v-lazy="item.picUrl"/>
-                  <div class="cover_count" v-show="musicItem.key != 'music'">
-                    <span class="cover-count-num">{{item.playCount}}</span>
+    <div v-for="i in 5" :key="i">
+      <loading v-if="!musicList.length"></loading>
+    </div>
+    <transition-group name="fade">
+      <div
+        v-if="musicList.length"
+        class="con-mod fade"
+        v-for="musicItem in musicList"
+        :key="musicItem.id"
+      >
+        <div class="con-tit">
+          <h2 class="con-tit-text">{{musicItem.tit}}</h2>
+          <p>更多<i class="iconfont iconright"></i> </p>
+        </div>
+        <div class="con-scroll-x">
+          <div class="con-scroll-bd">
+            <ul class="con-list">
+              <li class="list-item fade"
+                  v-for="(item, index) in musicItem.list"
+                  :key="item.id"
+                  @click.stop="handleClick(musicItem, item, index)"
+              >
+                <div class="list-box">
+                  <div class="list-media">
+                    <img class="list-img" v-lazy="item.picUrl"/>
+                    <div class="cover_count" v-show="musicItem.key != 'music'">
+                      <span class="cover-count-num">{{item.playCount}}</span>
+                    </div>
+                  </div>
+                  <div class="list-bd">
+                    {{item.name}}
                   </div>
                 </div>
-                <div class="list-bd">
-                  {{item.name}}
-                </div>
-              </div>
-            </li>
-          </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
+    </transition-group>
   </div>
 </template>
 
@@ -39,10 +48,9 @@ import formatSongs from '@/utils/song'
 import { getPersonalized, getNewSongs, getPersonalizedMv, getDjprogram } from '@/api'
 import { SET_PLAYINGSTATE, SET_PLAYLIST } from '@/store/mutation-types'
 import loading from '@/components/loading/loading'
-import Loading from 'components/loading/loading'
 export default {
   name: 'contentView',
-  components: { Loading },
+  components: { loading },
   data () {
     return {
       titList: [{
@@ -200,8 +208,11 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
+  .content-view
+    position relative
   .con-mod
     position relative
+    transition all 0.3s ease-in
     .con-tit
       height 30px
       display flex

@@ -78,6 +78,8 @@ export default {
       height 160px
       margin-top 15px
       overflow hidden
+      mask-image linear-gradient(180deg,hsla(0,0%,100%,0) 0,
+      hsla(0,0%,100%,.6) 15%,#fff 25%,#fff 75%,hsla(0,0%,100%,.6) 85%,hsla(0,0%,100%,0))
       // box-shadow 0px 0px 0px #f2f2f2,   /*左边阴影*/
       // 0px -20px 10px #f2f2f2 inset,  /*上边阴影*/
       // 0px 0px 0px #f2f2f2,  /*右边阴影*/

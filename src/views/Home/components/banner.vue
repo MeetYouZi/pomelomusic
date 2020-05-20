@@ -1,7 +1,9 @@
 <template>
-  <div class="music-banner" v-if="bannerList.length">
-    <img :src="bannerList[0].imageUrl"/>
-  </div>
+  <transition name="fade">
+    <div class="music-banner fade" v-if="bannerList.length">
+      <img :src="bannerList[0].imageUrl"/>
+    </div>
+  </transition>
 </template>
 
 <script>

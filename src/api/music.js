@@ -31,7 +31,7 @@ export const getPersonalizedMv = (params) => {
   })
 }
 
-// 推荐mv
+// 推荐电台
 export const getDjprogram = (params) => {
   return axios.request({
     url: '/personalized/djprogram',

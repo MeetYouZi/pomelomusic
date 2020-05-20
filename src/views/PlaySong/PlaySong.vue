@@ -152,7 +152,7 @@ export default {
     },
     ...mapActions(['selectPlay'])
   },
-  activated () {
+  created () {
     const id = this.$route.params.id
     this._getSongDetail(id)
     this._getLyric(id)

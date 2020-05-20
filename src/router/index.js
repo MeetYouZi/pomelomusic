@@ -7,6 +7,8 @@ const About = () => import('@/views/About')
 const Music = () => import('@/views/music')
 const PlaySong = () => import('@/views/PlaySong/PlaySong')
 const Personal = () => import('@/views/Personal/Personal')
+const Album = () => import('@/views/Album/Album')
+const MvDetail = () => import('@/views/MV/MvDetail')
 
 Vue.use(VueRouter)
 
@@ -65,6 +67,18 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About
+  }, {
+    path: '/album/:rid',
+    name: 'Album',
+    component: Album
+  }, {
+    path: '/mvDetail/:mvid',
+    name: 'MvDetail',
+    component: MvDetail,
+    meta: {
+      index: 1,
+      requiresAuth: false
+    }
   }
 ]
 

@@ -111,8 +111,8 @@ export default {
         })
       }
     },
-    playMV () {
-
+    playMV (item) {
+      this.$router.push(`/mvDetail/${item.id}`)
     },
     toPlaySong (item, index) {
       this.selectPlay({
@@ -120,6 +120,9 @@ export default {
         index
       })
       this.$router.push(`/playSong/${item.id}`)
+    },
+    handleToAlbum (item) {
+      this.$router.push(`/album/${item.id}`)
     },
     handleClick (musicItem, item, index) {
       const key = musicItem.key
@@ -132,10 +135,11 @@ export default {
           // this.playMusic(item, index)
           break
         case 'mv':
-          this.playMV()
+          this.playMV(item)
           break
         case 'program':
-          this.playMV()
+          this.handleToAlbum(item)
+          // this.playMV()
           break
         default:
           console.log('啥也没有呢～')
@@ -202,7 +206,9 @@ export default {
     }
   },
   created () {
-    this._getMusicList()
+    setTimeout(() => {
+      this._getMusicList()
+    }, 1500)
   }
 }
 </script>

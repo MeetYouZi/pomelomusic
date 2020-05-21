@@ -15,3 +15,19 @@ export const getmvUrl = params =>
     method: 'get',
     params
   })
+
+// 相似 mv
+export const getSimiMv = params =>
+  axios.request({
+    url: '/simi/mv',
+    method: 'get',
+    params
+  })
+
+// 全部 mv
+export const getAllMvs = params =>
+  axios.request({
+    url: '/mv/all',
+    method: 'get',
+    params
+  })

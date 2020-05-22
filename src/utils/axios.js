@@ -12,7 +12,7 @@ class HttpRequest {
   getInsideConfig () {
     const config = {
       baseURL: this.baseUrl,
-      withCredentials: true, // 跨域请求时发送 cookies
+      // withCredentials: true, // 跨域请求时发送 cookies
       timeout: 60000, // request timeout 2分钟
       headers: {
         'Content-Type': 'application/json'

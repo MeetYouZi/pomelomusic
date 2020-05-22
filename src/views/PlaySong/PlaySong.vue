@@ -40,7 +40,7 @@ import { getLyricl, getSongDetail, getCommentList } from '@/api'
 import { parseLyric } from '@/utils/lyric'
 import formatSongs from '@/utils/song'
 import lyric from '@/views/PlaySong/components/lyric'
-import comment from '@/views/PlaySong/components/comment'
+import comment from '@/components/comment/comment'
 import icon_like from '@/components/icons/icon_like'
 const MARGINTOP = 0
 export default {

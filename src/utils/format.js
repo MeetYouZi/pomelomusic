@@ -28,3 +28,11 @@ export const dateFormat = (oDate, fmt) => {
 export const dateReduce = (num) => {
   return new Date().getTime() - 3600 * 24 * 1000 * num
 }
+
+export const getImgUrl = (url, w, h) => {
+  if (!h) {
+    h = w
+  }
+  url += `?param=${w}y${h}`
+  return url
+}

@@ -24,7 +24,7 @@ export const getHotComment = params =>
 // mv评论
 export const getMvComment = params =>
   axios.request({
-    url: '/comment/mvt',
+    url: '/comment/mv',
     method: 'get',
     params
   })

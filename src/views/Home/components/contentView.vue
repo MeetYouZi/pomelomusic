@@ -24,7 +24,7 @@
               >
                 <div class="list-box">
                   <div class="list-media">
-                    <img class="list-img" v-lazy="item.picUrl"/>
+                    <img class="list-img" v-lazy="_getImgUrl(item.picUrl, 300)"/>
                     <div class="cover_count" v-show="musicItem.key != 'music'">
                       <span class="cover-count-num">{{item.playCount}}</span>
                     </div>
@@ -48,6 +48,7 @@ import formatSongs from '@/utils/song'
 import { getPersonalized, getNewSongs, getPersonalizedMv, getDjprogram } from '@/api'
 import { SET_PLAYINGSTATE, SET_PLAYLIST } from '@/store/mutation-types'
 import loading from '@/components/loading/loading'
+import { getImgUrl } from '@/utils/format'
 export default {
   name: 'contentView',
   components: { loading },
@@ -90,12 +91,12 @@ export default {
           }
         }
       })
-      return this.nomalizeSong(songList)
+      return formatSongs(songList)
     }
   },
   methods: {
-    nomalizeSong (songList) {
-      return formatSongs(songList)
+    _getImgUrl (url, w, h) {
+      return getImgUrl(url, w, h)
     },
     handleTomusicList (id, index) {
       // this.setplayList(this.normalizedSongs)

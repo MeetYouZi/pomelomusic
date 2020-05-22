@@ -31,3 +31,19 @@ export const getAllMvs = params =>
     method: 'get',
     params
   })
+
+// 获取歌手详情
+export const getArtists = params =>
+  axios.request({
+    url: '/artists',
+    method: 'get',
+    params
+  })
+
+// mv评论
+export const getMvComment = params =>
+  axios.request({
+    url: '/comment/mv',
+    method: 'get',
+    params
+  })

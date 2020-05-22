@@ -1,7 +1,7 @@
 <template>
   <div class="commentBox">
     <ul class="comment_list">
-      <li class="comment_item" v-for="item in hotCommentList">
+      <li class="comment_item" v-for="item in hotCommentList" :key="item.id">
         <div class="comment_item_avatar">
           <img v-lazy="`${item.user.avatarUrl}?param=50y50`">
         </div>

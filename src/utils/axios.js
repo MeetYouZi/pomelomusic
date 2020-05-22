@@ -1,18 +1,11 @@
-import Vue from 'vue'
 import axios from 'axios'
-// import store from '@/store'
 
-const _vue = new Vue()
 const loadinginstace = 0
+const baseUrl = process.env.VUE_APP_BASE_API_URL
 class HttpRequest {
-  constructor (baseUrl = baseURL) {
-    this.baseUrl = baseUrl
-  }
-
   getInsideConfig () {
     const config = {
-      baseURL: this.baseUrl,
-      // withCredentials: true, // 跨域请求时发送 cookies
+      baseURL: baseUrl,
       timeout: 60000, // request timeout 2分钟
       headers: {
         'Content-Type': 'application/json'
@@ -22,11 +15,9 @@ class HttpRequest {
   }
 
   interceptors (instance, url) {
-    const _vue = new Vue()
     // 请求拦截
     instance.interceptors.request.use(config => {
       // 添加全局的loading...
-      // loadinginstace.show()
       return config
     }, error => {
       loadinginstace.hide()
@@ -34,7 +25,6 @@ class HttpRequest {
     })
     // 响应拦截
     instance.interceptors.response.use(response => {
-      // loadinginstace.hide()
       return Promise.resolve(response.data)
     },
     error => {

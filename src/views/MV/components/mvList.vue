@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import router from '@/router'
-import { changeMvid } from '@/utils/utils'
+// import router from '@/router'
+// import { changeMvid } from '@/utils/utils'
 
 export default {
   name: 'mvList',
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     changeMv (mvid) {
-      changeMvid(mvid)
+      this.$router.push(`/mvDetail/${mvid}`)
       // this.$emit('changeMv', mvid)
     }
   }
@@ -61,7 +61,7 @@ export default {
       justify-content space-between
       padding 6px 0
       .mv_item_tit
-        font-size $font-size-large
+        font-size $font-size-medium
         line-height 18px
         no-wrap-number(2)
       .mv_item_desc

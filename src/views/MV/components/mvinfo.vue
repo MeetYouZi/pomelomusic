@@ -8,7 +8,7 @@
     </div>
     <div class="mv_author">
       <div class="mv_author_avatar">
-        <img class="avatar_img" :src="artistInfo.picUrl"/>
+        <img class="avatar_img" v-lazy="`${artistInfo.picUrl}?param=50y50`"/>
       </div>
       <div class="author_content">
         <h3 class="author_name c_txt1">{{ artistInfo.name }}</h3>
@@ -24,7 +24,6 @@
 <script>
 import mvList from '@/views/MV/components/mvList'
 import { dateFormat } from '@/utils/format'
-import router from '@/router'
 export default {
   name: 'mvinfo',
   components: {
@@ -44,7 +43,7 @@ export default {
   methods: {
     changeMv (mvid) {
       this.$emit('changeMv', mvid)
-      router.push(`/mvDetail/${mvid}`)
+      // router.push(`/mvDetail/${mvid}`)
     }
   }
 }
@@ -69,7 +68,7 @@ export default {
       line-height 18px
   .mv_author
     margin-bottom 10px
-    padding 0 16px
+    padding 5px 16px
     display flex
     align-items center
     justify-content space-between

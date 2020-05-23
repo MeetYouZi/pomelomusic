@@ -51,7 +51,3 @@ export function debounce (func, delay) {
     }, delay)
   }
 }
-
-export function changeMvid (id) {
-  router.push(`/mvDetail/${id}`)
-}

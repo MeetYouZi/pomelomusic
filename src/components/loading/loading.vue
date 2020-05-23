@@ -41,12 +41,12 @@ export default {
       margin 0 4px
       .list-media
         height 110px
-        background #f2f2f2
+        background var(--searchBg)
         position relative
         border-radius 8px
       .list-bd
         margin-top 8px
         border-radius 8px
         height 14px
-        background #f2f2f2
+        background var(--searchBg)
 </style>

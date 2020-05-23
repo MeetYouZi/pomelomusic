@@ -47,7 +47,7 @@ export default {
       return `background: url(${url}) center no-repeat`
     },
     gender () {
-      return this.profile.gender === 2 ? '女' : '男'
+      return this.profile.gender === 2 ? 'girl' : 'boy'
     },
     isLogin () {
       return this.userInfo.token

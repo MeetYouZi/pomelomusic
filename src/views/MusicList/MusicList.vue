@@ -124,6 +124,7 @@ export default {
     _getListDetail () {
       getListDetail({ id: this.id }).then(res => {
         this.playlist = res.playlist
+        document.title = this.playlist.name
         this._getSongDetail(this.playlist)
       })
     },

@@ -41,14 +41,14 @@ import { parseLyric } from '@/utils/lyric'
 import formatSongs from '@/utils/song'
 import lyric from '@/views/PlaySong/components/lyric'
 import comment from '@/components/comment/comment'
-import icon_like from '@/components/icons/icon_like'
+// import icon_like from '@/components/icons/icon_like'
 const MARGINTOP = 0
 export default {
   name: 'PlaySong',
   components: {
     lyric,
     comment,
-    icon_like
+    // icon_like
   },
   data () {
     return {
@@ -73,6 +73,7 @@ export default {
         return
       }
       this.$nextTick(() => {
+        document.title = newVaule.name
         this._getLyric(newVaule.id)
         this._getCommentList(newVaule.id)
       })

@@ -73,6 +73,7 @@ export default {
       }
       getmvdetail(data).then(res => {
         this.mvInfo = res.data
+        document.title = this.mvInfo.name
         this._getArtists(this.mvInfo.artistId)
         this._getMvComment(data.mvid)
       })
@@ -109,7 +110,6 @@ export default {
       })
     },
     changeMv (id) {
-      console.log(id, 'idd')
       this.mvid = id
     },
     init () {
@@ -127,6 +127,7 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   .mv_detail
     background var(--bg)
+    z-index 10
   .mvplayer
     position relative
     width 100%

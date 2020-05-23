@@ -4,7 +4,7 @@
         v-for="(item, index) in songList"
         :key="item.id"
         @click.stop="handleSelectSong(item, index)"
-        :class="{active: item.id == currentSong.id}"
+        :class="{active: item.id === currentSong.id}"
     >
       <div class="item-box">
         <span class="list-num" v-text="index + 1"></span>

@@ -25,7 +25,7 @@
       <div class="pomelo-play" v-show="isShowPlay" @swiperight="swiperight(x)">
         <div class="icon" @click="handleToUrl">
           <div class="imgWrapper" ref="miniWrapper">
-            <img ref="miniImage" :class="cdCls" width="44" height="44" :src="currentSong.image">
+            <img ref="miniImage" :class="cdCls" width="44" height="44" v-lazy="`${currentSong.image}?param=100y100`">
           </div>
         </div>
         <div class="text">

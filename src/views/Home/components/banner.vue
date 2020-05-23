@@ -22,8 +22,10 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .music-banner
-  width 100%
   height 154px
+  margin 0 16px
+  border-radius 6px
+  overflow hidden
   img
     width 100%
     height 100%

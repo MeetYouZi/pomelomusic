@@ -26,6 +26,7 @@ const routes = [
         name: 'Home',
         component: Home,
         meta: {
+          title: '小右 Player',
           index: 0,
           requiresAuth: false
         }
@@ -34,6 +35,7 @@ const routes = [
         name: 'Recommend',
         component: Recommend,
         meta: {
+          title: '排行榜',
           index: 0,
           requiresAuth: false
         }
@@ -42,6 +44,7 @@ const routes = [
         name: 'Personal',
         component: Personal,
         meta: {
+          title: '个人中心',
           index: 0,
           requiresAuth: false
         }
@@ -52,6 +55,7 @@ const routes = [
     name: 'MusicList',
     component: MusicList,
     meta: {
+      title: 'musicList',
       index: 1,
       requiresAuth: false
     }
@@ -60,13 +64,10 @@ const routes = [
     name: 'PlaySong',
     component: PlaySong,
     meta: {
+      title: 'playSong',
       index: 1,
       requiresAuth: false
     }
-  }, {
-    path: '/about',
-    name: 'About',
-    component: About
   }, {
     path: '/album/:rid',
     name: 'Album',
@@ -77,6 +78,7 @@ const routes = [
     component: MvDetail,
     props: (route) => ({ mvid: 1 * route.params.mvid }),
     meta: {
+      title: 'MvDetail',
       index: 1,
       requiresAuth: false
     }
@@ -95,6 +97,7 @@ const router = new VueRouter({
 })
 // 判断是否需要登录拦截
 router.beforeEach((to, from, next) => {
+  document.title = to.meta.title
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.

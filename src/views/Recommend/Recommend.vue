@@ -17,7 +17,7 @@
           </ol>
         </div>
         <div class="rank_list_media">
-          <img class="rank_list_img" v-lazy="`${item.coverImgUrl}?param=300y300`">
+          <img class="rank_list_img" v-lazy="`${item.coverImgUrl}?param=200y200`">
         </div>
       </li>
     </ul>
@@ -129,8 +129,8 @@ export default {
           top 0
           width 100%
           height 100%
-          background hsla(0, 0, 0, 0.3)
-          filter blur(10px)
+          background hsla(0, 0, 0, 0.5)
+          filter blur(20px)
           z-index 1
         .rank_list_img
           display block

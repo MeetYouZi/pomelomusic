@@ -18,6 +18,7 @@
           :mvInfo="mvInfo"
           :mvList="mvList"
           :artistInfo="artistInfo"
+          @changeMv="changeMv"
         ></mvinfo>
       </div>
     </transition>
@@ -40,6 +41,12 @@ export default {
     mvinfo,
     comment
   },
+  props: {
+    mvid: {
+      type: Number,
+      required: true
+    }
+  },
   data () {
     return {
       con: [
@@ -55,6 +62,9 @@ export default {
       mvList: [],
       hotCommentList: []
     }
+  },
+  watch: {
+    mvid: 'init'
   },
   methods: {
     _getmvdetail () {
@@ -97,12 +107,19 @@ export default {
       getmvUrl(data).then(res => {
         this.mvUrl = res.data.url
       })
+    },
+    changeMv (id) {
+      console.log(id, 'idd')
+      this.mvid = id
+    },
+    init () {
+      this._getmvdetail()
+      this._getmvUrl()
+      this._getSimiMv()
     }
   },
   created () {
-    this._getmvdetail()
-    this._getmvUrl()
-    this._getSimiMv()
+    this.init()
   }
 }
 </script>

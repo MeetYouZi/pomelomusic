@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="mv_list">
-      <mv-list :mvList="mvList"></mv-list>
+      <mv-list :mvList="mvList" @changeMv="changeMv"></mv-list>
     </div>
   </div>
 </template>
@@ -24,6 +24,7 @@
 <script>
 import mvList from '@/views/MV/components/mvList'
 import { dateFormat } from '@/utils/format'
+import router from '@/router'
 export default {
   name: 'mvinfo',
   components: {
@@ -39,6 +40,12 @@ export default {
     artistInfo: Object,
     mvInfo: Object,
     mvList: Array
+  },
+  methods: {
+    changeMv (mvid) {
+      this.$emit('changeMv', mvid)
+      router.push(`/mvDetail/${mvid}`)
+    }
   }
 }
 </script>

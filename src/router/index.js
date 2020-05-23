@@ -75,6 +75,7 @@ const routes = [
     path: '/mvDetail/:mvid',
     name: 'MvDetail',
     component: MvDetail,
+    props: (route) => ({ mvid: 1 * route.params.mvid }),
     meta: {
       index: 1,
       requiresAuth: false

@@ -1,6 +1,10 @@
 <template>
   <ul class="mv_list">
-    <li class="mv_item" v-for="simiMv in mvList" :key="simiMv.id">
+    <li class="mv_item"
+        v-for="simiMv in mvList"
+        :key="simiMv.id"
+        @click="changeMv(simiMv.id)"
+    >
       <div class="mv_media">
         <img class="media_img" v-lazy="simiMv.cover"/>
       </div>
@@ -13,10 +17,19 @@
 </template>
 
 <script>
+import router from '@/router'
+import { changeMvid } from '@/utils/utils'
+
 export default {
   name: 'mvList',
   props: {
     mvList: Array
+  },
+  methods: {
+    changeMv (mvid) {
+      changeMvid(mvid)
+      // this.$emit('changeMv', mvid)
+    }
   }
 }
 </script>

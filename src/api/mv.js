@@ -1,6 +1,6 @@
 import axios from '@/utils/http'
 
-// 电台详情
+// mv详情
 export const getmvdetail = params =>
   axios.request({
     url: '/mv/detail',
@@ -8,7 +8,7 @@ export const getmvdetail = params =>
     params
   })
 
-// 电台详情
+// 获取mvurl
 export const getmvUrl = params =>
   axios.request({
     url: '/mv/url',
@@ -36,14 +36,6 @@ export const getAllMvs = params =>
 export const getArtists = params =>
   axios.request({
     url: '/artists',
-    method: 'get',
-    params
-  })
-
-// mv评论
-export const getMvComment = params =>
-  axios.request({
-    url: '/comment/mv',
     method: 'get',
     params
   })

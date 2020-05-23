@@ -8,7 +8,8 @@ const state = {
   currentIndex: -1,
   currentSong: {},
   currentTime: 0,
-  searchHistorys: JSON.parse(localStorage.getItem('pomelomusic_SearchHistorys')) || []
+  searchHistorys: JSON.parse(localStorage.getItem('pomelomusic_SearchHistorys')) || [],
+  userInfo: JSON.parse(localStorage.getItem('pomelomusic_userInfo')) || {}
 }
 
 export default state

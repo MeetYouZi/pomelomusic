@@ -7,6 +7,7 @@ export const getSongComment = params =>
     method: 'get',
     params
   })
+
 // 歌单评论
 export const getPlaylistComment = params =>
   axios.request({
@@ -14,6 +15,7 @@ export const getPlaylistComment = params =>
     method: 'get',
     params
   })
+
 // 热门评论
 export const getHotComment = params =>
   axios.request({
@@ -21,6 +23,7 @@ export const getHotComment = params =>
     method: 'get',
     params
   })
+
 // mv评论
 export const getMvComment = params =>
   axios.request({

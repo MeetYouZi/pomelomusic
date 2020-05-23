@@ -14,3 +14,5 @@ export const currentTime = state => state.currentTime
 export const currentSong = (state) => {
   return state.playList[state.currentIndex] || {}
 }
+// 用户信息
+export const userInfo = (state) => state.userInfo

@@ -1,10 +1,9 @@
 <template>
   <div class="personal">
-    <div class="headerbg">
-    </div>
+    <div class="headerbg" :style="headerbg"></div>
     <div class="headerBox">
       <div class="avater">
-        <img class="avater_img" src="../../assets/img/loading.jpeg">
+        <img class="avater_img" v-lazy="profile.avatarUrl || avatarUrl">
       </div>
       <div class="animation">
         <div class="ball-scale-multiple">
@@ -14,15 +13,77 @@
         </div>
       </div>
     </div>
-    <div class="login_btn">
-      <button class="btn">登录</button>
+    <div class="userInfo">
+      <div class="user_name">{{profile.nickname || nickname}} | {{gender}}</div>
     </div>
+<!--    <div class="loginBox">-->
+<!--      <div class="from">-->
+<!--        <input class="login_input" v-model="login.phone">-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <input class="login_input" v-model="login.password">-->
+<!--      </div>-->
+<!--    </div>-->
+    <div class="login_btn" v-show="!isLogin">
+      <button class="btn" @click="handleLoginPopup">登录</button>
+    </div>
+    <login-popup ref="loginPopup" @toast="_longinCellPhone"></login-popup>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
+import { longinCellPhone } from '@/api'
+import loginPopup from '@/views/Personal/components/loginPopup'
+
 export default {
-  name: 'Personal'
+  name: 'Personal',
+  components: {
+    loginPopup
+  },
+  computed: {
+    headerbg () {
+      const url = this.isLogin ? this.profile.backgroundUrl : this.backgroundUrl
+      return `background: url(${url}) center no-repeat`
+    },
+    gender () {
+      return this.profile.gender === 2 ? '女' : '男'
+    },
+    isLogin () {
+      return this.userInfo.token
+    },
+    profile () {
+      return this.isLogin ? this.userInfo.profile : {}
+    },
+    ...mapGetters(['userInfo'])
+  },
+  data () {
+    return {
+      defaultImg: require('../../assets/img/loading.jpeg'),
+      nickname: '柚子姑娘呀',
+      avatarUrl: 'https://p4.music.126.net/KHMZU_0fBdqggOzRH6xx8g==/19198572532647757.jpg',
+      backgroundUrl: 'https://p3.music.126.net/hz-kOwghDqrIsyQD5gE8_w==/109951163380875324.jpg',
+      login: {
+        phone: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    handleLoginPopup () {
+      this.$refs.loginPopup.show()
+    },
+    _longinCellPhone (loginform) {
+      const data = loginform
+      longinCellPhone(data).then(res => {
+        this.set_userInfo(res)
+        this.$refs.loginPopup.hide()
+      })
+    },
+    ...mapMutations({
+      set_userInfo: 'SET_USERINFO'
+    })
+  }
 }
 </script>
 
@@ -33,13 +94,23 @@ export default {
   width 100%
   overflow hidden
   .headerbg
-    position absolute
+    position fixed
     width 100%
-    height 300px
-    background url("../../assets/img/loading.jpeg") no-repeat center
-    filter blur(10px)
-    transform scale(1.2)
+    height 100%
+    top 0
+    bottom 0
+    filter blur(4px)
+    transform scale(1.1)
     z-index -1
+    &:after
+      content ""
+      z-index 1
+      position fixed
+      width 100%
+      height 100%
+      top 0
+      bottom 0
+      background var(--bg_mask)
   .headerBox
     position relative
     height 300px
@@ -83,6 +154,16 @@ export default {
       width 160px
       height 160px
       animation ball-scale-multiple 6s 0s linear infinite
+  .userInfo
+    display flex
+    align-items center
+    justify-content center
+    margin-top -60px
+    margin-bottom 30px
+    .user_name
+      color var(--c_tex1)
+      font-size $font-size-large
+      font-weight 500
   .login_btn
     display flex
     align-items center

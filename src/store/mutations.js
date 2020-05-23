@@ -20,6 +20,12 @@ const mutations = {
     try {
       localStorage.pomelomusic_SearchHistorys = JSON.stringify(searchHistorys)
     } catch (e) {}
+  },
+  [types.SET_USERINFO] (state, userInfo) {
+    state.userInfo = userInfo
+    try {
+      localStorage.pomelomusic_userInfo = JSON.stringify(userInfo)
+    } catch (e) {}
   }
 }
 export default mutations

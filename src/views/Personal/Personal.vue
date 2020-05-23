@@ -47,7 +47,11 @@ export default {
       return `background: url(${url}) center no-repeat`
     },
     gender () {
-      return this.profile.gender === 2 ? 'girl' : 'boy'
+      if (this.isLogin) {
+        return this.profile.gender === 2 ? 'girl' : 'boy'
+      } else {
+        return '我是柚子姑娘呀'
+      }
     },
     isLogin () {
       return this.userInfo.token
@@ -60,7 +64,7 @@ export default {
   data () {
     return {
       defaultImg: require('../../assets/img/loading.jpeg'),
-      nickname: '柚子姑娘呀',
+      nickname: '你是谁呀？',
       avatarUrl: 'https://p4.music.126.net/KHMZU_0fBdqggOzRH6xx8g==/19198572532647757.jpg',
       backgroundUrl: 'https://p3.music.126.net/hz-kOwghDqrIsyQD5gE8_w==/109951163380875324.jpg',
       login: {

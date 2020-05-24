@@ -13,7 +13,7 @@
                  loading="lazy"
                  importance="low"
                  :style="imgSize(index)"
-                 :src="item.picUrl | _getImgUrl(item.picUrl, 90)"
+                 :src="`${item.picUrl}?param=100y100`"
             >
             <p class="avatar_name">{{item.name}}</p>
           </div>
@@ -100,7 +100,7 @@ export default {
   .artists_img
     width 44px
     height 44px
-    box-shadow 0 5px 10px rgba(0, 0, 0, 0.12)
+    box-shadow 0 5px 10px rgba(0, 0, 0, 0.32)
     border-radius 50%
   .avatar_name
     text-align center

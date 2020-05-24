@@ -37,6 +37,7 @@
       :keyWord="keyWord"
     ></search-view>
     <banner :banner-list="bannerList"></banner>
+    <hot-artists></hot-artists>
     <content-view></content-view>
   </div>
 </template>
@@ -48,6 +49,7 @@ import search from '@/views/Home/components/search'
 import contentView from '@/views/Home/components/contentView'
 import searchView from '@/views/Home/components/searchView'
 import dynamic from '@/components/dynamic/dynamic'
+import hotArtists from '@/views/Home/components/hotArtists'
 import { getBanner } from '@/api'
 export default {
   name: 'Home',
@@ -56,7 +58,8 @@ export default {
     search,
     dynamic,
     contentView,
-    searchView
+    searchView,
+    hotArtists
   },
   computed: {
     ...mapGetters(['playing', 'currentSong'])
@@ -106,7 +109,7 @@ export default {
     background var(--theme)
     position relative
     overflow hidden
-    padding-top 40px
+    padding-top 56px
     box-sizing border-box
     .top-header
       position fixed

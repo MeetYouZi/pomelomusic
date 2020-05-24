@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import mvList from '@/views/MV/components/mvList'
+import mvList from '@/views/Mv/components/mvList'
 import { dateFormat } from '@/utils/format'
 export default {
   name: 'mvinfo',

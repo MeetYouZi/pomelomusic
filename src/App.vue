@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <div class="goBack" v-show="BackPage" @click="handleToBack">
+      <i class="iconfont iconLeft"></i>
+    </div>
     <transition :name="transitionName">
       <keep-alive exclude="MusicList,PlaySong,Comment,lyric,MvDetail">
         <router-view class="rv"/>
@@ -18,18 +21,23 @@ export default {
   },
   data () {
     return {
-      transitionName: 'slide-right'
+      transitionName: 'slide-right',
+      BackPage: false
     }
   },
   // watch $route 决定使用哪种过渡
   watch: {
     '$route' (to, from) {
+      this.BackPage = to.meta.index > 0 ? true : false
       const toDepth = to.meta.index
       const fromDepth = from.meta.index
       this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
     }
   },
   methods: {
+    handleToBack () {
+      this.$router.back()
+    },
     removeAnimate () {
       // 首次加载完成后移除动画
       let loadDOM = document.querySelector('#appLoadingBox')
@@ -57,6 +65,21 @@ export default {
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
   height 100%
+  .goBack
+    position fixed
+    top 10px
+    left 16px
+    width 38px
+    height 38px
+    border-radius 50%
+    background rgba(0, 0, 0, 0.3)
+    display flex
+    align-items center
+    justify-content center
+    z-index 999
+    .iconfont
+      color #fff
+      font-size $font-size-medium
   .rv
     position absolute
     width 100%

@@ -1,7 +1,7 @@
 <template>
   <div class="music_list_warp">
     <div class="top_wrap">
-      <img class="top_wrap_bg" :src="headerImgCover" />
+      <img class="top_wrap_bg" v-lazy="headerImgCover" />
     </div>
     <div class="opt_box">
       <div class="author">
@@ -182,7 +182,7 @@ export default {
     .author_desc
       color var(--c_txt2)
       text-align justify
-      line-height 14px
+      line-height 18px
       font-size $font-size-small
     .author_avatar
       display block
@@ -192,7 +192,7 @@ export default {
       border-radius 100%
     .author_name
       font-size $font-size-medium
-      color var(--c_txt2)
+      color var(--c_txt1)
   .play_bar_wrap
     height 55px
     position relative

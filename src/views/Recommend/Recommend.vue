@@ -98,8 +98,9 @@ export default {
     .rank_list_item
       display flex
       align-items center
-      padding 0 16px 12px
+      margin 0 16px 12px
       border-radius 8px 0 0 8px
+      background var(--searchBg)
       .ank_list_left
         flex 1
         overflow hidden

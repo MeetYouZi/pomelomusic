@@ -207,9 +207,9 @@ export default {
     }
   },
   created () {
-    setTimeout(() => {
-      this._getMusicList()
-    }, 1500)
+    // setTimeout(() => {
+    this._getMusicList()
+    // }, 1500)
   }
 }
 </script>

@@ -28,6 +28,9 @@
       <button class="btn" @click="handleLoginPopup">登录</button>
     </div>
     <login-popup ref="loginPopup" @toast="_longinCellPhone"></login-popup>
+    <div class="fixBottom">
+      <p @click="handleToggleTheme">不好看？换一个颜色试试？</p>
+    </div>
   </div>
 </template>
 
@@ -43,7 +46,8 @@ export default {
   },
   computed: {
     headerbg () {
-      const url = this.isLogin ? this.profile.backgroundUrl : this.backgroundUrl
+      const backgroundUrl = this.isBlack ? this.myBackgroundUrl : this.backgroundUrl
+      const url = this.isLogin ? this.profile.backgroundUrl : backgroundUrl
       return `background: url(${url}) center no-repeat`
     },
     gender () {
@@ -66,14 +70,21 @@ export default {
       defaultImg: require('../../assets/img/loading.jpeg'),
       nickname: '你是谁呀？',
       avatarUrl: 'https://p4.music.126.net/KHMZU_0fBdqggOzRH6xx8g==/19198572532647757.jpg',
-      backgroundUrl: 'https://p3.music.126.net/hz-kOwghDqrIsyQD5gE8_w==/109951163380875324.jpg',
+      myBackgroundUrl: 'https://p3.music.126.net/hz-kOwghDqrIsyQD5gE8_w==/109951163380875324.jpg',
+      backgroundUrl: 'https://p4.music.126.net/zgFcCXmNN9fS9ah5pyqpLw==/109951165012953301.jpg',
       login: {
         phone: '',
         password: ''
-      }
+      },
+      isBlack: false
     }
   },
   methods: {
+    // 切换主题
+    handleToggleTheme () {
+      this.isBlack = !this.isBlack
+      document.querySelector('html').className = this.isBlack ? 'black' : 'white'
+    },
     handleLoginPopup () {
       this.$refs.loginPopup.show()
     },
@@ -181,6 +192,14 @@ export default {
       font-size $font-size-medium
       color #fff
       border none
+  .fixBottom
+    position fixed
+    bottom 110px
+    width 100%
+    p
+      text-align center
+      font-size $font-size-small
+      color var(--c_txt2)
 @keyframes ball-scale-multiple {
   0% {
     -webkit-transform: scale(0);

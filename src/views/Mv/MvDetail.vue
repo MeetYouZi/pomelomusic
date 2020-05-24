@@ -33,7 +33,7 @@
 
 <script>
 import { getmvdetail, getmvUrl, getArtists, getSimiMv, getMvComment } from '@/api'
-import mvinfo from '@/views/MV/components/mvinfo'
+import mvinfo from '@/views/Mv/components/mvinfo'
 import comment from '@/components/comment/comment'
 export default {
   name: 'MvDetail',

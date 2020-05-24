@@ -131,6 +131,7 @@ export default {
     _getSongDetail (id) {
       getSongDetail(id).then(res => {
         this.songList = formatSongs(res.songs)
+        document.title = this.mvInfo.name
         if (!this.isplaying(this.songList)) {
           this.selectPlay({
             list: this.songList,

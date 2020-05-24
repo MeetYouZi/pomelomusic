@@ -15,7 +15,7 @@ Vue.use(VueLazyload, {
 })
 
 // 初始化主题
-document.querySelector('html').className = 'black'
+document.querySelector('html').className = 'white'
 
 new Vue({
   router,

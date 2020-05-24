@@ -93,7 +93,7 @@ export default {
       transform: translate(-50%, -50%)
       z-index: 999
       .toast-content
-        width: 270px
+        width: 280px
         border-radius: 13px
         background var(--bg)
         box-shadow 0 0 20px 0 rgba(0,0,0,.1)
@@ -112,6 +112,7 @@ export default {
               height 40px
               border-radius 20px
               padding-left 8px
+              box-sizing border-box
               color #fff
               outline none
               border 1px solid var(--bgborder)

@@ -8,7 +8,7 @@ const Music = () => import('@/views/music')
 const PlaySong = () => import('@/views/PlaySong/PlaySong')
 const Personal = () => import('@/views/Personal/Personal')
 const Album = () => import('@/views/Album/Album')
-const MvDetail = () => import('@/views/MV/MvDetail')
+const MvDetail = () => import('@/views/Mv/MvDetail')
 
 Vue.use(VueRouter)
 

@@ -12,7 +12,7 @@
       >
         <div class="con-tit">
           <h2 class="con-tit-text">{{musicItem.tit}}</h2>
-          <p>更多<i class="iconfont iconright"></i> </p>
+          <p @click="handleClickAlert">更多<i class="iconfont iconright"></i> </p>
         </div>
         <div class="con-scroll-x">
           <div class="con-scroll-bd">
@@ -95,6 +95,11 @@ export default {
     }
   },
   methods: {
+    handleClickAlert () {
+      this.$Alert.info({
+        content: '等等，过两天再来看看吧~'
+      })
+    },
     _getImgUrl (url, w, h) {
       return getImgUrl(url, w, h)
     },

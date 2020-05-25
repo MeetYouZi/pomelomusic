@@ -5,6 +5,7 @@ import VueLazyload from 'vue-lazyload'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import $Alert from '@/components/api/alert'
 import 'stylus/index.styl'
 
 Vue.config.productionTip = false
@@ -16,6 +17,8 @@ Vue.use(VueLazyload, {
 
 // 初始化主题
 document.querySelector('html').className = 'white'
+
+Vue.prototype.$Alert = $Alert
 
 new Vue({
   router,

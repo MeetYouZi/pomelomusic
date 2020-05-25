@@ -8,12 +8,14 @@
                :key="item.id"
                :style="sliderStylue(index)"
           >
-            <img class="artists_img"
-                 decoding="async"
-                 loading="lazy"
-                 importance="low"
-                 :style="imgSize(index)"
-                 :src="`${item.picUrl}?param=100y100`"
+            <img
+              @click="handleAlert"
+              class="artists_img"
+              decoding="async"
+              loading="lazy"
+              importance="low"
+              :style="imgSize(index)"
+              :src="`${item.picUrl}?param=100y100`"
             >
             <p class="avatar_name">{{item.name}}</p>
           </div>
@@ -41,6 +43,11 @@ export default {
     }
   },
   methods: {
+    handleAlert () {
+      this.$Alert.info({
+        content: '等等，过两天再来看看吧~'
+      })
+    },
     sliderStylue (index) {
       const top = index % 3
       return `width: 50px;
@@ -78,7 +85,6 @@ export default {
   .container
     position relative
     transform none
-    pointer-events none
     user-select none
   .background
     white-space nowrap
@@ -91,7 +97,7 @@ export default {
   .artists_item
     position absolute
     object-position center center
-    pointer-events none
+    /*pointer-events none*/
     image-rendering optimizespeed
     animation-name slider_moving
     animation-duration 300s

@@ -83,25 +83,25 @@ export default {
     bottom 0
     z-index 998
     &.toast-fade-enter-active
-      animation: toast-fadein 0.3s
+      animation toast-fadein 0.3s
       .toast-content
-        animation: toast-zoom 0.3s
+        animation toast-zoom 0.3s
     .toast-wrapper
-      position: absolute
-      top: 50%
-      left: 50%
-      transform: translate(-50%, -50%)
-      z-index: 999
+      position absolute
+      top 50%
+      left 50%
+      transform translate(-50%, -50%)
+      z-index 999
       .toast-content
-        width: 280px
-        border-radius: 13px
+        width 280px
+        border-radius 13px
         background var(--bg)
         box-shadow 0 0 20px 0 rgba(0,0,0,.1)
         .text
-          padding: 19px 15px
-          line-height: 22px
-          text-align: center
-          font-size: $font-size-large
+          padding 19px 15px
+          line-height 22px
+          text-align center
+          font-size $font-size-large
           color var(--c_txt2)
         .loginBox
           position relative
@@ -113,36 +113,36 @@ export default {
               border-radius 20px
               padding-left 8px
               box-sizing border-box
-              color #fff
+              color var(--c_txt1)
               outline none
               border 1px solid var(--bgborder)
               background var(--searchBg)
               appearance: none
         .operate
-          display: flex
-          align-items: center
-          text-align: center
-          font-size: $font-size-large
+          display flex
+          align-items center
+          text-align center
+          font-size $font-size-large
           .operate-btn
-            flex: 1
-            line-height: 22px
-            padding: 10px 0
-            border-top: 1px solid var(--bgborder)
+            flex 1
+            line-height 22px
+            padding 10px 0
+            border-top 1px solid var(--bgborder)
             color var(--c_txt1)
             &.left
               border-right: 1px solid var(--bgborder)
 
   @keyframes toast-fadein
     0%
-      opacity: 0
+      opacity 0
     100%
-      opacity: 1
+      opacity 1
 
   @keyframes toast-zoom
     0%
-      transform: scale(0)
+      transform scale(0)
     50%
-      transform: scale(1.1)
+      transform scale(1.1)
     100%
-      transform: scale(1)
+      transform scale(1)
 </style>

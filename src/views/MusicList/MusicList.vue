@@ -1,5 +1,5 @@
 <template>
-  <div class="music_list_warp">
+  <div ref="musicListWarp" class="music_list_warp">
     <div class="top_wrap">
       <img class="top_wrap_bg" v-lazy="headerImgCover" />
     </div>
@@ -18,7 +18,12 @@
             <i class="play_icon play_all_icon" v-show="!playing"></i>
             <i class="play_icon iconfont iconpause1" v-show="playing"></i>
             <div class="progressBox" v-show="playing">
-              <progress-circle :radius="34" :percent="percent"></progress-circle>
+              <progress-circle
+                :radius="34"
+                :percent="percent"
+                @percentChange="percentChange"
+              >
+              </progress-circle>
             </div>
             <span class="play_all_text">{{!playing ? '播放全部' : currentSong.name}}</span>
           </div>
@@ -89,11 +94,23 @@ export default {
     }
   },
   methods: {
+    percentChange () {
+      // const currentTime = this.currentSong.duration * percent
+      // this.currentTime = this.$refs.audio.currentTime = currentTime
+      // if (this.currentLyric) {
+      //   this.currentLyric.seek(currentTime * 1000)
+      // }
+      // if (!this.playing) {
+      //   this.togglePlaying()
+      // }
+    },
     handleScroll () {
       const top = document.documentElement.scrollTop
       if (top < 310) {
+        this.$refs.musicListWarp.style.zIndex = '10'
         this.showAbs = false
       } else {
+        this.$refs.musicListWarp.style.zIndex = '1000'
         this.showAbs = true
       }
     },
@@ -184,6 +201,7 @@ export default {
       text-align justify
       line-height 18px
       font-size $font-size-small
+      no-wrap-number(4)
     .author_avatar
       display block
       width 20px
@@ -215,6 +233,7 @@ export default {
         background var(--searchBg)
         box-shadow 0 0 12px 0 rgba(0,0,0,.06)
         transition all .1s
+        z-index 1000
       .play_all
         flex 1
         display flex

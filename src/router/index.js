@@ -26,7 +26,7 @@ const routes = [
         name: 'Home',
         component: Home,
         meta: {
-          title: '小右 Player',
+          title: '小柚听音乐',
           index: 0,
           requiresAuth: false
         }

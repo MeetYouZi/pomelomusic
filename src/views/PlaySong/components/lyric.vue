@@ -1,5 +1,5 @@
 <template>
-  <div class="lyric_info">
+  <div class="lyric_info" v-if="!nolyric">
     <div class="song_info_lyric" ref="musicLyric">
       <ul class="lyric">
         <li
@@ -24,7 +24,8 @@ const lyricLineHight = 28
 export default {
   name: 'lyric',
   props: {
-    lyric: Array
+    lyric: Array,
+    nolyric: Boolean
   },
   computed: {
     ...mapGetters(['currentTime']),

@@ -1,7 +1,7 @@
 <template>
   <div class="song_wrap">
     <div class="bg">
-      <img class="bg_img" :src="currentSong.image">
+      <img class="bg_img" :src="currentSong.image"/>
     </div>
     <div class="main">
       <div class="main_wrap">
@@ -9,7 +9,10 @@
           <h1 class="song_name">{{currentSong.name}}</h1>
           <h1 class="sing_name">{{currentSong.singer}}</h1>
         </div>
-        <lyric :lyric="lyric"></lyric>
+        <div class="imgBox" v-if="nolyric">
+          <img class="bg_img_cover" :src="currentSong.image"/>
+        </div>
+        <lyric :lyric="lyric" :nolyric="nolyric"></lyric>
       </div>
       <div class="opt">
         <div class="opt_item" @click="prev">
@@ -47,14 +50,15 @@ export default {
   name: 'PlaySong',
   components: {
     lyric,
-    comment,
+    comment
     // icon_like
   },
   data () {
     return {
       lyric: [],
       commentList: [],
-      hotCommentList: []
+      hotCommentList: [],
+      nolyric: false
     }
   },
   computed: {
@@ -118,7 +122,6 @@ export default {
     // 获取歌词
     _getLyric (id) {
       getLyricl(id).then(res => {
-        this.lyric = parseLyric(res.lrc.lyric)
         if (res.nolyric) {
           this.nolyric = true
         } else {
@@ -190,6 +193,17 @@ export default {
         no-wrap()
         color var(--c_txt2)
         font-size $font-size-medium
+      .imgBox
+        width 100%
+        height 165px
+        display flex
+        align-items center
+        justify-content center
+        .bg_img_cover
+          width 140px
+          height 140px
+          border-radius 6px
+          box-shadow 0 0 20px 0 rgba(0,0,0,.1)
     .opt
       display flex
       align-items center
@@ -206,7 +220,7 @@ export default {
         align-items center
         justify-content center
         &.icon-mini
-          border 1px solid #ccc
+          border 1px solid var(--c_txt1)
         .iconfont
           color var(--c_txt1)
           font-weight bold

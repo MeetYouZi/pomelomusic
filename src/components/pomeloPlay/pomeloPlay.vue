@@ -10,8 +10,8 @@
                 <i class="iconfont iconclose"></i>
               </div>
             </div>
-            <div class="play_mode">
-              <i class="iconfont icon_loop">循环播放</i>
+            <div class="play_mode" @click="handleSetMode">
+              <i class="iconfont" :class="iconMode"></i>循环播放
             </div>
             <div class="music-play-list">
               <music-play-list
@@ -63,17 +63,21 @@
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import progressCircle from '@/components/progress/progressCircle'
 import musicPlayList from '@/components/musicPlayList/musicPlayList'
+import { playMode } from '@/assets/js/playMode'
+import { SET_PLAY_MODE } from '@/assets/js/mixin'
+
 export default {
   name: 'pomeloPlay',
   components: {
     progressCircle,
     musicPlayList
   },
+  mixins: [SET_PLAY_MODE],
   data () {
     return {
       radius: 30,
       musicReady: false, // 是否可以使用播放器
-      fullScreen: false,
+      fullScreen: true,
       currentTime: 0
       // currentSong: {
       //   album: '我们在夏枝繁茂时再见',
@@ -89,6 +93,9 @@ export default {
   computed: {
     cdCls () {
       return this.playing ? 'play' : ''
+    },
+    iconMode () {
+      return this.playMode === playMode.sequence ? 'icon_sequence' : this.playMode === playMode.loop ? 'icon_loop' : 'icon_random'
     },
     miniIcon () {
       return this.playing ? 'iconpause1' : 'iconplay'
@@ -137,6 +144,9 @@ export default {
     }
   },
   methods: {
+    handleSetMode () {
+      this.changeMode()
+    },
     selectItem (item, index) {
       this.setCurrentIndex(index)
       // this.selectPlay({
@@ -207,7 +217,6 @@ export default {
     },
     ...mapActions(['selectPlay']),
     ...mapMutations({
-      setPlayMode: 'SET_PLAYMODE',
       setPlaylist: 'SET_PLAYLIST',
       setAudioEle: 'SET_AUDIOELE',
       setCurrentIndex: 'SET_CURRENTINDEX',

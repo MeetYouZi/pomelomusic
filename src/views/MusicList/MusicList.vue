@@ -21,7 +21,6 @@
               <progress-circle
                 :radius="34"
                 :percent="percent"
-                @percentChange="percentChange"
               >
               </progress-circle>
             </div>
@@ -32,7 +31,11 @@
             收藏歌单
           </div>
           <div class="progress-bar" v-show="playing">
-            <progress-bar :percent="percent"></progress-bar>
+            <progress-bar
+              :percent="percent"
+              @percentChange="percentChange"
+            >
+            </progress-bar>
           </div>
         </div>
       </div>
@@ -48,7 +51,7 @@ import formatSongs from '@/utils/song'
 import ProgressBar from '@/components/progress/progressBar'
 import ProgressCircle from '@/components/progress/progressCircle'
 import MusicPlayList from '@/components/musicPlayList/musicPlayList'
-import { SET_PLAYINGSTATE } from '@/store/mutation-types'
+import { SET_PLAYING_TIME } from '@/assets/js/mixin'
 
 const MAXLENGTH = 100
 export default {
@@ -58,6 +61,7 @@ export default {
     ProgressCircle,
     MusicPlayList
   },
+  mixins: [SET_PLAYING_TIME],
   data () {
     return {
       id: '',
@@ -94,15 +98,9 @@ export default {
     }
   },
   methods: {
-    percentChange () {
-      // const currentTime = this.currentSong.duration * percent
-      // this.currentTime = this.$refs.audio.currentTime = currentTime
-      // if (this.currentLyric) {
-      //   this.currentLyric.seek(currentTime * 1000)
-      // }
-      // if (!this.playing) {
-      //   this.togglePlaying()
-      // }
+    percentChange (percent) {
+      const currentTime = this.currentSong.duration * percent
+      this.setPlayingTime(currentTime)
     },
     handleScroll () {
       const top = document.documentElement.scrollTop
@@ -123,7 +121,7 @@ export default {
     },
     ...mapActions(['selectPlay']),
     ...mapMutations({
-      setPlayState: SET_PLAYINGSTATE
+      setPlayState: 'SET_PLAYINGSTATE'
     }),
     togglePalying () {
       // const audio = this.$refs.pomelomusicAudio

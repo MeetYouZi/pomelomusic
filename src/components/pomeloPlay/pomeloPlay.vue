@@ -10,6 +10,9 @@
                 <i class="iconfont iconclose"></i>
               </div>
             </div>
+            <div class="play_mode">
+              <i class="iconfont icon_loop">循环播放</i>
+            </div>
             <div class="music-play-list">
               <music-play-list
                 :songList="playList"
@@ -102,7 +105,8 @@ export default {
       'playMode',
       'playList',
       'currentSong',
-      'currentIndex'
+      'currentIndex',
+      'currentTime'
     ])
   },
   watch: {
@@ -126,6 +130,10 @@ export default {
       this.timer = setTimeout(() => {
         this.musicReady = true
       }, 5000)
+    },
+    currentTime (newCurrentTime, oldCurrentTime) {
+      // console.log(newCurrentTime, 'newCurrentTime')
+      // this.$refs.pomelomusicAudio.currentTime = newCurrentTime
     }
   },
   methods: {
@@ -175,8 +183,8 @@ export default {
       this.next()
     },
     loop () {
-      this.$refs.audio.currentTime = 0
-      this.$refs.audio.play()
+      this.$refs.pomelomusicAudio.currentTime = 0
+      this.$refs.pomelomusicAudio.play()
       this.setPlayingState(true)
     },
     next () {
@@ -201,9 +209,15 @@ export default {
     ...mapMutations({
       setPlayMode: 'SET_PLAYMODE',
       setPlaylist: 'SET_PLAYLIST',
+      setAudioEle: 'SET_AUDIOELE',
       setCurrentIndex: 'SET_CURRENTINDEX',
       setCurrentTime: 'SET_CURRENTTIME',
       setPlayingState: 'SET_PLAYINGSTATE'
+    })
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.setAudioEle(this.$refs.pomelomusicAudio)
     })
   }
 }

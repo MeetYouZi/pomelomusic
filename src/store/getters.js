@@ -1,3 +1,5 @@
+// 播放器
+export const audioELE = state => state.audioELE
 // 播放状态
 export const playing = state => state.playing
 // 播放列表

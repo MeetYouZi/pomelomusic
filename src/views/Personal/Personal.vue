@@ -14,7 +14,15 @@
       </div>
     </div>
     <div class="userInfo">
-      <div class="user_name">{{profile.nickname || nickname}} | {{gender}}</div>
+      <div class="user_name">{{profile.nickname || nickname}} | {{ gender}} |
+        <a
+          target="_blank"
+          href="https://github.com/MeetYouZi/pomelomusic"
+        >
+        <i class="iconfont icon-github"></i>
+          柚子姑娘
+      </a>
+      </div>
     </div>
 <!--    <div class="loginBox">-->
 <!--      <div class="from">-->
@@ -134,6 +142,7 @@ export default {
     justify-content center
     mask-image linear-gradient(180deg,hsla(0,0%,100%,0) 0,
     hsla(0,0%,100%,1) 15%,#fff 25%,#fff 65%,hsla(0,0%,100%,1) 100%)
+    z-index -1
     .avater
       width 80px
       height 80px

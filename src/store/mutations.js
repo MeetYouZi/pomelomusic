@@ -15,6 +15,9 @@ const mutations = {
   [types.SET_CURRENTTIME] (state, currentTime) {
     state.currentTime = currentTime
   },
+  [types.SET_AUDIOELE] (state, audioELE) {
+    state.audioELE = audioELE
+  },
   [types.SET_SEARCHHISTORYS] (state, searchHistorys) {
     state.searchHistorys = searchHistorys
     try {

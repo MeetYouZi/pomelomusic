@@ -10,9 +10,9 @@
                 <i class="iconfont iconclose"></i>
               </div>
             </div>
-            <div class="play_mode" @click="handleSetMode">
-              <i class="iconfont" :class="iconMode"></i>循环播放
-            </div>
+<!--            <div class="play_mode" @click="handleSetMode">-->
+<!--              <i class="iconfont" :class="iconMode"></i>循环播放-->
+<!--            </div>-->
             <div class="music-play-list">
               <music-play-list
                 :songList="playList"
@@ -77,7 +77,7 @@ export default {
     return {
       radius: 30,
       musicReady: false, // 是否可以使用播放器
-      fullScreen: true,
+      fullScreen: false,
       currentTime: 0
       // currentSong: {
       //   album: '我们在夏枝繁茂时再见',

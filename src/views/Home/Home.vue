@@ -77,6 +77,7 @@ export default {
     handleToggleTheme () {
       this.isBlack = !this.isBlack
       document.querySelector('html').className = this.isBlack ? 'black' : 'white'
+      localStorage.setItem('pomelomusic_themeBg', document.querySelector('html').className)
     },
     keyWordChange (newValue) {
       this.keyWord = newValue.trim()

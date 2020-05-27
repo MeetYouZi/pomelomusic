@@ -187,6 +187,7 @@ export default {
         line-height 30px
         color var(--c_txt1)
         font-size $font-size-large
+        text-align center
       .sing_name
         margin 0 20px 15px
         text-align center

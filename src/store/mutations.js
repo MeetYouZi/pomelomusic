@@ -3,6 +3,9 @@ const mutations = {
   [types.SET_PLAYLIST] (state, list) {
     state.playList = list
   },
+  [types.SET_SEQUENCELIST] (state, list) {
+    state.sequenceList = list
+  },
   [types.SET_PLAYMODE] (state, playMode) {
     state.playMode = playMode
   },

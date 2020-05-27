@@ -4,6 +4,8 @@ export const audioELE = state => state.audioELE
 export const playing = state => state.playing
 // 播放列表
 export const playList = state => state.playList
+// 顺序列表
+export const sequenceList = state => state.sequenceList
 // 历史搜索记录
 export const searchHistorys = state => state.searchHistorys
 // 播放模式

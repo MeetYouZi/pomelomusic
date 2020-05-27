@@ -7,12 +7,13 @@
             <div class="playlist-title">
               播放列表
               <div class="close-icon-fix" @click="handleclose">
-                <i class="iconfont iconclose"></i>
+                <i class="iconfont icondown"></i>
               </div>
             </div>
-<!--            <div class="play_mode" @click="handleSetMode">-->
-<!--              <i class="iconfont" :class="iconMode"></i>循环播放-->
-<!--            </div>-->
+            <div class="play_mode" @click.stop="changeMode">
+              <i class="iconfont" :class="iconMode"></i>
+              <span>{{modeWord}}</span>
+            </div>
             <div class="music-play-list">
               <music-play-list
                 :songList="playList"
@@ -94,9 +95,6 @@ export default {
     cdCls () {
       return this.playing ? 'play' : ''
     },
-    iconMode () {
-      return this.playMode === playMode.sequence ? 'icon_sequence' : this.playMode === playMode.loop ? 'icon_loop' : 'icon_random'
-    },
     miniIcon () {
       return this.playing ? 'iconpause1' : 'iconplay'
     },
@@ -137,16 +135,9 @@ export default {
       this.timer = setTimeout(() => {
         this.musicReady = true
       }, 5000)
-    },
-    currentTime (newCurrentTime, oldCurrentTime) {
-      // console.log(newCurrentTime, 'newCurrentTime')
-      // this.$refs.pomelomusicAudio.currentTime = newCurrentTime
     }
   },
   methods: {
-    handleSetMode () {
-      this.changeMode()
-    },
     selectItem (item, index) {
       this.setCurrentIndex(index)
       // this.selectPlay({
@@ -190,7 +181,11 @@ export default {
     },
     end () {
       this.currentTime = 0
-      this.next()
+      if (this.mode === playMode.loop) {
+        this.loop()
+      } else {
+        this.next()
+      }
     },
     loop () {
       this.$refs.pomelomusicAudio.currentTime = 0
@@ -209,7 +204,6 @@ export default {
           index = 0
         }
         this.setCurrentIndex(index)
-        // this.setPlaying(true)
         if (!this.playing) {
           this.togglePlaying()
         }
@@ -277,16 +271,26 @@ export default {
       font-size $font-size-medium
       font-weight bold
       color var(--color)
+      .close-icon-fix
+        position absolute
+        top 0
+        right 16px
+        .iconfont
+          color var(--c_gray)
+          font-size 16px
+    .play_mode
+      padding 4px 10px
+      color var(--c_gray)
+      font-size $font-size-medium
+      .iconfont
+        color var(--c_txt2)
+        display inline-block
+        font-size $font-size-medium
+        width 20px
+        height 20px
     .music-play-list
       flex 1
       overflow scroll
-    .close-icon-fix
-      position absolute
-      top 0
-      right 16px
-      .iconfont
-        color var(--c_gray)
-        font-size 20px
   .pomelo-play
     display: flex
     align-items: center

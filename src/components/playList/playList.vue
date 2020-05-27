@@ -132,8 +132,9 @@ export default {
             max-width 95%
             overflow hidden
             line-height 24px
-            font-size $font-size-small
             color var(--c_txt2)
+            .play-list-txt
+              font-size $font-size-small
           .play-list-txt
             text-align left
             display block

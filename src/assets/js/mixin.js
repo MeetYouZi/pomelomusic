@@ -13,6 +13,22 @@ export const SET_PLAYING_TIME = {
   }
 }
 
+export const SET_PLAY = {
+  computed: {
+    ...mapGetters(['currentSong', 'currentTime']),
+    percent () {
+      // return 0.3
+      return this.currentSong.duration ? this.currentTime / this.currentSong.duration : 0
+    }
+  },
+  methods: {
+    percentChange (percent) {
+      const currentTime = this.currentSong.duration * percent
+      this.setPlayingTime(currentTime)
+    },
+  }
+}
+
 export const SET_PLAY_MODE = {
   data () {
     return {}
@@ -37,7 +53,7 @@ export const SET_PLAY_MODE = {
         list = this.sequenceList
       }
       this.resetCurrentIndex(list)
-      this.setPlaylist(list)
+      this.setPlaylist({ list: list })
     },
     // 修改当前歌曲索引
     resetCurrentIndex (list) {

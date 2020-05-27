@@ -115,8 +115,7 @@ export default {
       'playMode',
       'playList',
       'currentSong',
-      'currentIndex',
-      'currentTime'
+      'currentIndex'
     ])
   },
   watch: {
@@ -219,7 +218,6 @@ export default {
     },
     ...mapActions(['selectPlay']),
     ...mapMutations({
-      setPlaylist: 'SET_PLAYLIST',
       setAudioEle: 'SET_AUDIOELE',
       setCurrentIndex: 'SET_CURRENTINDEX',
       setCurrentTime: 'SET_CURRENTTIME',
@@ -276,7 +274,7 @@ export default {
       height 40px
       line-height 40px
       text-align center
-      font-size $font-size-medium
+      font-size $font-size-large
       font-weight bold
       color var(--color)
       .close-icon-fix
@@ -291,16 +289,17 @@ export default {
       box-sizing border-box
       display flex
       align-items center
+      line-height 26px
+      vertical-align bottom
       span
         color var(--c_txt1)
-        font-size $font-size-medium
+        font-size $font-size-large
         font-weight bold
       .iconfont
         color var(--c_txt2)
         display inline-block
-        font-size $font-size-large
-        width 22px
-        height 20px
+        font-size 22px
+        width 26px
     .music-play-list
       flex 1
       overflow scroll

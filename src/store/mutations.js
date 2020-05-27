@@ -1,6 +1,7 @@
 import * as types from './mutation-types'
 const mutations = {
   [types.SET_PLAYLIST] (state, list) {
+    console.log(list, '修改playlist数组')
     state.playList = list
   },
   [types.SET_SEQUENCELIST] (state, list) {

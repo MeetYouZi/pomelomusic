@@ -51,7 +51,7 @@ import formatSongs from '@/utils/song'
 import ProgressBar from '@/components/progress/progressBar'
 import ProgressCircle from '@/components/progress/progressCircle'
 import MusicPlayList from 'components/musicList/musicList'
-import { SET_PLAYING_TIME } from '@/assets/js/mixin'
+import { SET_PLAYING_TIME, SET_PLAY } from '@/assets/js/mixin'
 
 const MAXLENGTH = 100
 export default {
@@ -61,7 +61,7 @@ export default {
     ProgressCircle,
     MusicPlayList
   },
-  mixins: [SET_PLAYING_TIME],
+  mixins: [SET_PLAYING_TIME, SET_PLAY],
   data () {
     return {
       id: '',
@@ -83,10 +83,6 @@ export default {
         img = this.playlist.coverImgUrl
       }
       return img
-    },
-    percent () {
-      // return 0.3
-      return this.currentSong.duration ? this.currentTime / this.currentSong.duration : 0
     }
   },
   watch: {
@@ -98,14 +94,10 @@ export default {
     }
   },
   methods: {
-    percentChange (percent) {
-      const currentTime = this.currentSong.duration * percent
-      this.setPlayingTime(currentTime)
-    },
     handleScroll () {
       const top = document.documentElement.scrollTop
       if (top < 310) {
-        this.$refs.musicListWarp.style.zIndex = '10'
+        this.$refs.musicListWarp.style.zIndex = '11'
         this.showAbs = false
       } else {
         this.$refs.musicListWarp.style.zIndex = '1000'

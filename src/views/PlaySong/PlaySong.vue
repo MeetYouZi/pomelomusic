@@ -14,7 +14,21 @@
         </div>
         <lyric :lyric="lyric" :nolyric="nolyric"></lyric>
       </div>
+      <div class="play_progress_bar">
+        <p>{{currentTime | formatTime}}</p>
+        <div class="progress_bar">
+          <progress-bar
+            :percent="percent"
+            @percentChange="percentChange"
+          >
+          </progress-bar>
+        </div>
+        <p>{{currentSong.duration | formatTime}}</p>
+      </div>
       <div class="opt">
+        <div class="opt_item" @click="changeMode">
+          <i class="iconfont" :class="iconMode"></i>
+        </div>
         <div class="opt_item" @click="prev">
           <i class="iconfont iconshangyiqu101"></i>
         </div>
@@ -27,6 +41,9 @@
         <div class="opt_item" @click="next">
           <i class="iconfont iconxiayiqu101"></i>
 <!--          <icon_like></icon_like>-->
+        </div>
+        <div class="opt_item" @click="handleShowPlayList">
+          <i class="iconfont iconmenuoff"></i>
         </div>
       </div>
     </div>
@@ -44,15 +61,21 @@ import { parseLyric } from '@/utils/lyric'
 import formatSongs from '@/utils/song'
 import lyric from '@/views/PlaySong/components/lyric'
 import comment from '@/components/comment/comment'
+import ProgressBar from '@/components/progress/progressBar'
 // import icon_like from '@/components/icons/icon_like'
+import { SET_PLAYING_TIME, SET_PLAY, SET_PLAY_MODE } from '@/assets/js/mixin'
+import { formatTime } from '@/utils/utils'
+
 const MARGINTOP = 0
 export default {
   name: 'PlaySong',
   components: {
     lyric,
-    comment
+    comment,
+    ProgressBar
     // icon_like
   },
+  mixins: [SET_PLAYING_TIME, SET_PLAY, SET_PLAY_MODE],
   data () {
     return {
       lyric: [],
@@ -67,8 +90,13 @@ export default {
       return this.playing ? 'iconpause1' : 'iconplay'
     }
   },
+  filters: {
+    // 时间格式化
+    formatTime
+  },
   watch: {
     currentSong (newVaule, oldVaule) {
+      console.log(newVaule, 'newVaule')
       if (!newVaule.id) {
         this.lyric = []
         return
@@ -87,6 +115,7 @@ export default {
     togglePalying () {
       this.setPlayState(!this.playing)
     },
+    handleShowPlayList () {},
     next () {
       let index = 0
       if (this.currentIndex === this.playList.length - 1) {
@@ -205,12 +234,26 @@ export default {
           height 140px
           border-radius 6px
           box-shadow 0 0 20px 0 rgba(0,0,0,.1)
+    .play_progress_bar
+      margin-top 50px
+      padding 0px 16px
+      box-sizing border-box
+      display flex
+      align-items center
+      justify-content space-between
+      p
+        color var(--c_txt2)
+        font-size $font-size-small
+        width 40px
+        text-align center
+        padding 0 6px
+      .progress_bar
+        flex 1
     .opt
       display flex
       align-items center
       justify-content center
-      height 90px
-      margin-top 20px
+      height 70px
       .opt_item
         width 38px
         height 38px

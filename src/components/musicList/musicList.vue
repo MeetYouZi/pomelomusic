@@ -23,7 +23,7 @@ import { mapGetters, mapMutations } from 'vuex'
 import { formatTime } from '@/utils/utils'
 
 export default {
-  name: 'musicPlayList',
+  name: 'musicList',
   props: {
     songList: {
       type: Array,

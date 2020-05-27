@@ -26,6 +26,22 @@ border-1px($color = #ccc, $radius = 2PX, $style = solid)
       border-radius: $radius * 3
       transform: scale(.333)
 
+border-bottom-1px($color = #ccc, $style = solid)
+  position: relative
+  &::after
+    content: ""
+    pointer-events: none
+    display: block
+    position: absolute
+    left: 0
+    top: 0
+    transform-origin: 0 0
+    border-bottom: 1PX $style $color
+    border-radius: $radius
+    box-sizing border-box
+    width 100%
+    height 100%
+
 // 背景图片
 bg-image($url)
   background-image: url($url + "@2x.png")

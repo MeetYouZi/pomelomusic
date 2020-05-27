@@ -51,7 +51,7 @@ export default {
     height 50px
     box-shadow 0px 2px 6px 0px rgba(255,54,42,0.1)
     font-size $font-size-small
-    z-index 11
+    z-index 9
     .tab-item
       flex: 1
       text-align: center

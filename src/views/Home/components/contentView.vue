@@ -12,7 +12,7 @@
       >
         <div class="con-tit">
           <h2 class="con-tit-text">{{musicItem.tit}}</h2>
-          <p @click="handleClickAlert">更多<i class="iconfont iconright"></i> </p>
+<!--          <p @click="handleClickAlert">更多<i class="iconfont iconright"></i> </p>-->
         </div>
         <div class="con-scroll-x">
           <div class="con-scroll-bd">

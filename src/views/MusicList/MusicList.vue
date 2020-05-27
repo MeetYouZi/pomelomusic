@@ -50,7 +50,7 @@ import { getListDetail, getSongDetail } from '@/api'
 import formatSongs from '@/utils/song'
 import ProgressBar from '@/components/progress/progressBar'
 import ProgressCircle from '@/components/progress/progressCircle'
-import MusicPlayList from '@/components/musicPlayList/musicPlayList'
+import MusicPlayList from 'components/musicList/musicList'
 import { SET_PLAYING_TIME } from '@/assets/js/mixin'
 
 const MAXLENGTH = 100
@@ -165,7 +165,7 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .music_list_warp
-  z-index 10
+  z-index 11
   background var(--bg)
 .top_wrap
   position relative

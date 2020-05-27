@@ -4,29 +4,34 @@
       <div class="playlist-mask" v-show="fullScreen" @click="handleclose">
         <transition name="playlist">
           <div class="playlist-bg" v-show="fullScreen">
+<!--            <div class="playlist-bg-fix"></div>-->
             <div class="playlist-title">
               播放列表
-              <div class="close-icon-fix" @click="handleclose">
-                <i class="iconfont icondown"></i>
-              </div>
+<!--              <div class="close-icon-fix" @click="handleclose">-->
+<!--                <i class="iconfont icondown"></i>-->
+<!--              </div>-->
             </div>
             <div class="play_mode" @click.stop="changeMode">
               <i class="iconfont" :class="iconMode"></i>
               <span>{{modeWord}}</span>
             </div>
             <div class="music-play-list">
-              <music-play-list
+              <play-list
                 :songList="playList"
                 @selectItem="selectItem"
+                @empty="handleEmpty"
               >
-              </music-play-list>
+              </play-list>
+            </div>
+            <div class="playlist-close" @click="handleclose">
+              关闭
             </div>
           </div>
         </transition>
       </div>
     </transition>
     <transition name="miniplay">
-      <div class="pomelo-play" v-show="isShowPlay" @swiperight="swiperight(x)">
+      <div class="pomelo-play" v-show="isShowPlay && !fullScreen" @swiperight="swiperight(x)">
         <div class="icon" @click="handleToUrl">
           <div class="imgWrapper" ref="miniWrapper">
             <img ref="miniImage" :class="cdCls" width="44" height="44" v-lazy="`${currentSong.image}?param=100y100`">
@@ -63,7 +68,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import progressCircle from '@/components/progress/progressCircle'
-import musicPlayList from '@/components/musicPlayList/musicPlayList'
+import playList from '@/components/playList/playList'
 import { playMode } from '@/assets/js/playMode'
 import { SET_PLAY_MODE } from '@/assets/js/mixin'
 
@@ -71,7 +76,7 @@ export default {
   name: 'pomeloPlay',
   components: {
     progressCircle,
-    musicPlayList
+    playList
   },
   mixins: [SET_PLAY_MODE],
   data () {
@@ -138,6 +143,9 @@ export default {
     }
   },
   methods: {
+    handleEmpty () {
+      this.fullScreen = false
+    },
     selectItem (item, index) {
       this.setCurrentIndex(index)
       // this.selectPlay({
@@ -229,7 +237,7 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   .pomelo-module
     position relative
-    z-index 2
+    z-index 10
   .playlist-mask
     position fixed
     left 0
@@ -246,10 +254,10 @@ export default {
     position fixed
     left 0
     right 0
-    bottom 90px
-    z-index 150
-    height 70%
-    background var(--playBg)
+    bottom 0
+    z-index 1
+    height 85%
+    background var(--playlistBg)
     transition all 0.4s
     display flex
     flex-direction column
@@ -279,18 +287,32 @@ export default {
           color var(--c_gray)
           font-size 16px
     .play_mode
-      padding 4px 10px
-      color var(--c_gray)
-      font-size $font-size-medium
+      padding 4px 16px
+      box-sizing border-box
+      display flex
+      align-items center
+      span
+        color var(--c_txt1)
+        font-size $font-size-medium
+        font-weight bold
       .iconfont
         color var(--c_txt2)
         display inline-block
-        font-size $font-size-medium
-        width 20px
+        font-size $font-size-large
+        width 22px
         height 20px
     .music-play-list
       flex 1
       overflow scroll
+    .playlist-close
+      bottom 0
+      left 0
+      height 44px
+      line-height 44px
+      width 100%
+      text-align center
+      color var(--c_txt1)
+      font-size $font-size-medium
   .pomelo-play
     display: flex
     align-items: center

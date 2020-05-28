@@ -64,7 +64,10 @@ export default {
       return Math.floor(Math.random() * (end - start) + start)
     },
     _getTopArtists () {
-      getTopArtists().then(res => {
+      const data = {
+        limit: 100
+      }
+      getTopArtists(data).then(res => {
         this.topArtists = res.artists
       })
     }
@@ -100,7 +103,7 @@ export default {
     /*pointer-events none*/
     image-rendering optimizespeed
     animation-name slider_moving
-    animation-duration 300s
+    animation-duration 400s
     animation-timing-function linear
     animation-iteration-count infinite // 无限次播放
   .artists_img

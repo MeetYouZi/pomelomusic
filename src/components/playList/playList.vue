@@ -14,7 +14,7 @@
             <p class="play-list-desc"><span class="play-list-txt"> - {{item.singer}}</span></p>
             <p
               class="icon_dynamic"
-              v-show="item.id === currentSong.id"
+              v-show="item.id === currentSong.id && playing"
             >
               <dynamic></dynamic>
             </p>

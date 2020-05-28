@@ -51,6 +51,7 @@
       <h1 class="comment_tit">精彩评论</h1>
       <comment :commentList="commentList" :hotCommentList="hotCommentList"></comment>
     </div>
+    <popup-play-list ref="popupPlayList"></popup-play-list>
   </div>
 </template>
 
@@ -65,6 +66,7 @@ import ProgressBar from '@/components/progress/progressBar'
 // import icon_like from '@/components/icons/icon_like'
 import { SET_PLAYING_TIME, SET_PLAY, SET_PLAY_MODE } from '@/assets/js/mixin'
 import { formatTime } from '@/utils/utils'
+import popupPlayList from '@/components/popupPlayList/popupPlayList'
 
 const MARGINTOP = 0
 export default {
@@ -72,7 +74,8 @@ export default {
   components: {
     lyric,
     comment,
-    ProgressBar
+    ProgressBar,
+    popupPlayList
     // icon_like
   },
   mixins: [SET_PLAYING_TIME, SET_PLAY, SET_PLAY_MODE],
@@ -115,7 +118,9 @@ export default {
     togglePalying () {
       this.setPlayState(!this.playing)
     },
-    handleShowPlayList () {},
+    handleShowPlayList () {
+      this.$refs.popupPlayList.isShow()
+    },
     next () {
       let index = 0
       if (this.currentIndex === this.playList.length - 1) {
@@ -257,7 +262,7 @@ export default {
       .opt_item
         width 38px
         height 38px
-        margin 0 20px
+        margin 0 12px
         border-radius 50%
         text-align center
         display flex

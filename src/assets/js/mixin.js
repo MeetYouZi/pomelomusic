@@ -25,7 +25,7 @@ export const SET_PLAY = {
     percentChange (percent) {
       const currentTime = this.currentSong.duration * percent
       this.setPlayingTime(currentTime)
-    },
+    }
   }
 }
 
@@ -43,6 +43,7 @@ export const SET_PLAY_MODE = {
     ...mapGetters(['playMode', 'currentSong', 'sequenceList'])
   },
   methods: {
+    // 切换播放模式
     changeMode () {
       const mode = (this.playMode + 1) % 3
       this.setPlayMode(mode)
@@ -61,6 +62,14 @@ export const SET_PLAY_MODE = {
         return item.id === this.currentSong.id
       })
       this.setCurrentIndex(index)
+    },
+    // 选择播放
+    selectItem (item, index) {
+      this.setCurrentIndex(index)
+      // this.selectPlay({
+      //   list: this.songList,
+      //   index
+      // })
     },
     ...mapActions({
       setPlaylist: 'setPlaylist'

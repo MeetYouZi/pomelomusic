@@ -82,6 +82,7 @@ export default {
     z-index 1
     height 85%
     background var(--playlistBg)
+    backdrop-filter saturate(180%) blur(6px)
     transition all 0.4s
     display flex
     flex-direction column

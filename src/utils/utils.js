@@ -8,7 +8,6 @@
  * @param  {Object} value
  *         An object that may or may not be `Promise`-like.
  */
-import router from '@/router'
 export function isPromise (v) {
   return v !== undefined && v !== null && typeof v.then === 'function'
 }

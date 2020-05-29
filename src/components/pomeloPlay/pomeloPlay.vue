@@ -5,7 +5,13 @@
       <div class="pomelo-play" v-show="isShowPlay && !fullScreen" @swiperight="swiperight(x)">
         <div class="icon" @click="handleToUrl">
           <div class="imgWrapper" ref="miniWrapper">
-            <img ref="miniImage" :class="cdCls" width="44" height="44" v-lazy="`${currentSong.image}?param=100y100`">
+            <img ref="miniImage"
+                 class="play"
+                 :class="cdCls"
+                 width="44"
+                 height="44"
+                 v-lazy="`${currentSong.image}?param=100y100`"
+            >
           </div>
         </div>
         <div class="text">
@@ -69,7 +75,7 @@ export default {
   },
   computed: {
     cdCls () {
-      return this.playing ? 'play' : ''
+      return this.playing ? '' : 'pause'
     },
     miniIcon () {
       return this.playing ? 'iconpause1' : 'iconplay'

@@ -44,9 +44,10 @@ export default {
   },
   methods: {
     handleAlert () {
-      this.$Alert.info({
-        content: '等等，过两天再来看看吧~'
-      })
+      this.$youToast('哈哈哈f11ffffffff哈')
+      // this.$Alert.info({
+      //   content: '等等，过两天再来看看吧~'
+      // })
     },
     sliderStylue (index) {
       const top = index % 3

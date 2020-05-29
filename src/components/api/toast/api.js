@@ -13,7 +13,7 @@ let zIndex = 1996
 
 const nextZIndex = () => zIndex++
 
-const mmToast = (options = {}) => {
+const youToast = (options = {}) => {
   // 服务端渲染时不执行操作
   if (Vue.prototype.$isServer) {
     return
@@ -24,12 +24,12 @@ const mmToast = (options = {}) => {
       message: options
     }
   }
-  const id = 'mm_toast_' + num++
+  const id = 'you_toast_' + num++
 
   // 包装 onClose 方法
   const userOnClose = options.onClose
   options.onClose = function () {
-    mmToast.close(id, userOnClose)
+    youToast.close(id, userOnClose)
   }
 
   // 创建 / 挂载实例
@@ -44,7 +44,7 @@ const mmToast = (options = {}) => {
 }
 
 // 关闭指定 toast
-mmToast.close = (id, userOnClose) => {
+youToast.close = (id, userOnClose) => {
   for (let i = 0; i < instances.length; i++) {
     if (id === instances[i].id) {
       if (typeof userOnClose === 'function') {
@@ -57,29 +57,29 @@ mmToast.close = (id, userOnClose) => {
 }
 
 // 关闭所有 toast
-mmToast.closeAll = () => {
+youToast.closeAll = () => {
   for (let i = instances.length - 1; i >= 0; i--) {
     instances[i].close()
   }
 }
 
-// 在 Vue 原型上挂载 mmToast
-mmToast.install = vue => {
-  vue.prototype.$mmToast = mmToast
+// 在 Vue 原型上挂载 youToast
+youToast.install = vue => {
+  vue.prototype.$youToast = youToast
 }
 
-const myToast = mmToast({
-  message: '哈哈',
-  duration: 100000,
-  onClose () {
-    console.log('回调')
-  }
-})
-// mmToast('哈哈哈哈哈哈哈哈哈哈')
-console.log(myToast)
-setTimeout(() => {
-  // myToast.close()
-  mmToast.closeAll()
-}, 1500)
+// const myToast = youToast({
+//   message: '哈哈',
+//   duration: 100000,
+//   onClose () {
+//     console.log('回调')
+//   }
+// })
+// // youToast('哈哈哈哈哈哈哈哈哈哈')
+// console.log(myToast)
+// setTimeout(() => {
+//   // myToast.close()
+//   youToast.closeAll()
+// }, 1500)
 
-export default mmToast
+export default youToast

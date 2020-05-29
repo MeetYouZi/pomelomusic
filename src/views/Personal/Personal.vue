@@ -134,6 +134,7 @@ export default {
       top 0
       bottom 0
       background var(--bg_mask)
+      backdrop-filter saturate(180%) blur(10px)
   .headerBox
     position relative
     height 300px

@@ -73,6 +73,7 @@ export default {
       const list = [...this.playList]
       list.splice(index, 1)
       this.removerPlayListItem({ list, index })
+      this.$youToast('删除成功')
       if (!this.playList.length) {
         this.$emit('empty')
       }

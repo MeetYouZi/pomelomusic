@@ -3,11 +3,11 @@ import TempToast from './toast.vue'
 let instance
 let showToast = false
 let time // 存储toast显示状态
-const mmToast = {
-  install(Vue, options = {}) {
-    let opt = TempToast.data() // 获取组件中的默认配置
+const youToast = {
+  install (Vue, options = {}) {
+    const opt = TempToast.data() // 获取组件中的默认配置
     Object.assign(opt, options) // 合并配置
-    Vue.prototype.$mmToast = (message, position) => {
+    Vue.prototype.$youToast = (message, position) => {
       if (showToast) {
         clearTimeout(time)
         instance.vm.visible = showToast = false
@@ -20,7 +20,7 @@ const mmToast = {
       if (position) {
         opt.position = position // 如果有传type，则使用所传的type
       }
-      let TempToastConstructor = Vue.extend(TempToast)
+      const TempToastConstructor = Vue.extend(TempToast)
       instance = new TempToastConstructor({
         data: opt
       })
@@ -28,7 +28,7 @@ const mmToast = {
       document.body.appendChild(instance.vm.$el)
       instance.vm.visible = showToast = true
 
-      time = setTimeout(function() {
+      time = setTimeout(function () {
         instance.vm.visible = showToast = false
         document.body.removeChild(instance.vm.$el)
       }, opt.duration)
@@ -36,4 +36,4 @@ const mmToast = {
   }
 }
 
-export default mmToast
+export default youToast

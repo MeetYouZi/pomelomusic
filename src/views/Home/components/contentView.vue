@@ -96,9 +96,10 @@ export default {
   },
   methods: {
     handleClickAlert () {
-      this.$Alert.info({
-        content: '等等，过两天再来看看吧~'
-      })
+      this.$youToast('哈哈哈f11ffffffff哈')
+      // this.$Alert.info({
+      //   content: '等等，过两天再来看看吧~'
+      // })
     },
     _getImgUrl (url, w, h) {
       return getImgUrl(url, w, h)

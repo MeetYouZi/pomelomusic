@@ -8,8 +8,8 @@ import store from './store'
 import $Alert from '@/components/api/alert'
 import 'stylus/index.styl'
 
-// import mmToast from '@/base/toast/api'
-// Vue.use(mmToast)
+import youToast from '@/components/api/toast/api'
+Vue.use(youToast)
 // Vue.prototype.$mmToast('哈哈哈f11ffffffff哈')
 
 Vue.config.productionTip = false

@@ -1,4 +1,6 @@
 import * as types from './mutation-types'
+import { setHistoryList } from '@/utils/storage'
+
 // 选择播放（会更新整个播放列表）
 export const selectPlay = ({ commit }, { list, index }) => {
   commit(types.SET_PLAYLIST, list)
@@ -11,6 +13,11 @@ export const selectPlay = ({ commit }, { list, index }) => {
 export const setPlaylist = ({ commit }, { list }) => {
   commit(types.SET_PLAYLIST, list)
   commit(types.SET_SEQUENCELIST, list)
+}
+
+// 设置播放历史
+export const setHistory = ({ commit }, music) => {
+  commit(types.SET_PLAYHISTORY, setHistoryList(music))
 }
 
 // 删除播放列表的歌曲

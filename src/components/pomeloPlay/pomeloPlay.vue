@@ -33,6 +33,7 @@
         </div>
         <!--播放器-->
         <audio ref="pomelomusicAudio"
+               @playing="readyPlaying"
                @timeupdate="updateTime"
                @ended="end"
                @pause="paused"
@@ -154,6 +155,9 @@ export default {
       this.$refs.popUpPlayList.isShow()
       this.fullScreen = true
     },
+    readyPlaying () {
+      this.setHistory(this.currentSong)
+    },
     paused () {
       this.setPlayingState(false)
     },
@@ -187,7 +191,7 @@ export default {
         }
       }
     },
-    ...mapActions(['selectPlay']),
+    ...mapActions(['selectPlay', 'setHistory']),
     ...mapMutations({
       setAudioEle: 'SET_AUDIOELE',
       setCurrentIndex: 'SET_CURRENTINDEX',

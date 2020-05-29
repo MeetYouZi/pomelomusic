@@ -99,7 +99,6 @@ export default {
   },
   watch: {
     currentSong (newVaule, oldVaule) {
-      console.log(newVaule, 'newVaule')
       if (!newVaule.id) {
         this.lyric = []
         return

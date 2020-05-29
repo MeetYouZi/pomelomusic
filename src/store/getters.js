@@ -6,6 +6,8 @@ export const playing = state => state.playing
 export const playList = state => state.playList
 // 顺序列表
 export const sequenceList = state => state.sequenceList
+// 历史播放列表
+export const playHistory = state => state.playHistory
 // 历史搜索记录
 export const searchHistorys = state => state.searchHistorys
 // 播放模式

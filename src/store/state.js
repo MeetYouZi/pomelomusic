@@ -6,6 +6,7 @@ const state = {
   playMode: playMode.loop,
   playList: [],
   sequenceList: [],
+  playHistory: [],
   currentIndex: -1,
   currentSong: {
     album: '我们在夏枝繁茂时再见',

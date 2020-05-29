@@ -119,7 +119,7 @@ export default {
 
   @keyframes slider_moving
     0%
-      transform: translateX(2000px)
+      transform: translateX(1600px)
     to
-      transform translateX(-2000px)
+      transform translateX(-1600px)
 </style>

@@ -121,6 +121,10 @@ export default {
       this.$refs.popupPlayList.isShow()
     },
     next () {
+      const playListLength = this.playList.length
+      if (playListLength === 1) {
+        // return this.loop()
+      }
       let index = 0
       if (this.currentIndex === this.playList.length - 1) {
         index = 0

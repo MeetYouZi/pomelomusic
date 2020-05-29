@@ -6,20 +6,34 @@
           <!--            <div class="playlist-bg-fix"></div>-->
           <div class="playlist-title">
             播放列表
-            <!--              <div class="close-icon-fix" @click="handleclose">-->
-            <!--                <i class="iconfont icondown"></i>-->
-            <!--              </div>-->
+            <div class="close-icon-fix" @click.stop="handleRemove">
+              清空
+            </div>
           </div>
           <div class="play_mode" @click.stop="changeMode">
             <i class="iconfont" :class="iconMode"></i>
             <span>{{modeWord}}</span>
           </div>
           <div class="music-play-list">
-            <play-list
-              :songList="playList"
-              @selectItem="selectItem"
-            >
-            </play-list>
+            <swiper ref="mySwiper" :options="swiperOptions">
+              <swiper-slide>
+                <play-list
+                  :songList="playList"
+                  @selectItem="selectItem"
+                  :type="'playList'"
+                >
+                </play-list>
+              </swiper-slide>
+              <swiper-slide>
+                <play-list
+                  :songList="playHistory"
+                  @selectItem="selectItem"
+                  :type="'playHistoryList'"
+                >
+                </play-list>
+              </swiper-slide>
+              <div class="swiper-pagination"  slot="pagination"></div>
+            </swiper>
           </div>
           <div class="playlist-close" @click="handleclose">
             关闭
@@ -31,9 +45,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import playList from '@/components/playList/playList'
 import { SET_PLAY_MODE } from '@/assets/js/mixin'
+let slideCurrentIndex = 0
 
 export default {
   name: 'popupPlayList',
@@ -42,21 +57,42 @@ export default {
   },
   mixins: [SET_PLAY_MODE],
   computed: {
-    ...mapGetters(['playList'])
+    ...mapGetters(['playList', 'playHistory'])
   },
   data () {
     return {
-      fullScreen: false
+      fullScreen: false,
+      swiperOptions: {
+        on: {
+          slideChange: function () {
+            slideCurrentIndex = this.activeIndex
+            // vue.onChange(this.currentIndex)
+            // alert('改变了，activeIndex为' + this.activeIndex)
+          }
+        },
+        pagination: {
+          el: '.swiper-pagination'
+        }
+        // Some Swiper option/callback...
+      }
     }
   },
   methods: {
     isShow () {
       this.fullScreen = true
     },
+    handleRemove () {
+      if (!slideCurrentIndex) {
+        this.clearPlayList()
+      } else {
+        this.clearHistory()
+      }
+    },
     handleclose () {
       this.fullScreen = false
       this.$emit('handleclose')
-    }
+    },
+    ...mapActions(['clearPlayList', 'clearHistory'])
   }
 }
 </script>
@@ -140,4 +176,23 @@ export default {
       text-align center
       color var(--c_txt1)
       font-size $font-size-medium
+  .music-play-list
+    position relative
+    >>> .swiper-pagination
+      position fixed
+      bottom 50px
+      border-top-1px(var(--bg_play_border))
+    >>> .swiper-pagination-bullet
+      width 6px
+      height 6px
+      border 1px solid rgba(255, 255, 255, 0.1)
+      background rgba(255, 255, 255, 0.1)
+      border-radius 50%
+      opacity 1
+    >>> .swiper-pagination-bullet-active
+      border 1px solid #fff
+      background #fff
+    >>> .swiper-container
+      padding-bottom 0px
+      box-sizing border-box
 </style>

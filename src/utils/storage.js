@@ -43,3 +43,9 @@ export function setHistoryList (music) {
   storage.set(HISTORYLIST_KEY, JSON.stringify(list))
   return list
 }
+
+// 清空播放历史
+export function clearHistoryList () {
+  storage.clear(HISTORYLIST_KEY)
+  return []
+}

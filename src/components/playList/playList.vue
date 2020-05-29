@@ -20,6 +20,7 @@
             </p>
           </div>
           <p
+            v-show="type === 'playList'"
             class="play-list-close"
             @click.stop="handelDelMusic(item, index)"
           >
@@ -47,7 +48,8 @@ export default {
       default () {
         return []
       }
-    }
+    },
+    type: String
   },
   filters: {
     formatTime

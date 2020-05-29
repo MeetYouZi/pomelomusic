@@ -5,12 +5,15 @@ import VueLazyload from 'vue-lazyload'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+// import style
+import 'swiper/css/swiper.css'
 import $Alert from '@/components/api/alert'
 import 'stylus/index.styl'
 
 import youToast from '@/components/api/toast/api'
 Vue.use(youToast)
-// Vue.prototype.$mmToast('哈哈哈f11ffffffff哈')
+Vue.use(VueAwesomeSwiper/* { default options with global component } */)
 
 Vue.config.productionTip = false
 Vue.use(VueLazyload, {

@@ -1,5 +1,5 @@
 import * as types from './mutation-types'
-import { setHistoryList } from '@/utils/storage'
+import { setHistoryList, clearHistoryList } from '@/utils/storage'
 
 // 选择播放（会更新整个播放列表）
 export const selectPlay = ({ commit }, { list, index }) => {
@@ -34,4 +34,17 @@ export const removerPlayListItem = function ({ commit, state }, { list, index })
   } else {
     commit(types.SET_PLAYINGSTATE, true)
   }
+}
+
+// 清空播放列表
+export const clearPlayList = ({ commit }) => {
+  commit(types.SET_PLAYINGSTATE, false)
+  commit(types.SET_CURRENTINDEX, -1)
+  commit(types.SET_PLAYLIST, [])
+  commit(types.SET_SEQUENCELIST, [])
+}
+
+// 清空播放历史
+export const clearHistory = ({ commit }) => {
+  commit(types.SET_PLAYHISTORY, clearHistoryList())
 }

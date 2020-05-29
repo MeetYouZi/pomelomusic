@@ -105,8 +105,8 @@ export default {
     handleSelectSong (item, index) {
       // const songList = [item]
       // this.selectPlay({
-      //   list: songList,
-      //   index: 0
+      //   list: this.searchMusicList,
+      //   index: index
       // })
       this.$router.push(`/playSong/${item.id}`)
     },

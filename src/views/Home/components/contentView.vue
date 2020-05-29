@@ -187,7 +187,7 @@ export default {
     // 最新音乐
     _getNewSongs () {
       return new Promise(resolve => {
-        getNewSongs({ limit: 15 }).then(res => {
+        getNewSongs().then(res => {
           resolve(res.result)
           // this.newList = res.result
         })

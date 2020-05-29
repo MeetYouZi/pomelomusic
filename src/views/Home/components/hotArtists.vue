@@ -1,5 +1,5 @@
 <template>
-  <div class="hot_artists">
+  <div class="hot_artists" @click="handleAlert">
     <div class="container animate">
       <div class="background">
         <div class="slider_wrapper">
@@ -9,7 +9,6 @@
                :style="sliderStylue(index)"
           >
             <img
-              @click="handleAlert"
               class="artists_img"
               decoding="async"
               loading="lazy"
@@ -44,7 +43,7 @@ export default {
   },
   methods: {
     handleAlert () {
-      this.$youToast('哈哈哈f11ffffffff哈')
+      this.$youToast('等等哟，小柚还在努力编码中...')
       // this.$Alert.info({
       //   content: '等等，过两天再来看看吧~'
       // })
@@ -101,7 +100,7 @@ export default {
   .artists_item
     position absolute
     object-position center center
-    /*pointer-events none*/
+    pointer-events none
     image-rendering optimizespeed
     animation-name slider_moving
     animation-duration 400s

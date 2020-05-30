@@ -4,20 +4,20 @@
       <div class="playlist-mask" v-show="fullScreen" @click="handleClose">
         <transition name="playlist">
           <div class="playlist-bg" v-show="fullScreen">
-            <div class="playlist-bg-box">
+<!--            <div class="playlist-bg-box">-->
+              <div class="playlist-title">
+                <!--              {{playlistTitle}}-->
+                播放列表
+                <div class="close-icon-fix" @click.stop="handleRemove">
+                  清空
+                </div>
+              </div>
+              <div class="play_mode" @click.stop="changeMode">
+                <i class="iconfont" :class="iconMode"></i>
+                <span>{{modeWord}}</span>
+              </div>
               <swiper ref="mySwiper" :options="swiperOptions">
                 <swiper-slide>
-                  <div class="playlist-title">
-                    <!--              {{playlistTitle}}-->
-                    播放列表
-                    <div class="close-icon-fix" @click.stop="handleRemove">
-                      清空
-                    </div>
-                  </div>
-                  <div class="play_mode" @click.stop="changeMode">
-                    <i class="iconfont" :class="iconMode"></i>
-                    <span>{{modeWord}}</span>
-                  </div>
                   <div class="music-play-list">
                     <play-list
                       :songList="playList"
@@ -28,13 +28,6 @@
                   </div>
                 </swiper-slide>
                 <swiper-slide>
-                  <div class="playlist-title">
-                    <!--              {{playlistTitle}}-->
-                    历史播放列表
-                    <div class="close-icon-fix" @click.stop="handleRemove">
-                      清空
-                    </div>
-                  </div>
                   <div class="music-play-list">
                     <play-list
                       :songList="playHistory"
@@ -46,12 +39,13 @@
                 </swiper-slide>
                 <div class="swiper-pagination" slot="pagination"></div>
               </swiper>
-            </div>
-            <!--            <div class="playlist-bg-fix"></div>-->
             <div class="playlist-close" @click="handleClose">
               关闭
             </div>
-          </div>
+            </div>
+            <!--            <div class="playlist-bg-fix"></div>-->
+
+<!--          </div>-->
         </transition>
       </div>
     </transition>
@@ -238,10 +232,9 @@ export default {
       color var(--c_txt1)
       font-size $font-size-medium
 
-  .playlist-bg-box
+  .playlist-bg
     position relative
-    width 100%
-    height 100%
+    // height calc(100% - 50px)
 
     >>> .swiper-pagination
       position fixed

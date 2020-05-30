@@ -98,18 +98,18 @@ export default {
     formatTime
   },
   watch: {
-    currentSong (newVaule, oldVaule) {
-      if (!newVaule.id) {
+    currentSong (newValue, oldValue) {
+      if (!newValue.id) {
         this.lyric = []
         return
       }
-      if (newVaule.id === oldVaule.id) {
+      if (newValue.id === oldValue.id) {
         return
       }
       this.$nextTick(() => {
-        document.title = newVaule.name
-        this._getLyric(newVaule.id)
-        this._getCommentList(newVaule.id)
+        document.title = newValue.name
+        this._getLyric(newValue.id)
+        this._getCommentList(newValue.id)
       })
     }
   },

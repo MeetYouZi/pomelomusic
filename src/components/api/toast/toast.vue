@@ -1,7 +1,7 @@
 <template>
   <!--弹出层提示-->
-  <transition name="toast-fade" @after-leave="handleAfterLeave">
-    <div v-show="visible" role="alert" class="toast">{{ message }}</div>
+  <transition name="you_toast-fade" @after-leave="handleAfterLeave">
+    <div v-show="visible" role="alert" class="you_toast">{{ message }}</div>
   </transition>
 </template>
 
@@ -53,7 +53,7 @@ export default {
         }
       }, this.duration)
     },
-    // 关闭'toast'
+    // 关闭'you_toast'
     close () {
       this.closed = true
       if (typeof this.onClose === 'function') {
@@ -65,7 +65,7 @@ export default {
 </script>
 
 <style>
-  .toast {
+  .you_toast {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -86,20 +86,20 @@ export default {
     transform: translateX(-50%);
   }
 
-  .toast-fade-enter,
-  .toast-fade-leave-to {
+  .you_toast-fade-enter,
+  .you_toast-fade-leave-to {
     opacity: 0;
     transform: translate3d(-50%, -1em, 0);
   }
 
-  .toast-fade-enter-active,
-  .toast-fade-leave-active {
+  .you_toast-fade-enter-active,
+  .you_toast-fade-leave-active {
     will-change: transform;
     transition: all 0.2s;
   }
 
-  .toast-fade-enter-to,
-  .toast-fade-leave {
+  .you_toast-fade-enter-to,
+  .you_toast-fade-leave {
     opacity: 1;
     transform: translate3d(-50%, 0, 0);
   }

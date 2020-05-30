@@ -1,6 +1,6 @@
 <template>
   <div class="pomelo-module">
-    <popup-play-list ref="popUpPlayList" @handleclose="handleclose"></popup-play-list>
+    <popup-play-list ref="popUpPlayList" @handleClose="handleClose"></popup-play-list>
     <transition name="miniplay">
       <div class="pomelo-play" v-show="isShowPlay && !fullScreen" @swiperight="swiperight(x)">
         <div class="icon" @click="handleToUrl">
@@ -148,7 +148,7 @@ export default {
         this.setPlayingState(false)
       }
     },
-    handleclose () {
+    handleClose () {
       this.fullScreen = false
     },
     showPlaylist () {

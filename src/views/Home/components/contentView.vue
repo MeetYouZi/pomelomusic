@@ -246,20 +246,22 @@ export default {
     padding 10px 0
     overflow-x auto
     overflow-y hidden
-    margin 0 12px
     .con-list
-      font-size 0
       display flex
+      margin 0 12px
       .list-item
         vertical-align top
         display inline-block
         margin-bottom 14px
         font-size $font-size-small
+        &:last-child
+          .list-box
+            margin-right 16px
         .list-box
-          width 110px
+          width 109px
           margin 0 4px
           .list-media
-            height 110px
+            height 109px
             position relative
             .list-img
               position: absolute

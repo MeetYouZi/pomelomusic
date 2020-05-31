@@ -85,6 +85,9 @@ export default {
           color inherit
           line-height 24px
           width 100%
+        .list-time
+          font-size $font-size-small
+          color var(--c_txt2)
         .list-desc
           max-width 95%
           overflow hidden
@@ -92,6 +95,7 @@ export default {
           line-height 18px
           color var(--c_txt2)
         .list-txt
+          font-size inherit
           text-align left
           display block
           no-wrap()

@@ -7,7 +7,7 @@
         :class="{active: item.id === currentSong.id}"
     >
       <div class="item-box">
-        <span class="list-num" v-text="index + 1"></span>
+<!--        <span class="list-num" v-text="index + 1"></span>-->
         <div class="list-content">
           <h3 class="list-tit"><span class="list-txt">{{item.name}}</span></h3>
           <p class="list-desc"><span class="list-txt">{{item.singer}}</span></p>
@@ -87,15 +87,19 @@ export default {
         .list-desc
           max-width 95%
           overflow hidden
-          font-size $font-size-small
           line-height 18px
+          color var(--c_txt2)
+          font-size $font-size-small
+        .list-time
+          font-size $font-size-small
           color var(--c_txt2)
         .list-txt
           text-align left
           display block
+          font-size inherit
           no-wrap()
       &.active
         color var(--theme_color)
-        .list-desc
+        .list-desc, .list-time
           color var(--theme_color)
 </style>

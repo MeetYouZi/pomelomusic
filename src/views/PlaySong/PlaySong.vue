@@ -1,9 +1,9 @@
 <template>
   <div class="song_wrap">
-    <div class="bg">
-      <img class="bg_img" :src="currentSong.image"/>
-    </div>
     <div class="main">
+      <div class="bg">
+        <img class="bg_img" :src="currentSong.image"/>
+      </div>
       <div class="main_wrap">
         <div class="song_info">
           <h1 class="song_name">{{currentSong.name}}</h1>
@@ -206,7 +206,7 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .song_wrap
   z-index 20
-  background var(--theme)
+  background var(--bg)
   .main
     position relative
     padding-bottom 15px
@@ -262,6 +262,7 @@ export default {
       align-items center
       justify-content center
       height 70px
+      z-index 3
       .opt_item
         width 38px
         height 38px
@@ -296,14 +297,25 @@ export default {
     width 100%
     height 100%
     overflow hidden
+    z-index -1
+    &:after
+      content ""
+      position absolute
+      left 0
+      bottom 0
+      z-index 0
+      width 100%
+      height 300px
+      background-image -webkit-linear-gradient(top,rgba(255,255,255,0),rgba(255,255,255,1))
     .bg_img
       position absolute
       top 0
       left 0
       width 100%
       opacity 0.2
-      filter blur(4px)
-      transform scale(1.2)
-      mask-image linear-gradient(180deg,hsla(0,0%,100%,0) 0,
-      hsla(0,0%,100%,1) 15%,#fff 25%,#fff 65%,hsla(0,0%,100%,.8) 100%,hsla(0,0%,100%,0))
+      backdrop-filter saturate(180%) blur(5px);
+      filter blur(6px)
+      // transform scale(1.2)
+      // mask-image linear-gradient(180deg,hsla(0,0%,100%,0) 0,
+      // hsla(0,0%,100%,1) 15%,#fff 25%,#fff 65%,hsla(0,0%,100%,.8) 100%,hsla(0,0%,100%,0))
 </style>

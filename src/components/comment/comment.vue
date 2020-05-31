@@ -92,8 +92,8 @@ export default {
         .header_left
           flex 1
           .nickname
-            color var(--c_txt1)
-            font-size 13px
+            color var(--c_txt2)
+            font-size $font-size-medium
           .time
             color var(--c_txt2)
             font-size $font-size-small

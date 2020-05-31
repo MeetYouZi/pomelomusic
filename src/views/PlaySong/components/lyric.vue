@@ -92,5 +92,6 @@ export default {
         no-wrap()
         transition all .3s
         &.active
+          font-size $font-size-large
           color $color-theme
 </style>

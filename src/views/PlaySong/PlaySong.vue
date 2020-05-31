@@ -306,13 +306,14 @@ export default {
       z-index 0
       width 100%
       height 300px
-      background linear-gradient(to bottom, var(--bg-linear-gradient-1) 0, var(--bg-linear-gradient-2) 100%)
+      background-image linear-gradient(to bottom, var(--bg-linear-gradient-1) 0, var(--bg-linear-gradient-2) 100%)
     .bg_img
       position absolute
       top 0
       left 0
       width 100%
       opacity 0.2
+      transform scale(1.2)
       backdrop-filter saturate(180%) blur(5px);
       filter blur(2px)
       // transform scale(1.2)

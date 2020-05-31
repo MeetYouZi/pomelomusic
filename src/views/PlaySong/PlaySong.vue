@@ -33,10 +33,11 @@
           <i class="iconfont iconshangyiqu101"></i>
         </div>
         <div class="opt_item icon-mini" @click="togglePalying">
-          <i
-             class="iconfont icon-mini"
-             :class="miniIcon"
-          ></i>
+          <component :is="miniIcon"></component>
+<!--          <i-->
+<!--             class="iconfont icon-mini"-->
+<!--             :class="miniIcon"-->
+<!--          ></i>-->
         </div>
         <div class="opt_item" @click="next">
           <i class="iconfont iconxiayiqu101"></i>
@@ -64,6 +65,8 @@ import lyric from '@/views/PlaySong/components/lyric'
 import comment from '@/components/comment/comment'
 import ProgressBar from '@/components/progress/progressBar'
 // import icon_like from '@/components/icons/icon_like'
+import icon_play from '@/components/icons/icon_play'
+import icon_pause from '@/components/icons/icon_pause'
 import { SET_PLAYING_TIME, SET_PLAY, SET_PLAY_MODE } from '@/assets/js/mixin'
 import { formatTime } from '@/utils/utils'
 import popupPlayList from '@/components/popupPlayList/popupPlayList'
@@ -75,7 +78,9 @@ export default {
     lyric,
     comment,
     ProgressBar,
-    popupPlayList
+    popupPlayList,
+    icon_play,
+    icon_pause
     // icon_like
   },
   mixins: [SET_PLAYING_TIME, SET_PLAY, SET_PLAY_MODE],
@@ -90,7 +95,7 @@ export default {
   computed: {
     ...mapGetters(['currentTime', 'currentSong', 'playing', 'currentIndex', 'playList']),
     miniIcon () {
-      return this.playing ? 'iconpause1' : 'iconplay'
+      return this.playing ? 'icon_pause' : 'icon_play'
     }
   },
   filters: {

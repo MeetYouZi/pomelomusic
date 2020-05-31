@@ -14,7 +14,7 @@
 
       <div class="play_bar_wrap">
         <div class="play_bar" :class="{'fixed': showAbs}">
-          <div class="play_all"  @click.stop="togglePalying">
+          <div class="play_all" @click.stop="togglePalying">
             <i class="play_icon play_all_icon" v-show="!playing"></i>
             <i class="play_icon iconfont iconpause1" v-show="playing"></i>
             <div class="progressBox" v-show="playing">
@@ -50,7 +50,7 @@ import { getListDetail, getSongDetail } from '@/api'
 import formatSongs from '@/utils/song'
 import ProgressBar from '@/components/progress/progressBar'
 import ProgressCircle from '@/components/progress/progressCircle'
-import MusicPlayList from 'components/musicList/musicList'
+import MusicPlayList from '@/components/musicList/musicList'
 import { SET_PLAYING_TIME, SET_PLAY } from '@/assets/js/mixin'
 
 const MAXLENGTH = 100
@@ -104,7 +104,7 @@ export default {
         this.showAbs = true
       }
     },
-    // 播放暂停事件
+    // 选择播放事件
     selectItem (item, index) {
       this.selectPlay({
         list: this.songList,
@@ -235,7 +235,7 @@ export default {
           flex 1
           margin-left 10px
           text-align left
-          color var(--color)
+          color var(--c_txt1)
           no-wrap()
         .play_icon
           display: flex

@@ -43,6 +43,7 @@ export default {
   },
   methods: {
     handleAlert () {
+      this.$router.push('/singer')
       this.$youToast('等等哟，小柚还在努力编码中...')
       // this.$Alert.info({
       //   content: '等等，过两天再来看看吧~'

@@ -4,7 +4,7 @@
       <i class="iconfont iconLeft"></i>
     </div>
     <transition :name="transitionName">
-      <keep-alive exclude="MusicList,PlaySong,Comment,lyric,MvDetail">
+      <keep-alive exclude="MusicList,PlaySong,Comment,lyric,MvDetail,artists">
         <router-view class="rv"/>
       </keep-alive>
     </transition>

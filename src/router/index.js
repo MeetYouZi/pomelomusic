@@ -3,12 +3,13 @@ import VueRouter from 'vue-router'
 const Home = () => import('@/views/Home/Home')
 const MusicList = () => import('@/views/MusicList/MusicList')
 const Recommend = () => import('@/views/Recommend/Recommend')
-const About = () => import('@/views/About')
 const Music = () => import('@/views/music')
 const PlaySong = () => import('@/views/PlaySong/PlaySong')
 const Personal = () => import('@/views/Personal/Personal')
 const Album = () => import('@/views/Album/Album')
 const MvDetail = () => import('@/views/Mv/MvDetail')
+const Singer = () => import('@/views/Singer/Singer')
+const Artists = () => import('@/views/Singer/Artists')
 
 Vue.use(VueRouter)
 
@@ -65,7 +66,25 @@ const routes = [
     component: PlaySong,
     meta: {
       title: 'playSong',
+      index: 3,
+      requiresAuth: false
+    }
+  }, {
+    path: '/Singer',
+    name: 'Singer',
+    component: Singer,
+    meta: {
+      title: '歌手列表',
       index: 1,
+      requiresAuth: false
+    }
+  }, {
+    path: '/artists/:id',
+    name: 'Artists',
+    component: Artists,
+    meta: {
+      title: '歌手详情',
+      index: 2,
       requiresAuth: false
     }
   }, {

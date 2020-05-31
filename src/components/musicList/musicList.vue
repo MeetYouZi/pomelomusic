@@ -68,6 +68,7 @@ export default {
         justify-content space-between
         align-items baseline
         overflow hidden
+        color var(--c_txt1)
         .list-num
           min-width 10px
           text-align right
@@ -81,9 +82,9 @@ export default {
           overflow hidden
         .list-tit
           font-size $font-size-large
-          color inherit
           line-height 24px
           width 100%
+          color inherit
         .list-desc
           max-width 95%
           overflow hidden
@@ -100,6 +101,6 @@ export default {
           no-wrap()
       &.active
         color var(--theme_color)
-        .list-desc, .list-time
+        .list-desc, .list-time, .list-tit
           color var(--theme_color)
 </style>

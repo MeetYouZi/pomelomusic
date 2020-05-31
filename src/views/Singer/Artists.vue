@@ -21,7 +21,7 @@
         >
         </progress-circle>
       </div>
-      <span class="play_all_text">{{!playing ? '一键播放' : currentSong.name}}</span>
+      <p class="play_all_text">{{!playing ? '一键播放' : currentSong.name}}</p>
     </div>
     <div class="artists_hotSongs">
       <music-list :songList="hotSongs" @selectItem="selectItem"></music-list>
@@ -151,6 +151,7 @@ export default {
     .play_all_text
       flex 1
       margin-left 10px
+      line-height 1.5
       text-align left
       color var(--c_txt1)
       no-wrap()

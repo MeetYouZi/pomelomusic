@@ -55,7 +55,7 @@ export default {
     formatTime
   },
   computed: {
-    ...mapGetters(['currentSong', 'playing', 'playList'])
+    ...mapGetters(['currentSong', 'playing', 'playList', 'playHistory'])
   },
   methods: {
     // 播放暂停事件
@@ -64,8 +64,17 @@ export default {
         this.setPlaying(!this.playing)
         return
       }
+      if (this.type == 'playHistoryList') {
+        return this.selectPlay({
+          list: this.playHistory,
+          index
+        })
+      }
       this.$emit('selectItem', item, index)
     },
+    ...mapActions({
+      selectPlay: 'selectPlay'
+    }),
     // 删除播放列表歌曲
     handelDelMusic (item, index) {
       if (item.deleting) {

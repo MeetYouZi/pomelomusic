@@ -5,44 +5,42 @@
         <transition name="playlist">
           <div class="playlist-bg" v-show="fullScreen">
 <!--            <div class="playlist-bg-box">-->
-              <div class="playlist-title">
-                <!--              {{playlistTitle}}-->
-                播放列表
-                <div class="close-icon-fix" @click.stop="handleRemove">
-                  清空
-                </div>
+            <div class="playlist-title">
+              <!--              {{playlistTitle}}-->
+              播放列表
+              <div class="close-icon-fix" @click.stop="handleRemove">
+                清空
               </div>
-              <div class="play_mode" @click.stop="changeMode">
-                <i class="iconfont" :class="iconMode"></i>
-                <span>{{modeWord}}</span>
-              </div>
+            </div>
+            <div class="play_mode" @click.stop="changeMode">
+              <i class="iconfont" :class="iconMode"></i>
+              <span>{{modeWord}}</span>
+            </div>
+            <div class="music-play-list">
               <swiper ref="mySwiper" :options="swiperOptions">
                 <swiper-slide>
-                  <div class="music-play-list">
-                    <play-list
-                      :songList="playList"
-                      @selectItem="selectItem"
-                      :type="'playList'"
-                    >
-                    </play-list>
-                  </div>
+                  <play-list
+                    :songList="playList"
+                    @selectItem="selectItem"
+                    :type="'playList'"
+                  >
+                  </play-list>
                 </swiper-slide>
                 <swiper-slide>
-                  <div class="music-play-list">
-                    <play-list
-                      :songList="playHistory"
-                      @selectItem="selectItem"
-                      :type="'playHistoryList'"
-                    >
-                    </play-list>
-                  </div>
+                  <play-list
+                    :songList="playHistory"
+                    @selectItem="selectItem"
+                    :type="'playHistoryList'"
+                  >
+                  </play-list>
                 </swiper-slide>
                 <div class="swiper-pagination" slot="pagination"></div>
               </swiper>
+            </div>
             <div class="playlist-close" @click="handleClose">
               关闭
             </div>
-            </div>
+          </div>
             <!--            <div class="playlist-bg-fix"></div>-->
 
 <!--          </div>-->
@@ -232,7 +230,7 @@ export default {
       color var(--c_txt1)
       font-size $font-size-medium
 
-  .playlist-bg
+  .music-play-list
     position relative
     // height calc(100% - 50px)
 

@@ -105,7 +105,6 @@ export default {
       return getImgUrl(url, w, h)
     },
     handleTomusicList (id, index) {
-      // this.setplayList(this.normalizedSongs)
       this.$router.push(`/musicList/${id}`)
     },
     playMusic (item, index) {
@@ -154,7 +153,6 @@ export default {
     },
     ...mapActions(['selectPlay']),
     ...mapMutations({
-      setplayList: SET_PLAYLIST,
       setPlayState: SET_PLAYINGSTATE
     }),
     _getMusicList () {

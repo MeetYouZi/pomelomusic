@@ -72,7 +72,8 @@ export const SET_PLAY_MODE = {
       // })
     },
     ...mapActions({
-      setPlaylist: 'setPlaylist'
+      setPlaylist: 'setPlaylist',
+      selectPlay: 'selectPlay'
     }),
     ...mapMutations({
       setPlayMode: 'SET_PLAYMODE',

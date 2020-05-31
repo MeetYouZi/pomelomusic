@@ -306,7 +306,7 @@ export default {
       z-index 0
       width 100%
       height 300px
-      background-image -webkit-linear-gradient(top,rgba(255,255,255,0),rgba(255,255,255,1))
+      background linear-gradient(to bottom, var(--bg-linear-gradient-1) 0, var(--bg-linear-gradient-2) 100%)
     .bg_img
       position absolute
       top 0
@@ -314,7 +314,7 @@ export default {
       width 100%
       opacity 0.2
       backdrop-filter saturate(180%) blur(5px);
-      filter blur(6px)
+      filter blur(2px)
       // transform scale(1.2)
       // mask-image linear-gradient(180deg,hsla(0,0%,100%,0) 0,
       // hsla(0,0%,100%,1) 15%,#fff 25%,#fff 65%,hsla(0,0%,100%,.8) 100%,hsla(0,0%,100%,0))

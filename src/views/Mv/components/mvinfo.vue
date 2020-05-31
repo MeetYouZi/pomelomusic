@@ -51,7 +51,7 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   .tab_cont
-    background var(--bg)
+    background var(--color_white)
   .mv_info
     position relative
     margin 0 16px 26px

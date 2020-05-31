@@ -96,7 +96,7 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .artists_detail
   position relative
-  background var(--bg)
+  background var(--color_white)
   z-index 11
   .artists_top
     position relative

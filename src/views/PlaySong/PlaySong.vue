@@ -211,7 +211,7 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .song_wrap
   z-index 20
-  background var(--bg)
+  background var(--color_white)
   .main
     position relative
     padding-bottom 15px

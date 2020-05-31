@@ -15,4 +15,5 @@ export default {
 .icon_play
   width 22px
   height 22px
+  fill var(--color_black)
 </style>

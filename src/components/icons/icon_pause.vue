@@ -15,4 +15,5 @@ export default {
 .icon_pause
   width 22px
   height 22px
+  fill var(--color_black) // 填充颜色
 </style>

@@ -158,7 +158,7 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .music_list_warp
   z-index 11
-  background var(--bg)
+  background var(--color_white)
 .top_wrap
   position relative
   height 236px

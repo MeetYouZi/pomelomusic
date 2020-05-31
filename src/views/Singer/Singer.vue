@@ -44,7 +44,7 @@ export default {
 .singer_list
   position relative
   margin 16px
-  background var(--bg)
+  background var(--color_white)
   z-index 11
   .singer_item
     display flex

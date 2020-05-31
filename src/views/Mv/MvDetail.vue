@@ -126,7 +126,7 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   .mv_detail
-    background var(--bg)
+    background var(--color_white)
     z-index 10
   .mvplayer
     position relative

@@ -95,7 +95,7 @@ export default {
       .toast-content
         width 280px
         border-radius 13px
-        background var(--bg)
+        background var(--color_white)
         box-shadow 0 0 20px 0 rgba(0,0,0,.1)
         .text
           padding 19px 15px

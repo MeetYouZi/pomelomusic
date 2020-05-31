@@ -96,7 +96,7 @@ export default {
   },
   methods: {
     handleClickAlert () {
-      this.$youToast('哈哈哈f11ffffffff哈')
+      this.$youToast('嘻嘻嘻')
       // this.$Alert.info({
       //   content: '等等，过两天再来看看吧~'
       // })

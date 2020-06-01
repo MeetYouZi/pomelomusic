@@ -4,29 +4,43 @@
 
 ### 功能列表
 
-歌曲列表、mini 播放器、搜索、歌曲详情页、播放列表、评论、排行榜、皮肤切换（暗黑模式上线逼格不是一般的高[dog]）
+歌曲列表、多种播放器、搜索、歌曲详情页、播放列表、评论、排行榜、皮肤切换（暗黑模式上线逼格不是一般的高[dog]）、历史播放、我的、歌手列表
 
 ### 待完善功能
 
-历史播放、我的、歌手列表(努力思考中)......
+完善登录、收藏(努力思考中)......
 
-### UI展示
-![image](https://raw.githubusercontent.com/MeetYouZi/img-folder/master/IMG_7803.PNG)
-![image](https://raw.githubusercontent.com/MeetYouZi/img-folder/master/IMG_7811.PNG)
-![image](https://raw.githubusercontent.com/MeetYouZi/img-folder/master/IMG_7807.PNG)
-![image](https://raw.githubusercontent.com/MeetYouZi/img-folder/master/IMG_7816.PNG)
-![image](https://raw.githubusercontent.com/MeetYouZi/img-folder/master/IMG_7814.PNG)
-![image](https://raw.githubusercontent.com/MeetYouZi/img-folder/master/IMG_7809.PNG)
+### 体验地址
 
-### 后端接口
-https://binaryify.github.io/NeteaseCloudMusicApi
+https://pomelomusic.now.sh
 
 ### 使用说明
 
-静等上线......
+点击首页音乐馆即可切换暗黑模式（是一个彩蛋）
 
 ```
+
+# 下载 Player
+git clone https://github.com/MeetYouZi/pomelomusic.git
+
+# 安装依赖
 npm install
+
+# 启动项目
 npm run serve
+
 ```
+
+### 后端接口
+
+https://binaryify.github.io/NeteaseCloudMusicApi
+
+### 其他说明
+
+本移动端音乐 player 项目是个人爱好编写，灵感来源 [@maomao1996](https://github.com/maomao1996/Vue-mmPlayer) 的pc端 音乐 player ，该 pc 端音乐 player 是网页 player 的佼佼者，再次感谢 [@maomao1996](https://github.com/maomao1996/Vue-mmPlayer) ~
+
+使用过程中如有任何疑问或者bug 欢迎各位小伙伴们在 Issues 中给我指点迷津或者 PR 
+
+如若喜欢，欢迎star 
+
 

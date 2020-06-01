@@ -23,7 +23,7 @@ Vue.use(VueLazyload, {
 })
 
 // 初始化主题
-const themeBg = localStorage.getItem('pomelomusic_themeBg') || 'white'
+const themeBg = localStorage.getItem('pomelomusic_themeBg') || 'black'
 document.querySelector('html').className = themeBg
 
 Vue.prototype.$Alert = $Alert

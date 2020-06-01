@@ -104,10 +104,11 @@ export default {
     },
     handleSelectSong (item, index) {
       // const songList = [item]
-      // this.selectPlay({
-      //   list: this.searchMusicList,
-      //   index: index
-      // })
+      this.saveSearch(item.name)
+      this.selectPlay({
+        list: this.searchMusicList,
+        index: index
+      })
       this.$router.push(`/playSong/${item.id}`)
     },
     ...mapActions(['selectPlay']),
@@ -138,7 +139,8 @@ export default {
         artists,
         singer: music.artists && music.artists.length > 0 && this.filterSinger(music.artists),
         album: music.album.name,
-        duration: duration / 1000
+        duration: duration / 1000,
+        url: `https://music.163.com/song/media/outer/url?id=${music.id}.mp3`
       }
     },
     formatSongs (list) {
@@ -156,7 +158,6 @@ export default {
         keywords
       }
       searchMusic(data).then(res => {
-        this.saveSearch(keywords)
         this.searchMusicList = this.formatSongs(res.result.songs)
       })
     },

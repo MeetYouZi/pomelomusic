@@ -68,7 +68,7 @@ export default {
     return {
       bannerList: [],
       showSearchView: false,
-      isBlack: false,
+      isBlack: true,
       keyWord: ''
     }
   },

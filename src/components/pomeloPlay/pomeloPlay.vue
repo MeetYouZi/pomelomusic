@@ -245,12 +245,14 @@ export default {
       flex 1
       line-height 20px
       overflow hidden
+      vertical-align bottom
       .name
-        margin-bottom: 2px
+        margin-bottom 2px
         no-wrap()
         font-size $font-size-medium
         color var(--color)
         padding-right 2px
+        margin-right 4px
       .desc
         no-wrap()
         font-size $font-size-small

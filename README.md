@@ -35,12 +35,15 @@ npm run serve
 
 https://binaryify.github.io/NeteaseCloudMusicApi
 
+
 ### 其他说明
 
-本移动端音乐 player 项目是个人爱好编写，灵感来源 [@maomao1996](https://github.com/maomao1996/Vue-mmPlayer) 的pc端 音乐 player ，该 pc 端音乐 player 是网页 player 的佼佼者，再次感谢 [@maomao1996](https://github.com/maomao1996/Vue-mmPlayer) ~
+本移动端音乐 player 项目是个人爱好编写，灵感来源 [@maomao1996](https://github.com/maomao1996/Vue-mmPlayer) 的 pc 端 音乐 player ，该 pc 端音乐 player 是网页 player 的佼佼者，再次感谢 [@maomao1996](https://github.com/maomao1996/Vue-mmPlayer) ~
 
 使用过程中如有任何疑问或者bug 欢迎各位小伙伴们在 Issues 中给我指点迷津或者 PR 
 
-如若喜欢，欢迎star 
+本项目UI高仿网易云音乐和qq音乐以及加入个人喜好元素 如有更好的建议 欢迎发邮件 987176347@qq.com 交流...
+
+如若喜欢，欢迎 star~ 
 
 

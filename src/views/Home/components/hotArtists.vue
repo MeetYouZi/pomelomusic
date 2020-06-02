@@ -14,7 +14,7 @@
               loading="lazy"
               importance="low"
               :style="imgSize(index)"
-              :src="`${item.picUrl}?param=100y100`"
+              :src="`${item.picUrl}?param=60y60`"
             >
             <p class="avatar_name">{{item.name}}</p>
           </div>

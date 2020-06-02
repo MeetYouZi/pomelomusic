@@ -17,7 +17,7 @@
           </ol>
         </div>
         <div class="rank_list_media">
-          <img class="rank_list_img" v-lazy="`${item.coverImgUrl}?param=200y200`">
+          <img class="rank_list_img" v-lazy="`${item.coverImgUrl}?param=100y100`">
         </div>
       </li>
     </ul>

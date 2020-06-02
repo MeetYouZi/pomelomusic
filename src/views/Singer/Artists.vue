@@ -1,7 +1,7 @@
 <template>
   <div class="artists_detail">
     <div class="artists_top">
-      <img class="top_bg" v-lazy="artist.picUrl"/>
+      <img class="top_bg" v-lazy="`${artist.picUrl}?param=100y100`"/>
       <div class="top_cont">
         <div class="top_tit">
           <h3 class="top_tit_name">{{artist.name}}</h3>

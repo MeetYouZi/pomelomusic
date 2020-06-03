@@ -1,5 +1,5 @@
 <template>
-  <div class="pomelo-module">
+  <div class="pomelo-module" v-show="!miniPlayHide">
     <popup-play-list ref="popUpPlayList" @handleClose="handleClose"></popup-play-list>
     <transition name="miniplay">
       <div class="pomelo-play" v-show="isShowPlay && !fullScreen" @swiperight="swiperight(x)">
@@ -62,7 +62,8 @@ export default {
       radius: 30,
       musicReady: false, // 是否可以使用播放器
       fullScreen: false,
-      currentTime: 0
+      currentTime: 0,
+      miniPlayHide: false
       // currentSong: {
       //   album: '我们在夏枝繁茂时再见',
       //   duration: 218.979,
@@ -97,6 +98,13 @@ export default {
     ])
   },
   watch: {
+    $route (to, from) {
+      if (to.path === '/home' || to.path === '/recommend' || to.path === '/personal') {
+        this.miniPlayHide = false
+      } else {
+        this.miniPlayHide = true
+      }
+    },
     playing (newPlaying) {
       const pomelomusicAudio = this.$refs.pomelomusicAudio
       this.$nextTick(() => {

@@ -163,7 +163,7 @@ export default {
     },
     end () {
       this.currentTime = 0
-      if (this.mode === playMode.loop) {
+      if (this.playMode === playMode.sequence) {
         this.loop()
       } else {
         this.next()

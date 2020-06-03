@@ -24,7 +24,7 @@
               >
                 <div class="list-box">
                   <div class="list-media">
-                    <img class="list-img" v-lazy="_getImgUrl(item.picUrl, 300)"/>
+                    <img class="list-img" v-lazy="_getImgUrl(item.picUrl, 120)"/>
                     <div class="cover_count" v-show="musicItem.key != 'music'">
                       <span class="cover-count-num">{{item.playCount}}</span>
                     </div>

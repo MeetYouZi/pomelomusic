@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="music-banner fade" v-if="bannerList.length">
+    <div class="music-banner fade" v-if="bannerList.length" @click="handleTest">
       <img :src="bannerList[0].imageUrl"/>
     </div>
   </transition>
@@ -15,6 +15,15 @@ export default {
       default () {
         return []
       }
+    }
+  },
+  methods: {
+    handleTest () {
+      this.$message({
+        type: 'success',
+        content: 'who are you ? I am 小柚',
+        duration: 3000
+      })
     }
   }
 }

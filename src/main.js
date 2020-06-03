@@ -12,7 +12,9 @@ import $Alert from '@/components/api/alert'
 import 'stylus/index.styl'
 
 import youToast from '@/components/api/toast/api'
+import youMessage from '@/components/api/message/api'
 Vue.use(youToast)
+Vue.use(youMessage)
 Vue.use(VueAwesomeSwiper/* { default options with global component } */)
 
 Vue.config.productionTip = false

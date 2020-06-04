@@ -116,7 +116,7 @@ export default {
         this._getLyric(newValue.id)
         this._getCommentList(newValue.id)
       })
-    }
+    },
   },
   methods: {
     togglePalying () {

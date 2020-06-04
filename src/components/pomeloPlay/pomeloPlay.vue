@@ -41,6 +41,7 @@
                @timeupdate="updateTime"
                @ended="end"
                @pause="paused"
+               @error="error"
         ></audio>
       </div>
     </transition>
@@ -112,9 +113,9 @@ export default {
     },
     playing (newPlaying) {
       const pomelomusicAudio = this.$refs.pomelomusicAudio
+      if (!pomelomusicAudio.src) pomelomusicAudio.src = this.currentSong.url
       this.$nextTick(() => {
         newPlaying ? pomelomusicAudio.play() : pomelomusicAudio.pause()
-        // newPlaying ? silencePromise(audio.play()) : audio.pause()
         this.musicReady = true
       })
     },
@@ -123,7 +124,6 @@ export default {
         return
       }
       this.musicReady = false
-      console.log(newSong)
       this.$refs.pomelomusicAudio.src = newSong.url
       this.$refs.pomelomusicAudio.play()
       // 若歌曲 5s 未播放，则认为超时，修改状态确保可以切换歌曲。
@@ -158,13 +158,12 @@ export default {
       this.setCurrentTime(this.currentTime)
     },
     togglePlaying () {
-      console.log(this.$refs.pomelomusicAudio.src)
       const pomelomusicAudio = this.$refs.pomelomusicAudio
       if (!this.playing && !this.currentSong.id) {
         return
       }
       if (!this.playing && this.currentSong.id) {
-        if (!this.$refs.pomelomusicAudio.src) this.$refs.pomelomusicAudio.src = this.currentSong.url
+        if (!pomelomusicAudio.src) pomelomusicAudio.src = this.currentSong.url
         pomelomusicAudio.play()
         this.setPlayingState(true)
       } else {
@@ -181,6 +180,9 @@ export default {
     },
     readyPlaying () {
       this.setHistory(this.currentSong)
+    },
+    error () {
+      console.log('error')
     },
     paused () {
       this.setPlayingState(false)

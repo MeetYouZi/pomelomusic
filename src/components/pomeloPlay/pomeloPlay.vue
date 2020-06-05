@@ -213,7 +213,9 @@ export default {
       this.setHistory(this.currentSong)
     },
     error () {
+      this.$youToast('播放失败')
       console.log('error')
+      this.next()
     },
     paused () {
       this.setPlayingState(false)
@@ -246,7 +248,6 @@ export default {
       this.setPlayingState(true)
     },
     next () {
-      console.log('135465')
       // if (!this.songReady) {
       //   return
       // }

@@ -319,7 +319,7 @@ export default {
       width 100%
       opacity 0.2
       transform scale(1.2)
-      backdrop-filter saturate(180%) blur(5px);
+      backdrop-filter saturate(180%) blur(5px)
       filter blur(2px)
       // transform scale(1.2)
       // mask-image linear-gradient(180deg,hsla(0,0%,100%,0) 0,

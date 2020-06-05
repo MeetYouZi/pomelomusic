@@ -15,7 +15,7 @@
               <div class="imgWrapper" ref="miniWrapper">
                 <img ref="miniImage"
                      class="play"
-                     :class="cdCls"
+                     :class="currentSong.id === music.id ? cdCls: ''"
                      width="44"
                      height="44"
                      v-lazy="`${music.image}?param=100y100`"
@@ -294,6 +294,7 @@ export default {
     width 100%
     height 50px
     background var(--playBg)
+    backdrop-filter saturate(180%) blur(5px)
     &.miniplay-enter-active, &.miniplay-leave-active
       transition all 0.4s
     &.miniplay-enter, &.miniplay-leave-to
@@ -302,6 +303,15 @@ export default {
       height 64px
       margin 0
       flex 1
+      &:after
+        content ""
+        position absolute
+        right 0
+        bottom 0
+        z-index 2
+        width 60px
+        height 56px
+        background-image linear-gradient(to right , var(--bg-linear-gradient-1) 0, var(--bg-linear-gradient-3) 100%)
     >>>.swiper-slide
       display flex
       align-items center

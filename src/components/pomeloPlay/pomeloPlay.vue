@@ -4,24 +4,30 @@
     <transition name="miniplay">
       <div class="pomelo-play"
            v-show="isShowPlay && !fullScreen"
-           v-swiperight="(e)=>touchNext(e)"
-           v-swipeleft="(e)=>touchPrev(e)"
+           @click="handleToUrl"
       >
-        <div class="icon" @click="handleToUrl">
-          <div class="imgWrapper" ref="miniWrapper">
-            <img ref="miniImage"
-                 class="play"
-                 :class="cdCls"
-                 width="44"
-                 height="44"
-                 v-lazy="`${currentSong.image}?param=100y100`"
-            >
-          </div>
-        </div>
-        <div class="text">
-          <h2 class="name" v-html="currentSong.name"></h2>
-          <p class="desc" v-html="currentSong.singer"></p>
-        </div>
+        <swiper
+          ref="mySwiper"
+          :options="swiperOptions"
+        >
+          <swiper-slide v-for="music in playList" :key="music.id">
+            <div class="icon">
+              <div class="imgWrapper" ref="miniWrapper">
+                <img ref="miniImage"
+                     class="play"
+                     :class="cdCls"
+                     width="44"
+                     height="44"
+                     v-lazy="`${music.image}?param=100y100`"
+                >
+              </div>
+            </div>
+            <div class="text">
+              <h2 class="name" v-text="music.name"></h2>
+              <p class="desc" v-text="music.singer"></p>
+            </div>
+          </swiper-slide>
+        </swiper>
         <div class="control">
           <div class="progress-circle-box">
             <progress-circle :radius="radius" :percent="percent">
@@ -35,16 +41,16 @@
         <div class="control menu" @click.stop="showPlaylist">
           <i class="iconfont iconmenuoff"></i>
         </div>
-        <!--播放器-->
-        <audio ref="pomelomusicAudio"
-               @playing="readyPlaying"
-               @timeupdate="updateTime"
-               @ended="end"
-               @pause="paused"
-               @error="error"
-        ></audio>
       </div>
     </transition>
+    <!--播放器-->
+    <audio ref="pomelomusicAudio"
+           @playing="readyPlaying"
+           @timeupdate="updateTime"
+           @ended="end"
+           @pause="paused"
+           @error="error"
+    ></audio>
   </div>
 </template>
 
@@ -70,6 +76,22 @@ export default {
       fullScreen: false,
       currentTime: 0,
       miniPlayHide: false,
+      swiperOptions: {
+        initialSlide: this.currentIndex,
+        on: {
+          slideChange: () => {
+            const swiper = this.$refs.mySwiper.swiperInstance
+            if (this.currentIndex !== swiper.activeIndex) {
+              this.setCurrentIndex(swiper.activeIndex)
+              if (!this.playing) {
+                this.togglePlaying()
+              }
+            }
+            // Vue.onChange(this.slideCurrentIndex)
+            // alert('改变了，activeIndex为' + this.activeIndex)
+          }
+        }
+      }
       // currentSong: {
       //   album: '我们在夏枝繁茂时再见',
       //   duration: 218.979,
@@ -94,6 +116,9 @@ export default {
     },
     isShowPlay () {
       return this.currentSong.id
+    },
+    swiper () {
+      return this.$refs.mySwiper.$swiper
     },
     ...mapGetters([
       'playing',
@@ -131,6 +156,12 @@ export default {
       this.timer = setTimeout(() => {
         this.musicReady = true
       }, 5000)
+    },
+    currentIndex (newValue) {
+      this.$nextTick(() => {
+        this.swiper.slideTo(newValue, 1000, false)
+        console.log(newValue, 'currentIndex')
+      })
     }
   },
   methods: {
@@ -215,6 +246,7 @@ export default {
       this.setPlayingState(true)
     },
     next () {
+      console.log('135465')
       // if (!this.songReady) {
       //   return
       // }
@@ -252,30 +284,38 @@ export default {
     position relative
     z-index 10
   .pomelo-play
-    display: flex
-    align-items: center
-    position: fixed
-    left: 0
-    bottom: 50px
-    z-index: 180
-    width: 100%
-    height: 50px
+    display flex
+    align-items center
+    position fixed
+    left 0
+    bottom 50px
+    z-index 180
+    width 100%
+    height 50px
     background var(--playBg)
     &.miniplay-enter-active, &.miniplay-leave-active
-      transition: all 0.4s
+      transition all 0.4s
     &.miniplay-enter, &.miniplay-leave-to
-      opacity: 0
+      opacity 0
+    >>>.swiper-container
+      height 64px
+      margin 0
+      flex 1
+    >>>.swiper-slide
+      display flex
+      align-items center
+      justify-content flex-start
     .icon
-      flex: 0 0 44px
-      width: 44px
-      height: 44px
-      padding: 0 10px 0 20px
+      flex 0 0 44px
+      width 44px
+      height 44px
+      padding 0 10px 0 20px
       margin-top -20px
       .imgWrapper
-        height: 100%
-        width: 100%
+        height 100%
+        width 100%
         img
-          border-radius: 50%
+          border-radius 50%
           &.play
             animation rotate 10s linear infinite
           &.pause

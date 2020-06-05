@@ -6,8 +6,8 @@
           <div class="playlist-bg" v-show="fullScreen">
 <!--            <div class="playlist-bg-box">-->
             <div class="playlist-title">
-              <!--              {{playlistTitle}}-->
-              播放列表
+              {{playlistTitle}}
+<!--              播放列表{{activeIndex}}-->
               <div class="close-icon-fix" @click.stop="handleRemove">
                 清空
               </div>
@@ -17,7 +17,10 @@
               <span>{{modeWord}}</span>
             </div>
             <div class="music-play-list">
-              <swiper ref="mySwiper" :options="swiperOptions">
+              <swiper
+                ref="mySwiper"
+                :options="swiperOptions"
+              >
                 <swiper-slide>
                   <play-list
                     :songList="playList"
@@ -56,6 +59,7 @@ import { mapGetters, mapActions } from 'vuex'
 import playList from '@/components/playList/playList'
 import confirm from '@/components/confirm/confirm'
 import { SET_PLAY_MODE } from '@/assets/js/mixin'
+import Vue from 'vue'
 
 let slideCurrentIndex = 0
 
@@ -76,19 +80,22 @@ export default {
     }
   },
   watch: {
-    slideCurrentIndex (newValue) {
+    SlideCurrentIndex (newValue) {
+      this.activeIndex = newValue
       console.log(newValue, 'watch')
     }
   },
   data () {
     return {
       fullScreen: false,
+      SlideCurrentIndex: 0,
       activeIndex: 0,
-      slideCurrentIndex: 0,
       swiperOptions: {
         on: {
-          slideChange: function () {
-            slideCurrentIndex = this.activeIndex
+          slideChange: () => {
+            const swiper = this.$refs.mySwiper.swiperInstance
+            slideCurrentIndex = swiper.activeIndex
+            this.SlideCurrentIndex = swiper.activeIndex
             // Vue.onChange(this.slideCurrentIndex)
             // alert('改变了，activeIndex为' + this.activeIndex)
           }
@@ -96,11 +103,15 @@ export default {
         pagination: {
           el: '.swiper-pagination'
         }
-        // Some Swiper option/callback...
       }
     }
   },
   methods: {
+    slideChange (index) {
+    },
+    slideChangeTransitionEnd (e) {
+      console.log(e)
+    },
     isShow () {
       this.fullScreen = true
     },

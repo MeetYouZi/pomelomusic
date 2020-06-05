@@ -32,6 +32,7 @@ export default {
     }, 500),
     handelFocus () {
       this.isIconsearch = true
+      window.scroll(0, 0)
       this.$emit('handelFocus', true)
     },
     handleBlue () {

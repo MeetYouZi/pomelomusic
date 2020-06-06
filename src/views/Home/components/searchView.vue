@@ -135,7 +135,7 @@ export default {
       return {
         id,
         name,
-        img,
+        imgage: img,
         artists,
         singer: music.artists && music.artists.length > 0 && this.filterSinger(music.artists),
         album: music.album.name,

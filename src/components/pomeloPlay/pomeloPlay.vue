@@ -60,7 +60,7 @@ import progressCircle from '@/components/progress/progressCircle'
 import popupPlayList from '@/components/popupPlayList/popupPlayList'
 import { playMode } from '@/assets/js/playMode'
 import { SET_PLAY_MODE } from '@/assets/js/mixin'
-import vueTouch from '@/assets/js/vueTouch'
+// import vueTouch from '@/assets/js/vueTouch'
 
 export default {
   name: 'pomeloPlay',

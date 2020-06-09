@@ -24,7 +24,8 @@ export default {
   data () {
     return {
       swiperOptions: {
-        loop: true
+        loop: true,
+        autoplay: true
       }
     }
   },
@@ -42,10 +43,13 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .music-banner
-  height 154px
+  height 127px
   margin 0 16px
   border-radius 6px
   overflow hidden
+  z-index 0
+  >>>.swiper-container
+    z-index 0
   img
     width 100%
     height 100%

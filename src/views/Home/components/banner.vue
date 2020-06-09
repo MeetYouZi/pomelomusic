@@ -1,7 +1,11 @@
 <template>
   <transition name="fade">
     <div class="music-banner fade" v-if="bannerList.length" @click="handleTest">
-      <img :src="bannerList[0].imageUrl"/>
+      <swiper :options="swiperOptions">
+        <swiper-slide v-for="banner in bannerList" :key="banner.id">
+          <img :src="banner.imageUrl"/>
+        </swiper-slide>
+      </swiper>
     </div>
   </transition>
 </template>
@@ -14,6 +18,13 @@ export default {
       type: Array,
       default () {
         return []
+      }
+    }
+  },
+  data () {
+    return {
+      swiperOptions: {
+        loop: true
       }
     }
   },

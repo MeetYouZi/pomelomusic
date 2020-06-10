@@ -1,13 +1,14 @@
 <template>
   <div class="progress-bar" ref="progressBar" @click="progressClick">
     <div class="bar-inner">
-      <div class="progress" ref="progress"></div>
-      <div class="progress-btn-wrapper" ref="progressBtn"
+      <div class="progress" :class="{'activeBar': activeBar}" ref="progress"></div>
+      <div class="progress-btn-wrapper"
+           ref="progressBtn"
            @touchstart.prevent="progressTouchStart"
            @touchmove.prevent="progressTouchMove"
            @touchend="progressTouchEnd"
       >
-        <div class="progress-btn"></div>
+        <div class="progress-btn" :class="{'activeBar': activeBar}"></div>
       </div>
     </div>
   </div>
@@ -20,6 +21,11 @@ const progressBtnWidth = 16
 const transform = prefixStyle('transform')
 
 export default {
+  data () {
+    return {
+      activeBar: false
+    }
+  },
   props: {
     percent: {
       type: Number,
@@ -31,6 +37,7 @@ export default {
   },
   methods: {
     progressTouchStart (e) {
+      this.activeBar = true
       this.touch.initiated = true
       this.touch.startX = e.touches[0].pageX
       this.touch.left = this.$refs.progress.clientWidth
@@ -45,6 +52,7 @@ export default {
       this.$emit('percentChanging', this._getPercent())
     },
     progressTouchEnd () {
+      this.activeBar = false
       this.touch.initiated = false
       this._triggerPercent()
     },
@@ -84,8 +92,9 @@ export default {
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-  @import "~stylus/variable.styl"
-
+  .activeBar
+    transition box-shadow ease .2s
+    box-shadow 0 0 10px $color-theme
   .progress-bar
     height: 30px
     .bar-inner
@@ -97,6 +106,8 @@ export default {
         position: absolute
         height: 100%
         background: $color-theme
+        &.activeBar
+          @extends .activeBar
       .progress-btn-wrapper
         position: absolute
         left: -8px
@@ -113,4 +124,9 @@ export default {
           border: 0px solid $color-text
           border-radius: 50%
           background: $color-theme
+          &.activeBar
+            top: 10px
+            width: 8px
+            height: 8px
+            @extends .activeBar
 </style>

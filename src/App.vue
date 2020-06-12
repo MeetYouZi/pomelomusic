@@ -9,20 +9,33 @@
       </keep-alive>
     </transition>
     <pomelo-play></pomelo-play>
+    <dialog-box ref="dialogBox" :contentText="dialogText"></dialog-box>
 <!--    <tab-nav></tab-nav>-->
   </div>
 </template>
 
 <script>
 import pomeloPlay from '@/components/pomeloPlay/pomeloPlay'
+import dialogBox from '@/components/dialog/dialog'
+
+const dialogText = `
+1、 新增 miniPlay 滑动切换<br>
+2、 新增播放进度条按下拖动的样式<br>
+3、 新增首页轮播图<br>
+4、 新增默认音乐<br>
+5、 新增首页加载新功能提醒
+`
+
 export default {
   components: {
-    pomeloPlay
+    pomeloPlay,
+    dialogBox
   },
   data () {
     return {
       transitionName: 'slide-right',
-      BackPage: false
+      BackPage: false,
+      dialogText: ''
     }
   },
   // watch $route 决定使用哪种过渡
@@ -56,6 +69,12 @@ export default {
   },
   mounted () {
     this.removeAnimate()
+    setTimeout(() => {
+      this.$refs.dialogBox.show()
+    }, 1000)
+  },
+  created () {
+    this.dialogText = dialogText
   }
 }
 </script>

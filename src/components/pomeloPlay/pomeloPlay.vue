@@ -15,7 +15,7 @@
               <div class="imgWrapper" ref="miniWrapper">
                 <img ref="miniImage"
                      class="play"
-                     :class="currentSong.id === music.id ? cdCls: ''"
+                     :class="currentSong.id === music.id ? cdCls : ''"
                      width="44"
                      height="44"
                      v-lazy="`${music.image}?param=100y100`"

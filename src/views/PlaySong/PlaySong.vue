@@ -2,7 +2,7 @@
   <div class="song_wrap">
     <div class="main">
       <div class="bg">
-        <img class="bg_img" :src="currentSong.image"/>
+        <img class="bg_img" :src="`${currentSong.image}?param=300y300`"/>
       </div>
       <div class="main_wrap">
         <div class="song_info">

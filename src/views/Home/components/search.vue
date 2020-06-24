@@ -67,17 +67,18 @@ export default {
   .iconsearch
     position absolute
     left 50%
-    top 50%
-    transform translate(-0, -50%)
-    margin-left -26px
+    top 6px
+    margin-left -22px
     color  var(--searchcolor)
+    font-size 16px
     vertical-align top
+    transition all .3s
   .search_bar_input
     position: absolute
     top: 0
     left: 0
     width: 100%
-    padding-top: 6px
+    padding-top: 4px
     padding-bottom: 4px
     padding-left: 24px
     font-size: $font-size-medium
@@ -86,6 +87,7 @@ export default {
     border-radius: 0
     background: 0 0
     -webkit-appearance: none
+    transition all .3s
     &.c_input
        color var(--searchcolor)
   &.focus

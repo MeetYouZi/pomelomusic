@@ -25,8 +25,10 @@
                 <div class="list-box">
                   <div class="list-media">
                     <img class="list-img" v-lazy="_getImgUrl(item.picUrl, 120)"/>
-                    <div class="cover_count" v-show="musicItem.key != 'music'">
-                      <span class="cover-count-num">{{item.playCount}}</span>
+                    <div class="cover_count" v-show="musicItem.key != 'music' || musicItem.key != 'program'">
+                      <i class="iconfont iconplay_fill"></i>
+                      <span class="cover-count-num">
+                       {{item.playCount / 10000}} 万</span>
                     </div>
                   </div>
                   <div class="list-bd">
@@ -290,6 +292,9 @@ export default {
                 font-size $font-size-small
                 font-weight 300
                 color #fff
+              .iconfont
+                color #fff
+                font-size 10px
           .list-bd
             margin-top 8px
             line-height 17px

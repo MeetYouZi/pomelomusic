@@ -45,7 +45,7 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import { longinCellPhone } from '@/api'
-import loginPopup from '@/views/Personal/components/loginPopup'
+import loginPopup from '@/views/Personal/components/loginByUid'
 
 export default {
   name: 'Personal',

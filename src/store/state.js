@@ -108,7 +108,8 @@ const state = {
   currentTime: 0,
   audioELE: null,
   searchHistorys: JSON.parse(localStorage.getItem('pomelomusic_SearchHistorys')) || [],
-  userInfo: JSON.parse(localStorage.getItem('pomelomusic_userInfo')) || {}
+  userInfo: JSON.parse(localStorage.getItem('pomelomusic_userInfo')) || {},
+  userPlayList: JSON.parse(localStorage.getItem('pomelo_playlist')) || []
 }
 
 export default state

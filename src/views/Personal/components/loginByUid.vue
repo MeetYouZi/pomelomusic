@@ -9,7 +9,7 @@
               <input
                 class="inputBox"
                 placeholder="请输入网易云 Uid"
-                v-model="login.phone"
+                v-model="login.uid"
               />
             </div>
           </div>
@@ -78,6 +78,8 @@ export default {
       animation toast-fadein 0.3s
       .toast-content
         animation toast-zoom 0.3s
+    &.loginToast-fade-leave-active
+      animation toast-fadeout 0.3s
     .toast-wrapper
       position absolute
       top 50%
@@ -129,6 +131,17 @@ export default {
       opacity 0
     100%
       opacity 1
+
+  @keyframes toast-fadeout
+    0%
+      opacity 1
+      transform scale(1)
+    40%
+      opacity 0.6
+      transform scale(1.1)
+    100%
+      opacity 0
+      transform scale(0)
 
   @keyframes toast-zoom
     0%

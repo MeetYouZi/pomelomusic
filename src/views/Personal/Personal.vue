@@ -1,9 +1,9 @@
 <template>
   <div class="personal">
     <div class="headerbg" :style="headerbg"></div>
-    <div class="headerBox">
-      <div class="avater">
-        <img class="avater_img" v-lazy="profile.avatarUrl || avatarUrl">
+    <div class="headerBox" :class="{'fixLeft': isUser}">
+      <div class="avatar">
+        <img class="avatar_img" v-lazy="user.avatarUrl || avatarUrl">
       </div>
       <div class="animation">
         <div class="ball-scale-multiple">
@@ -13,8 +13,11 @@
         </div>
       </div>
     </div>
+    <template>
+      <user :isShow="isUser" :user="user" @handleLoginOut="handleLoginOut"></user>
+    </template>
     <div class="userInfo">
-      <div class="user_name">{{profile.nickname || nickname}} | {{ gender}} |
+      <div class="user_name">{{user.nickname || nickname}} | {{ gender}} |
         <a
           target="_blank"
           href="https://github.com/MeetYouZi/pomelomusic"
@@ -24,18 +27,13 @@
       </a>
       </div>
     </div>
-<!--    <div class="loginBox">-->
-<!--      <div class="from">-->
-<!--        <input class="login_input" v-model="login.phone">-->
-<!--      </div>-->
-<!--      <div>-->
-<!--        <input class="login_input" v-model="login.password">-->
-<!--      </div>-->
-<!--    </div>-->
     <div class="login_btn" v-show="!isLogin">
       <button class="btn" @click="handleLoginPopup">登录</button>
     </div>
-    <login-popup ref="loginPopup" @toast="_longinCellPhone"></login-popup>
+    <login-popup ref="loginPopup" @toast="_getUserPlaylist"></login-popup>
+    <div class="changeView" v-show="isLogin">
+      <p @click="isShow = true">去我的音乐看看吧</p>
+    </div>
     <div class="fixBottom">
       <p @click="handleToggleTheme">不好看？换一个颜色试试？</p>
     </div>
@@ -44,31 +42,36 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import { longinCellPhone } from '@/api'
+import { longinCellPhone, getUserPlaylist, getUserDetail } from '@/api'
 import loginPopup from '@/views/Personal/components/loginByUid'
+import User from './user'
 
 export default {
   name: 'Personal',
   components: {
-    loginPopup
+    loginPopup,
+    User
   },
   computed: {
+    isUser () {
+      return this.isLogin && this.isShow
+    },
     headerbg () {
       const backgroundUrl = this.isBlack ? this.myBackgroundUrl : this.backgroundUrl
-      const url = this.isLogin ? this.profile.backgroundUrl : backgroundUrl
+      const url = this.isLogin ? this.user.backgroundUrl : backgroundUrl
       return `background: url(${url}) center no-repeat`
     },
     gender () {
       if (this.isLogin) {
-        return this.profile.gender === 2 ? 'girl' : 'boy'
+        return this.user.gender === 2 ? 'girl' : 'boy'
       } else {
         return '我是柚子姑娘呀'
       }
     },
     isLogin () {
-      return this.userInfo.token
+      return this.userInfo.createTime
     },
-    profile () {
+    user () {
       return this.isLogin ? this.userInfo.profile : {}
     },
     ...mapGetters(['userInfo'])
@@ -84,7 +87,8 @@ export default {
         phone: '',
         password: ''
       },
-      isBlack: false
+      isBlack: false,
+      isShow: true
     }
   },
   methods: {
@@ -92,6 +96,9 @@ export default {
     handleToggleTheme () {
       this.isBlack = !this.isBlack
       document.querySelector('html').className = this.isBlack ? 'black' : 'white'
+    },
+    handleLoginOut () {
+      this.isShow = false
     },
     handleLoginPopup () {
       this.$refs.loginPopup.show()
@@ -103,8 +110,21 @@ export default {
         this.$refs.loginPopup.hide()
       })
     },
+    _getUserPlaylist (loginform) {
+      if (!loginform.uid) return
+      const data = loginform
+      Promise.all([getUserDetail(data), getUserPlaylist(data)])
+        .then(res => {
+          this.set_userInfo(res[0])
+          this.userPlayList(res[1])
+          // localStorage.setItem('pomelo_userInfo', JSON.stringify(res[0]))
+          localStorage.setItem('pomelo_playlist', JSON.stringify(res[1].playlist))
+          console.log(res)
+        })
+    },
     ...mapMutations({
-      set_userInfo: 'SET_USERINFO'
+      set_userInfo: 'SET_USERINFO',
+      userPlayList: 'SET_USERPLAYLIST'
     })
   }
 }
@@ -144,21 +164,35 @@ export default {
     mask-image linear-gradient(180deg,hsla(0,0%,100%,0) 0,
     hsla(0,0%,100%,1) 15%,#fff 25%,#fff 65%,hsla(0,0%,100%,1) 100%)
     z-index -1
-    .avater
+    transition transform .5s
+    .avatar
       width 80px
       height 80px
       border-radius 50%
       overflow hidden
       z-index 1
-      .avater_img
+      transition opacity .5s
+      .avatar_img
         width 100%
         height 100%
+        transition-timing-function cubic-bezier(.55,0,.85,.36)
+        transition transform .5s
+    &.fixLeft
+      transform: translate(-120px, -80px)
+      .avatar
+        width 60px
+        height 60px
+        //opacity 0
+        transition-timing-function linear
+      .animation
+        //opacity 0
   .animation
     width 80px
     height 80px
     position absolute
     left 50%
     top 50%
+    transition opacity .3s
     transform translate(-50%, -50%)
   .ball-scale-multiple
     position: relative
@@ -189,6 +223,10 @@ export default {
       color var(--c_tex1)
       font-size $font-size-large
       font-weight 500
+  .changeView
+    display flex
+    align-items center
+    justify-content center
   .login_btn
     display flex
     align-items center

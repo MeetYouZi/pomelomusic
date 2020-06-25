@@ -35,6 +35,12 @@ const mutations = {
     try {
       localStorage.pomelomusic_userInfo = JSON.stringify(userInfo)
     } catch (e) {}
+  },
+  [types.SET_USERPLAYLIST] (state, userPlayList) {
+    state.userPlayList = userPlayList
+    try {
+      localStorage.pomelomusic_playlist = JSON.stringify(userInfo)
+    } catch (e) {}
   }
 }
 export default mutations

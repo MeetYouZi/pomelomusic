@@ -22,3 +22,5 @@ export const currentSong = (state) => {
 }
 // 用户信息
 export const userInfo = (state) => state.userInfo
+// 用户信息
+export const userPlayList = (state) => state.userPlayList

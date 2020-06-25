@@ -15,3 +15,11 @@ export const getUserPlaylist = (params) => {
     params
   })
 }
+// 获取用户信息
+export const getUserDetail = (params) => {
+  return axios.request({
+    url: '/user/detail',
+    method: 'get',
+    params
+  })
+}

@@ -19,11 +19,12 @@ import pomeloPlay from '@/components/pomeloPlay/pomeloPlay'
 import dialogBox from '@/components/dialog/dialog'
 
 const dialogText = `
-1、 新增 miniPlay 滑动切换<br>
-2、 新增播放进度条按下拖动的样式<br>
-3、 新增首页轮播图<br>
-4、 新增默认音乐<br>
-5、 新增首页加载新功能提醒
+1、 新增我的页面 UID 登录及我的音乐列表<br>
+2、 新增 miniPlay 滑动切换<br>
+3、 新增播放进度条按下拖动的样式<br>
+4、 新增首页轮播图<br>
+5、 新增默认音乐<br>
+6、 新增首页加载新功能提醒
 `
 
 export default {

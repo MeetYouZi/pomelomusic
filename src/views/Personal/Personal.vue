@@ -220,13 +220,14 @@ export default {
     margin-top -60px
     margin-bottom 30px
     .user_name
-      color var(--c_tex1)
+      color var(--color)
       font-size $font-size-large
       font-weight 500
   .changeView
     display flex
     align-items center
     justify-content center
+    color var(--color)
   .login_btn
     display flex
     align-items center

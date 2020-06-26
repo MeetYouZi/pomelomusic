@@ -50,6 +50,7 @@
            @ended="end"
            @pause="paused"
            @error="error"
+           @progress="onprogress"
     ></audio>
   </div>
 </template>
@@ -211,6 +212,20 @@ export default {
     },
     readyPlaying () {
       this.setHistory(this.currentSong)
+    },
+    onprogress () {
+      const ele = this.$refs.pomelomusicAudio
+      console.log(ele.buffered, 'ele.buffered')
+      try {
+        if (ele.buffered.length > 0) {
+          const duration = this.currentSong.duration
+          let buffered = 0
+          ele.buffered.end(0)
+          buffered =
+            ele.buffered.end(0) > duration ? duration : ele.buffered.end(0)
+          this.currentProgress = buffered / duration
+        }
+      } catch (e) {}
     },
     error () {
       this.$youToast('播放失败')

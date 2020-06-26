@@ -21,6 +21,9 @@ const mutations = {
   [types.SET_CURRENTTIME] (state, currentTime) {
     state.currentTime = currentTime
   },
+  [types.SET_CURRENTPROGRESS] (state, currentProgress) {
+    state.currentProgress = currentProgress
+  },
   [types.SET_AUDIOELE] (state, audioELE) {
     state.audioELE = audioELE
   },

@@ -34,6 +34,7 @@
             <progress-bar
               :percent="percent"
               @percentChange="percentChange"
+              :currentProgress="currentProgress"
             >
             </progress-bar>
           </div>
@@ -74,7 +75,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['currentSong', 'playing', 'currentTime']),
+    ...mapGetters(['currentSong', 'playing', 'currentTime', 'currentProgress']),
     headerImgCover () {
       let img = ''
       if (this.currentSong.id) {

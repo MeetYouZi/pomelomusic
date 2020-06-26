@@ -106,6 +106,7 @@ const state = {
   currentIndex: 0,
   currentSong: {},
   currentTime: 0,
+  currentProgress: 0,
   audioELE: null,
   searchHistorys: JSON.parse(localStorage.getItem('pomelomusic_SearchHistorys')) || [],
   userInfo: JSON.parse(localStorage.getItem('pomelomusic_userInfo')) || {},

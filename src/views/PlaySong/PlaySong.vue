@@ -20,6 +20,7 @@
           <progress-bar
             :percent="percent"
             @percentChange="percentChange"
+            :currentProgress="currentProgress"
           >
           </progress-bar>
         </div>
@@ -93,7 +94,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['currentTime', 'currentSong', 'playing', 'currentIndex', 'playList']),
+    ...mapGetters(['currentTime', 'currentSong', 'playing', 'currentIndex', 'playList', 'currentProgress']),
     miniIcon () {
       return this.playing ? 'icon_pause' : 'icon_play'
     }

@@ -2,6 +2,7 @@
   <div class="progress-bar" ref="progressBar" @click="progressClick">
     <div class="bar-inner">
       <div class="progress" :class="{'activeBar': activeBar}" ref="progress"></div>
+      <div class="bar-outer" ref="currentProgress"></div>
       <div class="progress-btn-wrapper"
            ref="progressBtn"
            @touchstart.prevent="progressTouchStart"
@@ -28,6 +29,10 @@ export default {
   },
   props: {
     percent: {
+      type: Number,
+      default: 0
+    },
+    currentProgress: {
       type: Number,
       default: 0
     }
@@ -86,6 +91,11 @@ export default {
   watch: {
     percent (newPercent) {
       this.setProgressOffset(newPercent)
+    },
+    currentProgress (Progress) {
+      const barWidth = this.$refs.progressBar.clientWidth
+      const offsetWidth = Progress * barWidth
+      this.$refs.currentProgress.style.width = `${offsetWidth}px`
     }
   }
 }
@@ -102,6 +112,10 @@ export default {
       top: 13px
       height: 2px
       background: #fff
+      .bar-outer
+        osition: absolute
+        height: 100%
+        background: #eee
       .progress
         position: absolute
         height: 100%

@@ -6,6 +6,11 @@
            v-show="isShowPlay && !fullScreen"
            @click="handleToUrl"
       >
+        <div class="progress-bar">
+          <progress-bar :percent="percent"
+                      :currentProgress="currentProgress"
+                      @percentChange="percentChange"></progress-bar>
+        </div>
         <swiper
           ref="mySwiper"
           :options="swiperOptions"
@@ -58,6 +63,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import progressCircle from '@/components/progress/progressCircle'
+import progressBar from '@/components/progress/progressBar'
 import popupPlayList from '@/components/popupPlayList/popupPlayList'
 import { playMode } from '@/assets/js/playMode'
 import { SET_PLAY_MODE } from '@/assets/js/mixin'
@@ -67,7 +73,8 @@ export default {
   name: 'pomeloPlay',
   components: {
     progressCircle,
-    popupPlayList
+    popupPlayList,
+    progressBar
   },
   mixins: [SET_PLAY_MODE],
   data () {
@@ -77,6 +84,7 @@ export default {
       fullScreen: false,
       currentTime: 0,
       miniPlayHide: false,
+      currentProgress: 0,
       swiperOptions: {
         initialSlide: this.currentIndex,
         on: {
@@ -203,6 +211,10 @@ export default {
         this.setPlayingState(false)
       }
     },
+    percentChange (percent) {
+      const currentTime = this.currentSong.duration * percent
+      this.$refs.pomelomusicAudio.currentTime = currentTime
+    },
     handleClose () {
       this.fullScreen = false
     },
@@ -224,6 +236,7 @@ export default {
           buffered =
             ele.buffered.end(0) > duration ? duration : ele.buffered.end(0)
           this.currentProgress = buffered / duration
+          this.setCurrentProgress(this.currentProgress)
         }
       } catch (e) {}
     },
@@ -284,7 +297,8 @@ export default {
       setAudioEle: 'SET_AUDIOELE',
       setCurrentIndex: 'SET_CURRENTINDEX',
       setCurrentTime: 'SET_CURRENTTIME',
-      setPlayingState: 'SET_PLAYINGSTATE'
+      setPlayingState: 'SET_PLAYINGSTATE',
+      setCurrentProgress: 'SET_CURRENTPROGRESS'
     })
   },
   mounted () {
@@ -323,7 +337,7 @@ export default {
         position absolute
         right 0
         bottom 0
-        z-index 2
+        z-index 1
         width 60px
         height 56px
         background-image linear-gradient(to right , var(--bg-linear-gradient-1) 0, var(--bg-linear-gradient-3) 100%)
@@ -331,6 +345,12 @@ export default {
       display flex
       align-items center
       justify-content flex-start
+    .progress-bar
+      position absolute
+      left 0
+      bottom -7px
+      width 100%
+      z-index 2
     .icon
       flex 0 0 44px
       width 44px

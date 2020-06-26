@@ -24,3 +24,5 @@ export const currentSong = (state) => {
 export const userInfo = (state) => state.userInfo
 // 用户信息
 export const userPlayList = (state) => state.userPlayList
+// 用户信息
+export const currentProgress = (state) => state.currentProgress

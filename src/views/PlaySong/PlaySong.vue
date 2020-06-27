@@ -33,7 +33,7 @@
         <div class="opt_item" @click="prev">
           <i class="iconfont iconshangyiqu101"></i>
         </div>
-        <div class="opt_item icon-mini" @click="togglePalying">
+        <div class="opt_item icon-mini" @click="togglePlaying">
           <component :is="miniIcon"></component>
 <!--          <i-->
 <!--             class="iconfont icon-mini"-->
@@ -117,10 +117,10 @@ export default {
         this._getLyric(newValue.id)
         this._getCommentList(newValue.id)
       })
-    },
+    }
   },
   methods: {
-    togglePalying () {
+    togglePlaying () {
       this.setPlayState(!this.playing)
     },
     handleShowPlayList () {

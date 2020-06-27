@@ -158,7 +158,9 @@ export default {
         return
       }
       this.musicReady = false
-      this.$refs.pomelomusicAudio.src = newSong.url
+      const pomelomusicAudio = this.$refs.pomelomusicAudio
+      pomelomusicAudio.src = newSong.url
+      pomelomusicAudio.currentTime = 0
       this.$refs.pomelomusicAudio.play()
       // 若歌曲 5s 未播放，则认为超时，修改状态确保可以切换歌曲。
       clearTimeout(this.timer)

@@ -4,7 +4,7 @@
 
 ### 功能列表
 
-歌曲列表、多种播放器、mini播放器左右滑动切换音乐、搜索、歌曲详情页、播放列表、评论、排行榜、皮肤切换（暗黑模式上线逼格不是一般的高[dog]）、历史播放、我的、歌手列表
+歌曲列表、多种播放器、mini 播放器左右滑动切换音乐、搜索、歌曲详情页、播放列表、评论、排行榜、皮肤切换（暗黑模式上线逼格不是一般的高[dog]）、历史播放、我的、歌手列表
 
 ### 待完善功能
 
@@ -40,9 +40,9 @@ https://binaryify.github.io/NeteaseCloudMusicApi
 
 本移动端音乐 player 项目是个人爱好编写，灵感来源 [@maomao1996](https://github.com/maomao1996/Vue-mmPlayer) 的 pc 端 音乐 player ，该 pc 端音乐 player 是网页 player 的佼佼者，再次感谢 [@maomao1996](https://github.com/maomao1996/Vue-mmPlayer) ~
 
-使用过程中如有任何疑问或者bug 欢迎各位小伙伴们在 Issues 中给我指点迷津或者 PR 
+使用过程中如有任何疑问或者 bug 欢迎各位小伙伴们在 Issues 中给我指点迷津或者 PR 
 
-本项目UI高仿网易云音乐和qq音乐以及加入个人喜好元素 如有更好的建议 欢迎发邮件 987176347@qq.com 交流...
+本项目UI高仿网易云音乐和 qq 音乐以及加入个人喜好元素 如有更好的建议 欢迎发邮件 987176347@qq.com 交流...
 
 如若喜欢，欢迎 star~ 
 

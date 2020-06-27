@@ -23,7 +23,7 @@
           href="https://github.com/MeetYouZi/pomelomusic"
         >
         <i class="iconfont icon-github"></i>
-          柚子姑娘
+          github
       </a>
       </div>
     </div>
@@ -34,6 +34,10 @@
     <div class="changeView" v-show="isLogin">
       <p @click="isShow = true">去我的音乐看看吧</p>
     </div>
+    <div class="changeView" v-show="isLogin">
+      <p @click="handleClearn">退出登录</p>
+    </div>
+<!--    <div @click="handleloading()" v-loading="true">自定义 loading 组件</div>-->
     <div class="fixBottom">
       <p @click="handleToggleTheme">不好看？换一个颜色试试？</p>
     </div>
@@ -92,6 +96,12 @@ export default {
     }
   },
   methods: {
+    handleloading () {
+      this.$loading({ text: '正在加载。。。' })
+      // setTimeout(() => {
+      //   this.$loading().close()
+      // }, 3000)
+    },
     // 切换主题
     handleToggleTheme () {
       this.isBlack = !this.isBlack
@@ -99,6 +109,10 @@ export default {
     },
     handleLoginOut () {
       this.isShow = false
+    },
+    handleClearn () {
+      this.set_userInfo({})
+      this.set_userPlayList(JSON.stringify([]))
     },
     handleLoginPopup () {
       this.$refs.loginPopup.show()
@@ -116,15 +130,12 @@ export default {
       Promise.all([getUserDetail(data), getUserPlaylist(data)])
         .then(res => {
           this.set_userInfo(res[0])
-          this.userPlayList(res[1])
-          // localStorage.setItem('pomelo_userInfo', JSON.stringify(res[0]))
-          localStorage.setItem('pomelo_playlist', JSON.stringify(res[1].playlist))
-          console.log(res)
+          this.set_userPlayList(res[1].playlist)
         })
     },
     ...mapMutations({
       set_userInfo: 'SET_USERINFO',
-      userPlayList: 'SET_USERPLAYLIST'
+      set_userPlayList: 'SET_USERPLAYLIST'
     })
   }
 }
@@ -228,6 +239,7 @@ export default {
     align-items center
     justify-content center
     color var(--color)
+    margin-bottom 20px
   .login_btn
     display flex
     align-items center

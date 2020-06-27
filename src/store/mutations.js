@@ -42,7 +42,7 @@ const mutations = {
   [types.SET_USERPLAYLIST] (state, userPlayList) {
     state.userPlayList = userPlayList
     try {
-      localStorage.pomelomusic_playlist = JSON.stringify(userInfo)
+      localStorage.pomelomusic_playlist = JSON.stringify(userPlayList)
     } catch (e) {}
   }
 }

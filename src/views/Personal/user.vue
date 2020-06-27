@@ -39,7 +39,8 @@ export default {
   computed: {
     ...mapGetters(['userPlayList']),
     playList () {
-      return this.userPlayList.filter(item => item.trackCount > 0)
+      console.log(this.userPlayList, 'this.userPlayList')
+      return this.userPlayList.length && this.userPlayList.filter(item => item.trackCount > 0)
     }
   },
   methods: {

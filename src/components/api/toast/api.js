@@ -9,7 +9,7 @@ let instance = null
 let num = 1
 
 // 初始 zIndex
-let zIndex = 1996
+let zIndex = 1999
 
 const nextZIndex = () => zIndex++
 

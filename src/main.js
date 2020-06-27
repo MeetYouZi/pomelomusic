@@ -9,6 +9,8 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 // import style
 import 'swiper/css/swiper.css'
 import $Alert from '@/components/api/alert'
+// import $Loading from '@/components/api/customLoading'
+// import '@/components/api/customLoading/v-loading'
 import 'stylus/index.styl'
 
 import youToast from '@/components/api/toast/api'
@@ -30,6 +32,7 @@ const themeBg = localStorage.getItem('pomelomusic_themeBg') || 'white'
 document.querySelector('html').className = themeBg
 
 Vue.prototype.$Alert = $Alert
+// Vue.prototype.$loading = $Loading
 
 // 版权信息
 window.pomelomusic = `欢迎使用 pomelomusic!

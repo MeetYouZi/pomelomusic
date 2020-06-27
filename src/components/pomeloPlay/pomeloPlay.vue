@@ -6,11 +6,11 @@
            v-show="isShowPlay && !fullScreen"
            @click="handleToUrl"
       >
-        <div class="progress-bar">
-          <progress-bar :percent="percent"
-                      :currentProgress="currentProgress"
-                      @percentChange="percentChange"></progress-bar>
-        </div>
+<!--        <div class="progress-bar">-->
+<!--          <progress-bar :percent="percent"-->
+<!--                      :currentProgress="currentProgress"-->
+<!--                      @percentChange="percentChange"></progress-bar>-->
+<!--        </div>-->
         <swiper
           ref="mySwiper"
           :options="swiperOptions"

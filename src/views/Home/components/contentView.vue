@@ -25,7 +25,7 @@
                 <div class="list-box">
                   <div class="list-media">
                     <img class="list-img" v-lazy="_getImgUrl(item.picUrl, 120)"/>
-                    <div class="cover_count" v-show="musicItem.key != 'music' || musicItem.key != 'program'">
+                    <div class="cover_count" v-show="item.playCount">
                       <i class="iconfont iconplay_fill"></i>
                       <span class="cover-count-num">
                        {{item.playCount / 10000}} 万</span>

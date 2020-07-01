@@ -171,7 +171,6 @@ export default {
     currentIndex (newValue) {
       this.$nextTick(() => {
         this.swiper.slideTo(newValue, 1000, false)
-        console.log(newValue, 'currentIndex')
       })
     }
   },

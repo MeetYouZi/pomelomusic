@@ -111,6 +111,7 @@ export default {
         list: this.songList,
         index
       })
+      this.$router.push(`/playSong/${item.id}`)
     },
     ...mapActions(['selectPlay']),
     ...mapMutations({

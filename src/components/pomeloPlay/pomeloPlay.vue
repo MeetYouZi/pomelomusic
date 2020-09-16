@@ -306,7 +306,6 @@ export default {
       this.setAudioEle(this.$refs.pomelomusicAudio)
     })
     window.onresize = () => {
-      console.log(this.swiper.updateSize, '999999')
       setTimeout(() => {
         this.swiper.updateSize()
       })

@@ -228,7 +228,6 @@ export default {
     },
     onprogress () {
       const ele = this.$refs.pomelomusicAudio
-      console.log(ele.buffered, 'ele.buffered')
       try {
         if (ele.buffered.length > 0) {
           const duration = this.currentSong.duration
@@ -306,6 +305,12 @@ export default {
     this.$nextTick(() => {
       this.setAudioEle(this.$refs.pomelomusicAudio)
     })
+    window.onresize = () => {
+      console.log(this.swiper.updateSize, '999999')
+      setTimeout(() => {
+        this.swiper.updateSize()
+      })
+    }
   }
 }
 </script>

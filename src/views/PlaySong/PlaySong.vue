@@ -50,6 +50,9 @@
       </div>
     </div>
     <div class="song_comment">
+      <h1 class="comment_tit">猜你喜欢听</h1>
+      <simi-songs-list :simiSongList="simiSongList"></simi-songs-list>
+    </div><div class="song_comment">
       <h1 class="comment_tit">精彩评论</h1>
       <comment :commentList="commentList" :hotCommentList="hotCommentList"></comment>
     </div>
@@ -59,9 +62,9 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-import { getLyricl, getSongDetail, getCommentList } from '@/api'
+import { getLyricl, getSongDetail, getCommentList, getSimiSong } from '@/api'
 import { parseLyric } from '@/utils/lyric'
-import formatSongs from '@/utils/song'
+import formatSongs, { createSongList } from '@/utils/song'
 import lyric from '@/views/PlaySong/components/lyric'
 import comment from '@/components/comment/comment'
 import ProgressBar from '@/components/progress/progressBar'
@@ -70,9 +73,12 @@ import icon_play from '@/components/icons/icon_play'
 import icon_pause from '@/components/icons/icon_pause'
 import { SET_PLAYING_TIME, SET_PLAY, SET_PLAY_MODE } from '@/assets/js/mixin'
 import { formatTime } from '@/utils/utils'
+import formatSimiSongs from './simiSong'
 import popupPlayList from '@/components/popupPlayList/popupPlayList'
+import simiSongsList from '@/views/PlaySong/components/simiSongsList'
 
 const MARGINTOP = 0
+
 export default {
   name: 'PlaySong',
   components: {
@@ -81,12 +87,14 @@ export default {
     ProgressBar,
     popupPlayList,
     icon_play,
-    icon_pause
+    icon_pause,
+    simiSongsList
     // icon_like
   },
   mixins: [SET_PLAYING_TIME, SET_PLAY, SET_PLAY_MODE],
   data () {
     return {
+      simiSongList: [],
       lyric: [],
       commentList: [],
       hotCommentList: [],
@@ -198,6 +206,13 @@ export default {
         this.hotCommentList = res.hotComments
       })
     },
+    // 相似音乐
+    _getSimiSong (id) {
+      getSimiSong(id).then(res => {
+        this.simiSongList = formatSimiSongs(res.songs)
+        console.log(this.simiSongList)
+      })
+    },
     ...mapActions(['selectPlay'])
   },
   created () {
@@ -205,6 +220,7 @@ export default {
     this._getSongDetail(id)
     this._getLyric(id)
     this._getCommentList(id)
+    this._getSimiSong(id)
   }
 }
 </script>

@@ -20,3 +20,11 @@ export const getCommentList = (id) => {
     method: 'get'
   })
 }
+
+// 相似
+export const getSimiSong = (id) => {
+  return axios.request({
+    url: `/simi/song?id=${id}`,
+    method: 'get'
+  })
+}

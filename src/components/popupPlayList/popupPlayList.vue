@@ -59,7 +59,6 @@ import { mapGetters, mapActions } from 'vuex'
 import playList from '@/components/playList/playList'
 import confirm from '@/components/confirm/confirm'
 import { SET_PLAY_MODE } from '@/assets/js/mixin'
-import Vue from 'vue'
 
 let slideCurrentIndex = 0
 
@@ -96,8 +95,6 @@ export default {
             const swiper = this.$refs.mySwiper.swiperInstance
             slideCurrentIndex = swiper.activeIndex
             this.SlideCurrentIndex = swiper.activeIndex
-            // Vue.onChange(this.slideCurrentIndex)
-            // alert('改变了，activeIndex为' + this.activeIndex)
           }
         },
         pagination: {

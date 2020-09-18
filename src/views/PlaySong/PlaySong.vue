@@ -91,6 +91,12 @@ export default {
     simiSongsList
     // icon_like
   },
+  props: {
+    singId: {
+      type: Number,
+      required: true
+    }
+  },
   mixins: [SET_PLAYING_TIME, SET_PLAY, SET_PLAY_MODE],
   data () {
     return {
@@ -112,6 +118,7 @@ export default {
     formatTime
   },
   watch: {
+    singId: 'init',
     currentSong (newValue, oldValue) {
       if (!newValue.id) {
         this.lyric = []
@@ -210,13 +217,19 @@ export default {
     _getSimiSong (id) {
       getSimiSong(id).then(res => {
         this.simiSongList = formatSimiSongs(res.songs)
-        console.log(this.simiSongList)
       })
     },
-    ...mapActions(['selectPlay'])
+    ...mapActions(['selectPlay']),
+    init () {
+      const id = this.$route.params.singId
+      this._getSongDetail(id)
+      this._getLyric(id)
+      this._getCommentList(id)
+      this._getSimiSong(id)
+    }
   },
   created () {
-    const id = this.$route.params.id
+    const id = this.$route.params.singId
     this._getSongDetail(id)
     this._getLyric(id)
     this._getCommentList(id)

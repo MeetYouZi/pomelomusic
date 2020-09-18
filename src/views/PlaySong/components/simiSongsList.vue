@@ -20,6 +20,8 @@
 </template>
 
 <script>
+// import { mapActions } from 'vuex'
+
 export default {
   name: 'simiSongsList',
   props: {
@@ -31,8 +33,8 @@ export default {
     }
   },
   methods: {
-    handleToDetail () {
-
+    handleToDetail (singId) {
+      this.$router.push(`/playSong/${singId}`)
     }
   }
 }

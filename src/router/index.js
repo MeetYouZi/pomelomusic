@@ -61,9 +61,10 @@ const routes = [
       requiresAuth: false
     }
   }, {
-    path: '/playSong/:id',
+    path: '/playSong/:singId',
     name: 'PlaySong',
     component: PlaySong,
+    props: (route) => ({ singId: 1 * route.params.singId }),
     meta: {
       title: 'playSong',
       index: 3,
